@@ -1,0 +1,71 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>
+      Create an Account
+    </ion-title>
+    <ion-buttons end>
+      <button ion-button icon-only (click)="closeModal()">
+        <ion-icon name="close"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+  <p>This is your Deceptacon Profile. Once signed in, you can make future changes by going to 'My Profile'.</p>
+  
+  <ion-grid>
+    <ion-row>
+      <ion-col>
+        <profile-pic [picture]="villager.picture" [color]="villager.color" (click)="editProfilePic(villager)"></profile-pic>
+      </ion-col>
+      <ion-col [ngClass]="{'not-ready': !villager.pin}">
+        <button class="create-account-pin" (click)="createPIN()" *ngIf="!villager.pin"></button>
+        <button class="create-account-pin bg-{{villager.color}}" (click)="createPIN()" *ngIf="villager.pin">
+          <img [src]="assets.assetsUrl + 'checkmark.png'">
+        </button>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col class="account-profile-pic">
+        Tap to Change
+      </ion-col>
+      <ion-col>
+        <span *ngIf="!villager.pin">Tap to Add PIN </span>
+        <span *ngIf="villager.pin">Tap to Change PIN </span>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+  
+  <form #f="ngForm" (ngSubmit)="onSubmit(f)" novalidate>
+    <ion-item>
+      <ion-label stacked color="primary">Username</ion-label>
+      <ion-input type="text" name="username" ngModel #username="ngModel" required 
+                 autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false">
+      </ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label stacked color="primary">First Name</ion-label>
+      <ion-input type="text" name="firstname" ngModel #firstname="ngModel" required 
+                 autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false">
+      </ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label stacked color="primary">Last Name</ion-label>
+      <ion-input type="text" name="lastname" ngModel #lastname="ngModel" required 
+                 autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false">
+      </ion-input>
+    </ion-item>
+    <button>Submit</button>
+  </form>
+
+  <p class="create-account-terms">
+    By signing up, you agree to our
+    <a (click)="openCodeConduct()">Code of Conduct</a>
+  </p>
+</ion-content>
+
+<!--
+<modal-footer leftAction="cancel" (leftEvent)="cancel($event)"
+              rightAction="register" (rightEvent)="register($event)"></modal-footer>
+-->

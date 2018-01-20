@@ -3,19 +3,32 @@ import { NgModule, ErrorHandler } from '@angular/core';
 import { IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular';
 import { MyApp } from './app.component';
 
-import { HelloIonicPage } from '../pages/hello-ionic/hello-ionic';
-import { ItemDetailsPage } from '../pages/item-details/item-details';
-import { ListPage } from '../pages/list/list';
+// PAGES
+import { LoginPage } from '../pages/login/login';
 
+// MODALS
+import { CreateAccountModal } from '../modals/create-account/create-account';
+
+// COMPONENTS
+import { ProfilePic } from '../components/profile-pic/profile-pic';
+
+// PROVIDERS
+import { DeceptaconService } from '../providers/deceptacon-service/deceptacon-service';
+import { AssetsService } from '../providers/assets-service/assets-service';
+
+// NATIVE
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
+import { Keyboard } from '@ionic-native/keyboard';
 
 @NgModule({
   declarations: [
     MyApp,
-    HelloIonicPage,
-    ItemDetailsPage,
-    ListPage
+    LoginPage,
+    
+    CreateAccountModal,
+    
+    ProfilePic
   ],
   imports: [
     BrowserModule,
@@ -24,14 +37,19 @@ import { SplashScreen } from '@ionic-native/splash-screen';
   bootstrap: [IonicApp],
   entryComponents: [
     MyApp,
-    HelloIonicPage,
-    ItemDetailsPage,
-    ListPage
+    LoginPage,
+    
+    CreateAccountModal,
+    
+    ProfilePic
   ],
   providers: [
     StatusBar,
     SplashScreen,
-    {provide: ErrorHandler, useClass: IonicErrorHandler}
+    Keyboard,
+    {provide: ErrorHandler, useClass: IonicErrorHandler},
+    DeceptaconService,
+    AssetsService
   ]
 })
 export class AppModule {}

@@ -1,0 +1,32 @@
+// ion-header // ion-footer 
+
+.toolbar-background {
+  background: color($colors, secondary);
+  color: color($colors, white);
+}
+
+.back-button {
+  color: color($colors, white);
+}
+
+.toolbar {
+  color: color($colors, white);
+}
+
+.toolbar-title {
+  color: color($colors, white);
+  padding-top: 5px;
+  overflow: visible;
+  
+}
+
+// ion-input // ion-item
+  
+.item {
+  padding: 0;
+  background: transparent;
+}
+
+button {
+  font-family: 'Avenir';
+}

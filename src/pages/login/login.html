@@ -1,0 +1,14 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>Login</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+  <div><button ion-button (click)="displayLogin()">Sign In</button></div>
+  <div><button ion-button (click)="createAccount()">Create Account</button></div>
+  <p class="create-account-terms">
+    By attending Decepta Con, <br/> you agree to our
+    <a (click)="openCodeConduct()">Code of Conduct</a>
+  </p>
+</ion-content>
