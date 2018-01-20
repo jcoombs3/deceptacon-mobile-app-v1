@@ -1,0 +1,8 @@
+{
+  "name": "deceptacon-mobile-app",
+  "app_id": "fcc6b8a1",
+  "type": "ionic-angular",
+  "integrations": {
+    "cordova": {}
+  }
+}
