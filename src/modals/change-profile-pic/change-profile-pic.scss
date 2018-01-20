@@ -1,0 +1,27 @@
+modal-change-profile-pic {
+  
+  ion-content {
+    background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAcAAAAHCAYAAADEUlfTAAAAG0lEQVQYV2NMKL/ty4ADMIIkF3SqbsYmP+gkAayXGgfe8HOVAAAAAElFTkSuQmCC) 50% 50% repeat;
+  }
+  
+  .grid-pics {
+    height: 70%;
+    
+    [class*=" bg-"], [class^=bg-] {
+      border: 2px solid black;
+    }
+    
+    ion-col {
+      opacity: 0.6;
+      @include transition(opacity 200ms ease);
+
+      &.active {
+        opacity: 1;
+      }
+    }
+  }
+  
+  img {
+    display: block;
+  }
+}

@@ -1,13 +1,12 @@
 import { Component } from '@angular/core';
-import { ViewController, Events, ModalController, LoadingController, AlertController } from 'ionic-angular';
+import { ViewController, ModalController } from 'ionic-angular';
 import { NgForm } from '@angular/forms';
 
 // COMPONENTS
-//import { ProfilePic } from '../../components/profile-pic/profile-pic';
 //import { ModalFooter } from '../../components/modal-footer/modal-footer';
 
 // MODALS
-//import { ProfilePicModal } from '../profile-pic/profile-pic';
+import { ChangeProfilePicModal } from '../change-profile-pic/change-profile-pic';
 //import { PinModal } from '../pin/pin';
 //import { ConductModal } from '../conduct/conduct';
 
@@ -32,7 +31,10 @@ export class CreateAccountModal {
     color: "tan"
   }
   
-  constructor(public viewCtrl: ViewController) {
+  constructor(
+    public viewCtrl: ViewController,
+    public modalCtrl: ModalController
+  ) {
     this.randomizeProfilePic();
   }
   
@@ -51,26 +53,17 @@ export class CreateAccountModal {
     console.log(f.valid); 
   }
   
-  
-  
-  
-  
-  
-  
-  
-  
-  
   editProfilePic(villager: any) {
     console.log('++ editProfilePic');
     
-//    const profilePicModal = this.modalCtrl.create(ProfilePicModal, this.villager);
-//    profilePicModal.onWillDismiss(data => {
-//      if (data) {
-//        this.villager.picture = data.picture;
-//        this.villager.color = data.color;
-//      }
-//    });
-//    profilePicModal.present();
+    const changeProfilePicModal = this.modalCtrl.create(ChangeProfilePicModal, this.villager);
+    changeProfilePicModal.onWillDismiss(data => {
+      if (data) {
+        this.villager.picture = data.picture;
+        this.villager.color = data.color;
+      }
+    });
+    changeProfilePicModal.present();
   }
   
   createPIN() {

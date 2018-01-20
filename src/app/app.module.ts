@@ -8,6 +8,7 @@ import { LoginPage } from '../pages/login/login';
 
 // MODALS
 import { CreateAccountModal } from '../modals/create-account/create-account';
+import { ChangeProfilePicModal } from '../modals/change-profile-pic/change-profile-pic';
 
 // COMPONENTS
 import { ProfilePic } from '../components/profile-pic/profile-pic';
@@ -27,6 +28,7 @@ import { Keyboard } from '@ionic-native/keyboard';
     LoginPage,
     
     CreateAccountModal,
+    ChangeProfilePicModal,
     
     ProfilePic
   ],
@@ -40,6 +42,7 @@ import { Keyboard } from '@ionic-native/keyboard';
     LoginPage,
     
     CreateAccountModal,
+    ChangeProfilePicModal,
     
     ProfilePic
   ],
