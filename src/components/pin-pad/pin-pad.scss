@@ -1,49 +1,43 @@
 pin-pad {
-  background: red;
+  
+  .pin-pad-container {
+    max-width: 250px;
+    margin: 0 auto;
+  }
+  
+  .pin-input {
+    width: 100%;
+    margin-bottom: 25px;
+    
+    ion-col div {
+      width: 30px;
+      height: 30px;
+      border-radius: 5px;
+      margin: 0 auto;
+      border: 2px solid darken(color($colors, secondary), 15%);
+      background: color($colors, secondary);
+      @include transition(background 200ms ease);
+      
+      &.active {
+        background: lighten(color($colors, secondary), 50%);
+      }
+    }
+  }
 
-//  .pin-input {
-//    width: 250px;
-//    margin: 0 auto;
-//    margin-top: 5px;
-//    text-align: center;
-//    
-//    ion-col:first-child .radial:after {
-//      display: none;
-//    }
-//    
-//    .radial {
-//      width: 30px;
-//      height: 30px;
-//      @include center-align();
-//      background: color($colors, white);
-//      border-radius: 50%;
-//      border: 2px solid color($colors, primary);
-//      @include transition(background 200ms ease);
-//      
-//      &:after {
-//        content: '';
-//        width: 0px;
-//        height: 5px;
-//        background: color($colors, primary);
-//        @include vertical-align();
-//        position: absolute;
-//        left: -50px;
-//        @include transition(width 200ms ease);
-//      }
-//      
-//      &.active {
-//        background: color($colors, primary);
-//        
-//        &:after {
-//          width: 50px;
-//        }
-//      }
-//    }
-//  }
-//  
   .pin-pad {
-    width: 250px;
+    width: 100%;
     text-align: center;
+    
+    button {
+      border: 2px solid darken(color($colors, secondary), 15%);
+      background: color($colors, secondary);
+      width: 50px;
+      height: 50px;
+      
+      &:active {
+        background: darken(color($colors, secondary), 15%);
+      }
+    }
   }
   
 }

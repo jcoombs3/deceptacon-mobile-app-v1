@@ -44,7 +44,7 @@ export class ChangeProfilePicModal {
   
   save() {
     let toast = this.toastCtrl.create({
-      message: 'Profile Updated',
+      message: 'Profile Picture Updated',
       duration: 2000,
       position: 'top',
       showCloseButton: true

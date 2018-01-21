@@ -14,14 +14,6 @@ modal-create-account {
   .create-account-terms { 
     margin-top: 25px;
     font-size: 12px;
-    
-    a {
-      color: color($colors, secondary);
-      text-decoration: underline;
-      font-weight: 600;
-      padding: 0;
-      font-size: 12px;
-    }
   }
   
   .create-account-pin {
@@ -30,7 +22,7 @@ modal-create-account {
     position: relative;
     border-radius: 10px;
     overflow: hidden;
-    border: 2px solid color($colors, secondary);
+    border: 2px solid darken(color($colors, secondary), 15%);
     
     img {
       max-width: 50%;
@@ -42,7 +34,7 @@ modal-create-account {
   .not-ready {
     
     .create-account-pin {
-      background: color($colors, secondary);
+      @include linear-gradient-bottom-diagonal-three(lighten($bg-tan, 15%), lighten($bg-tan, 7.5%), $bg-tan);
     }
   }
   

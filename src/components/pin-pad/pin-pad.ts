@@ -12,8 +12,10 @@ export class PinPad {
   
   validatePIN() {
     if (this.pin.length === 4) {
-      this.validated.emit(this.pin);
-      this.pin = [];
+      setTimeout(() => {
+        this.validated.emit(this.pin);
+        this.pin = [];
+      }, 200); 
     }
   }
   
