@@ -2,13 +2,9 @@ import { Component } from '@angular/core';
 import { ViewController, ModalController, AlertController } from 'ionic-angular';
 import { NgForm } from '@angular/forms';
 
-// COMPONENTS
-//import { ModalFooter } from '../../components/modal-footer/modal-footer';
-
 // MODALS
 import { ChangeProfilePicModal } from '../change-profile-pic/change-profile-pic';
-//import { PinModal } from '../pin/pin';
-//import { ConductModal } from '../conduct/conduct';
+import { CreatePinModal } from '../create-pin/create-pin';
 
 // PROVIDERS
 import { DeceptaconService } from '../../providers/deceptacon-service/deceptacon-service';
@@ -112,29 +108,22 @@ export class CreateAccountModal {
     }
   }
   
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
   createPIN() {
-    console.log('++ createPIN');
-    
-//    const pinModal = this.modalCtrl.create(PinModal);
-//    pinModal.onWillDismiss(data => {
-//      if (data) {
-//        this.villager.pin = data;
-//      }
-//    });
-//    pinModal.present();
+    const createPinModal = this.modalCtrl.create(CreatePinModal);
+    createPinModal.onWillDismiss(data => {
+      if (data) {
+        this.villager.pin = data;
+      }
+    });
+    createPinModal.present();
   }
+  
+  
+  
+  
+  
+  
+  
   
   
   
