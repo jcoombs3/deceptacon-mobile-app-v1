@@ -86,7 +86,7 @@ export class DeceptaconService {
   // ---------------------- //
 
   handleError(error) {
-    console.error(error);
-    return Observable.throw(error.json().error || 'Server error');
+    //console.error(error);
+    return Observable.throw(JSON.parse(error._body)["Error"] || 'Server error');
   }
 }

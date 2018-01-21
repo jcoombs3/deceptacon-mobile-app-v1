@@ -94,39 +94,39 @@
 }
 @mixin linear-gradient-top-three($startcolor, $middlecolor, $stopcolor) {
   background-color: $middlecolor;
-  background: -moz-linear-gradient(top, $startcolor 0%, $middlecolor 25%, $middlecolor 75%, $stopcolor 100%);
-  background: -webkit-linear-gradient(top, $startcolor 0%, $middlecolor 25%, $middlecolor 75%, $stopcolor 100%);
-  background: -o-linear-gradient(top, $startcolor 0%, $middlecolor 25%, $middlecolor 75%, $stopcolor 100%);
-  background: -ms-linear-gradient(top, $startcolor 0%, $middlecolor 25%, $middlecolor 75%, $stopcolor 100%);
+  background: -moz-linear-gradient(to bottom, $startcolor 0%, $middlecolor 25%, $middlecolor 75%, $stopcolor 100%);
+  background: -webkit-linear-gradient(to bottom, $startcolor 0%, $middlecolor 25%, $middlecolor 75%, $stopcolor 100%);
+  background: -o-linear-gradient(to bottom, $startcolor 0%, $middlecolor 25%, $middlecolor 75%, $stopcolor 100%);
+  background: -ms-linear-gradient(to bottom, $startcolor 0%, $middlecolor 25%, $middlecolor 75%, $stopcolor 100%);
   background: linear-gradient(to bottom, $startcolor 0%, $middlecolor 25%, $middlecolor 75%, $stopcolor 100%);
 }
 @mixin linear-gradient-left-three($startcolor, $middlecolor, $stopcolor) {
   background-color: $middlecolor;
-  background: -moz-linear-gradient(left, $startcolor 0%, $middlecolor 25%, $middlecolor 75%, $stopcolor 100%);
-  background: -webkit-linear-gradient(left, $startcolor 0%, $middlecolor 25%, $middlecolor 75%, $stopcolor 100%);
-  background: -o-linear-gradient(left, $startcolor 0%, $middlecolor 25%, $middlecolor 75%, $stopcolor 100%);
-  background: -ms-linear-gradient(left, $startcolor 0%, $middlecolor 25%, $middlecolor 75%, $stopcolor 100%);
+  background: -moz-linear-gradient(to right, $startcolor 0%, $middlecolor 25%, $middlecolor 75%, $stopcolor 100%);
+  background: -webkit-linear-gradient(to right, $startcolor 0%, $middlecolor 25%, $middlecolor 75%, $stopcolor 100%);
+  background: -o-linear-gradient(to right, $startcolor 0%, $middlecolor 25%, $middlecolor 75%, $stopcolor 100%);
+  background: -ms-linear-gradient(to right, $startcolor 0%, $middlecolor 25%, $middlecolor 75%, $stopcolor 100%);
   background: linear-gradient(to right, $startcolor 0%, $middlecolor 25%, $middlecolor 75%, $stopcolor 100%);
 }
 @mixin linear-gradient-left($startcolor, $stopcolor) {
-  background-image: -webkit-gradient(linear, left top, right top, color-stop(0, $startcolor), color-stop(1, $stopcolor));//for old webkit syntax
+  background-image: -webkit-gradient(linear, to right top, to left top, color-stop(0, $startcolor), color-stop(1, $stopcolor));//for old webkit syntax
   @include gradient($startcolor, $stopcolor, 90deg, mix($startcolor, $stopcolor, 60%));
 }
 @mixin linear-gradient-top-diagonal($startcolor, $stopcolor) {
-  background-image: -webkit-gradient(linear, left top, right bottom, color-stop(0, $startcolor), color-stop(1, $stopcolor));//for old webkit syntax
+  background-image: -webkit-gradient(linear, to right top, to left bottom, color-stop(0, $startcolor), color-stop(1, $stopcolor));//for old webkit syntax
   @include gradient($startcolor, $stopcolor, 135deg, mix($startcolor, $stopcolor, 60%));
 }
 @mixin linear-gradient-bottom-diagonal($startcolor, $stopcolor) {
-  background-image: -webkit-gradient(linear, left bottom, right top, color-stop(0, $startcolor), color-stop(1, $stopcolor));//for old webkit syntax
+  background-image: -webkit-gradient(linear, to right bottom, to left top, color-stop(0, $startcolor), color-stop(1, $stopcolor));//for old webkit syntax
   @include gradient($startcolor, $stopcolor, 45deg, mix($startcolor, $stopcolor, 60%));
 }
 @mixin linear-gradient-bottom-diagonal-three($startcolor, $middlecolor, $stopcolor) {
   background-color: $startcolor;
-  background: -moz-linear-gradient(left bottom, $startcolor 0%, $middlecolor 30%, $stopcolor 65%);
-  background: -webkit-linear-gradient(left bottom, $startcolor 0%, $middlecolor 30%, $stopcolor 65%);
-  background: -o-linear-gradient(left bottom, $startcolor 0%, $middlecolor 30%, $stopcolor 65%);
-  background: -ms-linear-gradient(left bottom, $startcolor 0%, $middlecolor 30%, $stopcolor 65%);
-  background: linear-gradient(left bottom, $startcolor 0%, $middlecolor 30%, $stopcolor 65%);
+  background: -moz-linear-gradient(to right bottom, $startcolor 0%, $middlecolor 30%, $stopcolor 65%);
+  background: -webkit-linear-gradient(to right bottom, $startcolor 0%, $middlecolor 30%, $stopcolor 65%);
+  background: -o-linear-gradient(to right bottom, $startcolor 0%, $middlecolor 30%, $stopcolor 65%);
+  background: -ms-linear-gradient(to right bottom, $startcolor 0%, $middlecolor 30%, $stopcolor 65%);
+  background: linear-gradient(to right bottom, $startcolor 0%, $middlecolor 30%, $stopcolor 65%);
 }
 @mixin gradient($startcolor, $stopcolor, $angle, $backgroundcolor) {
   background-color: $backgroundcolor;

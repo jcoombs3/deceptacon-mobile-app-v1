@@ -51,4 +51,9 @@ ion-toast, .toast-ios, .toast-android {
     @include linear-gradient-bottom-diagonal-three(lighten(color($colors, special), 8%), lighten(color($colors, special), 3%), color($colors, special));
     border: 2px solid color($colors, black);
   }
+  
+  &.error .toast-wrapper {
+    @include linear-gradient-bottom-diagonal-three(lighten($bg-orange, 8%), lighten($bg-orange, 3%), $bg-orange);
+    border-color: color($colors, white);
+  }
 }

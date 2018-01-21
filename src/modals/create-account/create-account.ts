@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { ViewController, ModalController, AlertController } from 'ionic-angular';
+import { ViewController, ModalController, AlertController, LoadingController, ToastController } from 'ionic-angular';
 import { NgForm } from '@angular/forms';
 
 // MODALS
@@ -31,7 +31,10 @@ export class CreateAccountModal {
     public viewCtrl: ViewController,
     public modalCtrl: ModalController,
     public alertCtrl: AlertController,
-    private assets: AssetsService
+    public loadingCtrl: LoadingController,
+    public toastCtrl: ToastController,
+    private assets: AssetsService,
+    private deceptaconService: DeceptaconService
   ) {
     this.randomizeProfilePic();
   }
@@ -65,15 +68,26 @@ export class CreateAccountModal {
   }
   
   register(f: NgForm) {
-    console.log('++ register');
     if (this.validateCreateAccount(f)) {
-      console.log('++ register: passed');
-//      this.deceptaconService.registerVillager(this.villager)
-//        .subscribe(data => {
-//          this.viewCtrl.dismiss(data);
-//        }, error => {
-//
-//        });
+      let loading = this.loadingCtrl.create({
+        content: 'Registering...'
+      });
+      loading.present();
+      this.deceptaconService.registerVillager(this.villager)
+        .subscribe(data => {
+          loading.dismiss();
+          this.viewCtrl.dismiss(data);
+        }, error => {
+          let toast = this.toastCtrl.create({
+            message: error,
+            duration: 3000,
+            position: 'top',
+            showCloseButton: true,
+            cssClass: 'error'
+          });
+          toast.present();
+          loading.dismiss();
+        });
     }
   }
   
@@ -120,14 +134,9 @@ export class CreateAccountModal {
   }
   
   
+
   
-  
-  
-  
-  
-  
-  
-  
+  // TODO: openCodeConduct
   openCodeConduct() {
     console.log('++ openCodeConduct');
 //    const conductModal = this.modalCtrl.create(ConductModal);
