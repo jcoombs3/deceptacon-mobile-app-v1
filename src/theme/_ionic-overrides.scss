@@ -20,7 +20,10 @@
 
 .bar-buttons button {
   color: color($colors, white);
-  font-size: 27px;
+  
+  &[icon-only] {
+    font-size: 27px;
+  }
 }
 
 // ion-input // ion-item
@@ -38,4 +41,14 @@ button {
 
 ion-content {
   @include linear-gradient-bottom-diagonal-three(color($gradient_shine, start), color($gradient_shine, middle), color($gradient_shine, end));
+  color: inherit !important;
+}
+
+// ion-toast
+
+ion-toast, .toast-ios, .toast-android {
+  .toast-wrapper {
+    @include linear-gradient-bottom-diagonal-three(lighten(color($colors, special), 8%), lighten(color($colors, special), 3%), color($colors, special));
+    border: 2px solid color($colors, black);
+  }
 }

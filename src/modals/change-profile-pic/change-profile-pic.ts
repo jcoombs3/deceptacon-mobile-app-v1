@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { ViewController, NavParams } from 'ionic-angular';
+import { ViewController, NavParams, ToastController } from 'ionic-angular';
 
 // COMPONENTS
 import { ProfilePic } from '../../components/profile-pic/profile-pic';
@@ -16,7 +16,12 @@ export class ChangeProfilePicModal {
   color: any;
   picture: any;
   
-  constructor(public viewCtrl: ViewController, private navParams: NavParams, private assets: AssetsService) {
+  constructor(
+    public viewCtrl: ViewController, 
+    private navParams: NavParams, 
+    private assets: AssetsService,
+    private toastCtrl: ToastController
+  ) {
     this.color = navParams.get('color');
     this.picture = navParams.get('picture');
   }
@@ -38,6 +43,13 @@ export class ChangeProfilePicModal {
   }
   
   save() {
+    let toast = this.toastCtrl.create({
+      message: 'Profile Updated',
+      duration: 2000,
+      position: 'top',
+      showCloseButton: true
+    });
+    toast.present();
     this.viewCtrl.dismiss(this);
   } 
 }

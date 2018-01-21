@@ -12,7 +12,7 @@
 </ion-header>
 
 <ion-content padding>
-  <p>This is your Deceptacon Profile. Once signed in, you can make future changes by going to 'My Profile'.</p>
+  <p>This is your Decepta Con Profile. Once signed in, you can make future changes by going to 'My Profile'.</p>
   
   <ion-grid>
     <ion-row>
@@ -56,7 +56,8 @@
                  autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false">
       </ion-input>
     </ion-item>
-    <button>Submit</button>
+    
+    <button class="hidden-submit">Submit</button>
   </form>
 
   <p class="create-account-terms">
@@ -65,7 +66,12 @@
   </p>
 </ion-content>
 
-<!--
-<modal-footer leftAction="cancel" (leftEvent)="cancel($event)"
-              rightAction="register" (rightEvent)="register($event)"></modal-footer>
--->
+<ion-footer>
+  <ion-navbar>
+    <ion-buttons end>
+      <button ion-button (click)="register(f)">
+        Register
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+</ion-footer>

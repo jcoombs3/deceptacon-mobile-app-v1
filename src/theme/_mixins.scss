@@ -122,11 +122,11 @@
 }
 @mixin linear-gradient-bottom-diagonal-three($startcolor, $middlecolor, $stopcolor) {
   background-color: $startcolor;
-  background: -moz-linear-gradient(left bottom, $startcolor 0%, $middlecolor 75%, $stopcolor 100%);
-  background: -webkit-linear-gradient(left bottom, $startcolor 0%, $middlecolor 75%, $stopcolor 100%);
-  background: -o-linear-gradient(left bottom, $startcolor 0%, $middlecolor 75%, $stopcolor 100%);
-  background: -ms-linear-gradient(left bottom, $startcolor 0%, $middlecolor 75%, $stopcolor 100%);
-  background: linear-gradient(left bottom, $startcolor 0%, $middlecolor 75%, $stopcolor 100%);
+  background: -moz-linear-gradient(left bottom, $startcolor 0%, $middlecolor 30%, $stopcolor 65%);
+  background: -webkit-linear-gradient(left bottom, $startcolor 0%, $middlecolor 30%, $stopcolor 65%);
+  background: -o-linear-gradient(left bottom, $startcolor 0%, $middlecolor 30%, $stopcolor 65%);
+  background: -ms-linear-gradient(left bottom, $startcolor 0%, $middlecolor 30%, $stopcolor 65%);
+  background: linear-gradient(left bottom, $startcolor 0%, $middlecolor 30%, $stopcolor 65%);
 }
 @mixin gradient($startcolor, $stopcolor, $angle, $backgroundcolor) {
   background-color: $backgroundcolor;

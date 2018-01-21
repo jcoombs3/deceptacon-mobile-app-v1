@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { ViewController, ModalController } from 'ionic-angular';
+import { ViewController, ModalController, AlertController } from 'ionic-angular';
 import { NgForm } from '@angular/forms';
 
 // COMPONENTS
@@ -33,14 +33,19 @@ export class CreateAccountModal {
   
   constructor(
     public viewCtrl: ViewController,
-    public modalCtrl: ModalController
+    public modalCtrl: ModalController,
+    public alertCtrl: AlertController
   ) {
     this.randomizeProfilePic();
   }
   
   randomizeProfilePic() {
-    this.villager.picture = this.pictures[Math.floor((Math.random() * this.pictures.length - 1) + 1)];
-    this.villager.color = this.colors[Math.floor((Math.random() * this.colors.length - 1) + 1)];
+    this.villager.picture = this.pictures[
+      Math.floor((Math.random() * this.pictures.length - 1) + 1)
+    ];
+    this.villager.color = this.colors[
+      Math.floor((Math.random() * this.colors.length - 1) + 1)
+    ];
   }
   
   closeModal() {
@@ -51,11 +56,11 @@ export class CreateAccountModal {
     console.log('++ onSubmit');
     console.log(f.value); 
     console.log(f.valid); 
+    
+    this.register();
   }
   
   editProfilePic(villager: any) {
-    console.log('++ editProfilePic');
-    
     const changeProfilePicModal = this.modalCtrl.create(ChangeProfilePicModal, this.villager);
     changeProfilePicModal.onWillDismiss(data => {
       if (data) {
@@ -65,6 +70,63 @@ export class CreateAccountModal {
     });
     changeProfilePicModal.present();
   }
+  
+  register(f: NgForm) {
+    console.log('++ register');
+    if (this.validateCreateAccount(f)) {
+      console.log('++ register: passed');
+//      this.deceptaconService.registerVillager(this.villager)
+//        .subscribe(data => {
+//          this.viewCtrl.dismiss(data);
+//        }, error => {
+//
+//        });
+    }
+  }
+  
+  validateCreateAccount(f: ngForm) {
+    let error = false;
+    let errorText = '';
+    if (f.valid && this.villager.pin) {
+      this.villager.username = f.value.username;
+      this.villager.firstname = f.value.firstname;
+      this.villager.lastname = f.value.lastname;
+      return true;
+    } else if (!f.valid && !f.value.username) {
+      errorText = "Please input a username";
+      error = true;
+    } else if (!f.valid && !f.value.firstname) {
+      errorText = "Please add your first name";
+      error = true;
+    } else if (!f.valid && !f.value.lastname) {
+      errorText = "Please add your last name";
+      error = true;
+    } else if (!this.villager.pin) {
+      errorText = "Please add a security pin";
+      error = true;
+    }
+    
+    if (error) {
+      let alert = this.alertCtrl.create({
+        title: errorText,
+        buttons: ['Okay']
+      });
+      alert.present();
+      return false;
+    }
+  }
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   createPIN() {
     console.log('++ createPIN');
@@ -78,47 +140,7 @@ export class CreateAccountModal {
 //    pinModal.present();
   }
   
-  register() {
-    console.log('++ register');
-//    if (this.validateCreateAccount()) {
-//      this.deceptaconService.registerVillager(this.villager)
-//        .subscribe(data => {
-//          this.viewCtrl.dismiss(data);
-//        }, error => {
-//
-//        });
-//    }
-  }
   
-  validateCreateAccount() {
-    console.log('++ validateCreateAccount');
-//    let error = false;
-//    let errorText = '';
-//    if (!this.villager.username) {
-//      errorText = "Please input a username";
-//      error = true;
-//    } else if (!this.villager.firstname) {
-//      errorText = "Please add your first name";
-//      error = true;
-//    } else if (!this.villager.lastname) {
-//      errorText = "Please add your last name";
-//      error = true;
-//    } else if (!this.villager.pin) {
-//      errorText = "Please add a security pin";
-//      error = true;
-//    }
-//    
-//    if (error) {
-//      let alert = this.alertCtrl.create({
-//        title: errorText,
-//        buttons: ['Okay']
-//      });
-//      alert.present();
-//      return false;
-//    } else {
-//      return true;
-//    }
-  }
   
   openCodeConduct() {
     console.log('++ openCodeConduct');

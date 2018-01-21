@@ -1,24 +1,24 @@
 .bg-darkblue {
-  background: $bg-darkblue;
+  @include linear-gradient-bottom-diagonal-three(lighten($bg-darkblue, 20%), lighten($bg-darkblue, 10%), $bg-darkblue);
 }
 .bg-tan {
-  background: $bg-tan;
+  @include linear-gradient-bottom-diagonal-three(lighten($bg-tan, 20%), lighten($bg-tan, 10%), $bg-tan);
 }
 .bg-orange {
-  background: $bg-orange;
+  @include linear-gradient-bottom-diagonal-three(lighten($bg-orange, 20%), lighten($bg-orange, 10%), $bg-orange);
 }
 .bg-yellow {
-  background: $bg-yellow;
+  @include linear-gradient-bottom-diagonal-three(lighten($bg-yellow, 20%), lighten($bg-yellow, 10%), $bg-yellow);
 }
 .bg-green {
-  background: $bg-green;
+  @include linear-gradient-bottom-diagonal-three(lighten($bg-green, 20%), lighten($bg-green, 10%), $bg-green);
 }
 .bg-blue {
-  background: $bg-blue;
+  @include linear-gradient-bottom-diagonal-three(lighten($bg-blue, 20%), lighten($bg-blue, 10%), $bg-blue);
 }
 .bg-black {
-  background: $bg-black;
+  @include linear-gradient-bottom-diagonal-three(lighten($bg-black, 20%), lighten($bg-black, 10%), $bg-black);
 }
 .bg-gray {
-  background: $bg-gray;
+  @include linear-gradient-bottom-diagonal-three(lighten($bg-gray, 20%), lighten($bg-gray, 10%), $bg-gray);
 }
