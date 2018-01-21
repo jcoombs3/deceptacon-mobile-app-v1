@@ -13,13 +13,20 @@ import { AssetsService } from '../../providers/assets-service/assets-service';
   templateUrl: 'login.html'
 })
 export class LoginPage {
+  anim: boolean = false;
 
   constructor(
     public navCtrl: NavController, 
     public modalCtrl: ModalController,
     private assets: AssetsService
-  ) {
-    
+  ) { }
+  
+  ionViewDidEnter() {
+    this.anim = true;
+  }
+  
+  ionViewWillLeave() {
+    this.anim = false;
   }
   
   displayLogin() {

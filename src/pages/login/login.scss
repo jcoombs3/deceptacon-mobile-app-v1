@@ -1,5 +1,7 @@
 page-login {
   
+  $loginBtnsDelay: 300ms;
+  
   ion-content {
     @include linear-gradient-bottom-diagonal-three(lighten(color($login, primary), 10%), lighten(color($login, primary), 5%), color($login, primary));
   }
@@ -11,13 +13,13 @@ page-login {
   }
   
   .login-logo-container {
-    height: 40%;
+    height: 50%;
     width: 100%;
     position: relative;
   }
   
   .login-buttons-container {
-    height: 60%;
+    height: 50%;
     width: 100%;
     position: relative;
   }
@@ -25,33 +27,48 @@ page-login {
   .login-logo {
     border-radius: 50%;
     border: 8px solid darken(color($login, primary), 10%);
-    width: 250px;
-    height: 250px;
+    width: 0px;
+    height: 0px;
     margin: 0 auto;
-    background: color($colors, white);
+    @include linear-gradient-bottom-diagonal-three(color($colors, white), darken(color($colors, white), 3%), darken(color($colors, white), 6%));
     overflow: hidden;
     text-align: center;
+    opacity: 0;
     @include box-shadow();
     @include vertical-align();
-      
-    @media only screen and (max-device-height: 650px) {
-      width: 180px;
-      height: 180px;
-    }
+    @include transition(width 500ms ease-out, height 500ms ease-out, opacity 300ms ease);
     
     img {
       max-width: 90%;
+      opacity: 0;
       @include vertical-align();
+      @include transition(opacity 300ms ease);
+      transition-delay: 300ms;
     }
   }
   
   .login-buttons {
     text-align: center;
     @include center-align();
+    
+    ion-row {
+      position: relative;
+      top: 25px;
+      opacity: 0;
+      @include transition(top 600ms ease, opacity, 500ms ease);
+      transition-delay: $loginBtnsDelay;
+      
+      &:nth-child(2) {
+        transition-delay: $loginBtnsDelay + 200ms;
+      }
+      &:nth-child(3) {
+        transition-delay: $loginBtnsDelay + 400ms;
+      }
+    }
   
     button {
       background: darken(color($login, primary), 10%);
-      @include box-shadow();
+      @include box-shadow(0 1px 3px darken(color($login, primary), 40%));
       width: 100%;
       max-width: 250px;
       margin-bottom: 25px;
@@ -64,5 +81,28 @@ page-login {
   
   .create-account-terms {
     color: color($colors, white);
+  }
+  
+  .anim-active {
+    
+    .login-logo {
+      width: 250px;
+      height: 250px;
+      opacity: 1;
+      
+      @media only screen and (max-device-height: 650px) {
+        width: 180px;
+        height: 180px;
+      }
+    }
+    
+    .login-logo img {
+      opacity: 1;
+    }
+    
+    .login-buttons ion-row {
+      opacity: 1;
+      top: 0;
+    }
   }
 }
