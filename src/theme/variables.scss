@@ -42,6 +42,11 @@ $colors: (
   black: #000000,
 );
 
+$login: (
+  primary: #7482A6,
+  button: #5EA7E5
+);
+
 $profile: (
   darkblue: color($colors, primary),
   tan: color($colors, secondary),

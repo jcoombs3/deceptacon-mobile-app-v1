@@ -1,14 +1,32 @@
-<ion-header>
-  <ion-navbar>
-    <ion-title>Login</ion-title>
-  </ion-navbar>
-</ion-header>
-
-<ion-content>
-  <div><button ion-button (click)="displayLogin()">Sign In</button></div>
-  <div><button ion-button (click)="createAccount()">Create Account</button></div>
-  <p class="create-account-terms">
-    By attending Decepta Con, <br/> you agree to our
-    <a (click)="openCodeConduct()">Code of Conduct</a>
-  </p>
+<ion-content padding>
+  
+  <div class="login-container">
+    <div class="login-logo-container">
+      <div class="login-logo">
+        <img [src]="assets.assetsUrl + 'deceptacon-logo.png'"/>
+      </div>
+    </div>
+    <div class="login-buttons-container">
+      <ion-grid class="login-buttons">
+        <ion-row>
+          <ion-col>
+            <button ion-button (click)="displayLogin()" class="ion-button-special">Sign In</button>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col>
+            <button ion-button (click)="createAccount()">Create Account</button>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col>
+            <p class="create-account-terms">
+              By attending Decepta Con 2018, <br/> you agree to our
+              <a (click)="openCodeConduct()" class="a-white">Code of Conduct</a>
+            </p>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </div>
+  </div>
 </ion-content>

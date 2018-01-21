@@ -1,11 +1,21 @@
 html, body {
   color: $bg-black;
+  @include linear-gradient-bottom-diagonal-three(color($gradient_shine, start), color($gradient_shine, middle), color($gradient_shine, end));
 }
   
 a {
-  color: color($colors, secondary);
+  color: darken(color($colors, secondary), 15%);
   text-decoration: underline;
   font-weight: 600;
   padding: 0;
   font-size: 12px;
+}
+
+button[ion-button].ion-button-special {
+  @include linear-gradient-bottom-diagonal-three(color($colors, white), darken(color($colors, white), 3%), darken(color($colors, white), 6%));
+  color: $bg-darkblue;
+}
+
+a.a-white {
+  color: color($colors, white);
 }

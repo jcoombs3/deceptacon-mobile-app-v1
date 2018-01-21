@@ -1,7 +1,12 @@
 import { Component } from '@angular/core';
 import { NavController, ModalController } from 'ionic-angular';
 
+// MODALS
 import { CreateAccountModal } from '../../modals/create-account/create-account';
+
+// PROVIDERS
+//import { DeceptaconService } from '../../providers/deceptacon-service/deceptacon-service';
+import { AssetsService } from '../../providers/assets-service/assets-service';
 
 @Component({
   selector: 'page-login',
@@ -11,7 +16,8 @@ export class LoginPage {
 
   constructor(
     public navCtrl: NavController, 
-    public modalCtrl: ModalController
+    public modalCtrl: ModalController,
+    private assets: AssetsService
   ) {
     
   }
@@ -21,7 +27,6 @@ export class LoginPage {
   }
   
   createAccount() {
-    console.log('++ createAccount');
     const createAccountModal = this.modalCtrl.create(CreateAccountModal);
     createAccountModal.onDidDismiss(data => {
       if (data) {
