@@ -1,14 +1,25 @@
 modal-change-profile-pic {
+  $gridPicHeight: 70%;
   
-  ion-content {
-    background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAcAAAAHCAYAAADEUlfTAAAAG0lEQVQYV2NMKL/ty4ADMIIkF3SqbsYmP+gkAayXGgfe8HOVAAAAAElFTkSuQmCC) 50% 50% repeat;
+  .scroll-content {
+    padding: 25px 0px;
   }
   
   .grid-pics {
     height: 70%;
+    width: 80%;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    
+    ion-grid {
+      @include vertical-align();
+      position: absolute;
+    }
     
     [class*=" bg-"], [class^=bg-] {
       border: 2px solid black;
+      @include transition(background 200ms ease);
     }
     
     ion-col {
@@ -23,5 +34,58 @@ modal-change-profile-pic {
   
   img {
     display: block;
+  }
+  
+  .profile-actual {
+    width: 80%;
+    height: 100% - $gridPicHeight;
+    position: relative;
+    top: 0;
+    left: 0;
+    
+    profile-pic {
+      width: 145px;
+      @include center-align();
+      position: absolute;
+      
+      @media only screen and (max-device-height: 650px) {
+        width: 100px;
+      }
+      
+      @media only screen and (min-device-height: 700px) {
+        width: 150px;
+      }
+    }
+  }
+  
+  .swatches {
+    width: 20%;
+    max-height: 600px;
+    position: absolute;
+    top: 0;
+    right: -20%;
+    height: 100%;
+    border-left: 2px solid black;
+    @include transition(right 300ms ease);
+    
+    &.active {
+      right: 0;
+    }
+    
+    .bg-block {
+      position: relative;
+      width: 100%;
+      height: 12.5%;
+      padding: 0;
+      border: none;
+      display: block;
+    } 
+      
+    @media only screen and (min-device-height: 700px) {
+      @include vertical-align();
+      position: absolute;
+      border: 2px solid black;
+      border-right: none;
+    }
   }
 }
