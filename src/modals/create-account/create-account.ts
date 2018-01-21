@@ -52,14 +52,6 @@ export class CreateAccountModal {
     this.viewCtrl.dismiss();
   }
   
-  onSubmit(f: NgForm) {
-    console.log('++ onSubmit');
-    console.log(f.value); 
-    console.log(f.valid); 
-    
-    this.register();
-  }
-  
   editProfilePic(villager: any) {
     const changeProfilePicModal = this.modalCtrl.create(ChangeProfilePicModal, this.villager);
     changeProfilePicModal.onWillDismiss(data => {
@@ -69,6 +61,10 @@ export class CreateAccountModal {
       }
     });
     changeProfilePicModal.present();
+  }
+  
+  onSubmit(f: NgForm) {
+    this.register(f);
   }
   
   register(f: NgForm) {
@@ -84,7 +80,7 @@ export class CreateAccountModal {
     }
   }
   
-  validateCreateAccount(f: ngForm) {
+  validateCreateAccount(f: NgForm) {
     let error = false;
     let errorText = '';
     if (f.valid && this.villager.pin) {
