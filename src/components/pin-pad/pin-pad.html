@@ -1,0 +1,58 @@
+<!--
+<ion-grid class="pin-input">
+  <ion-row>
+    <ion-col>
+      <div class="radial" [ngClass]="{'active': pin.length > 0}"></div>
+    </ion-col>
+    <ion-col>
+      <div class="radial" [ngClass]="{'active': pin.length > 1}"></div>
+    </ion-col>
+    <ion-col>
+      <div class="radial" [ngClass]="{'active': pin.length > 2}"></div>
+    </ion-col>
+    <ion-col>
+      <div class="radial" [ngClass]="{'active': pin.length > 3}"></div>
+    </ion-col>
+  </ion-row>
+</ion-grid>
+-->
+<ion-grid class="pin-pad">
+  <ion-row>
+    <ion-col>
+      <button ion-button (click)="insertPIN(1)">1</button>
+    </ion-col>
+    <ion-col>
+      <button ion-button (click)="insertPIN(2)">2</button>
+    </ion-col>
+    <ion-col>
+      <button ion-button (click)="insertPIN(3)">3</button>
+    </ion-col>
+  </ion-row>
+  <ion-row>
+    <ion-col>
+      <button ion-button (click)="insertPIN(4)">4</button>
+    </ion-col>
+    <ion-col>
+      <button ion-button (click)="insertPIN(5)">5</button>
+    </ion-col>
+    <ion-col>
+      <button ion-button (click)="insertPIN(6)">6</button>
+    </ion-col>
+  </ion-row>
+  <ion-row>
+    <ion-col>
+      <button ion-button (click)="insertPIN(7)">7</button>
+    </ion-col>
+    <ion-col>
+      <button ion-button (click)="insertPIN(8)">8</button>
+    </ion-col>
+    <ion-col>
+      <button ion-button (click)="insertPIN(9)">9</button>
+    </ion-col>
+  </ion-row>
+  <ion-row>
+    <ion-col>
+      <button ion-button (click)="insertPIN(0)">0</button>
+    </ion-col>
+  </ion-row>
+</ion-grid>

@@ -1,0 +1,49 @@
+pin-pad {
+  background: red;
+
+//  .pin-input {
+//    width: 250px;
+//    margin: 0 auto;
+//    margin-top: 5px;
+//    text-align: center;
+//    
+//    ion-col:first-child .radial:after {
+//      display: none;
+//    }
+//    
+//    .radial {
+//      width: 30px;
+//      height: 30px;
+//      @include center-align();
+//      background: color($colors, white);
+//      border-radius: 50%;
+//      border: 2px solid color($colors, primary);
+//      @include transition(background 200ms ease);
+//      
+//      &:after {
+//        content: '';
+//        width: 0px;
+//        height: 5px;
+//        background: color($colors, primary);
+//        @include vertical-align();
+//        position: absolute;
+//        left: -50px;
+//        @include transition(width 200ms ease);
+//      }
+//      
+//      &.active {
+//        background: color($colors, primary);
+//        
+//        &:after {
+//          width: 50px;
+//        }
+//      }
+//    }
+//  }
+//  
+  .pin-pad {
+    width: 250px;
+    text-align: center;
+  }
+  
+}

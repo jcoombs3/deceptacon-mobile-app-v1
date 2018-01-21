@@ -13,6 +13,7 @@ import { CreatePinModal } from '../modals/create-pin/create-pin';
 
 // COMPONENTS
 import { ProfilePic } from '../components/profile-pic/profile-pic';
+import { PinPad } from '../components/pin-pad/pin-pad';
 
 // PROVIDERS
 import { DeceptaconService } from '../providers/deceptacon-service/deceptacon-service';
@@ -32,7 +33,8 @@ import { Keyboard } from '@ionic-native/keyboard';
     ChangeProfilePicModal,
     CreatePinModal,
     
-    ProfilePic
+    ProfilePic,
+    PinPad
   ],
   imports: [
     BrowserModule,
@@ -47,7 +49,8 @@ import { Keyboard } from '@ionic-native/keyboard';
     ChangeProfilePicModal,
     CreatePinModal,
     
-    ProfilePic
+    ProfilePic,
+    PinPad
   ],
   providers: [
     StatusBar,

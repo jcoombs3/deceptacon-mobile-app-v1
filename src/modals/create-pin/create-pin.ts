@@ -11,7 +11,7 @@ export class CreatePinModal {
     
   }
   
-  closeModal() {
-    this.viewCtrl.dismiss();
+  completePIN(pin: any) {
+    this.viewCtrl.dismiss(pin);
   }
 }

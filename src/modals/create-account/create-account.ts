@@ -30,7 +30,8 @@ export class CreateAccountModal {
   constructor(
     public viewCtrl: ViewController,
     public modalCtrl: ModalController,
-    public alertCtrl: AlertController
+    public alertCtrl: AlertController,
+    private assets: AssetsService
   ) {
     this.randomizeProfilePic();
   }
