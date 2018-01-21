@@ -15,15 +15,10 @@ import { AssetsService } from '../../providers/assets-service/assets-service';
 export class ChangeProfilePicModal {
   color: any;
   picture: any;
-  anim: boolean = false;
   
   constructor(public viewCtrl: ViewController, private navParams: NavParams, private assets: AssetsService) {
     this.color = navParams.get('color');
     this.picture = navParams.get('picture');
-  }
-  
-  ionViewDidEnter() {
-    this.anim = true;
   }
   
   updatePicture(pic: string) {

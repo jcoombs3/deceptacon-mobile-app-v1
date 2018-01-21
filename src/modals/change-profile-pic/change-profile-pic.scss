@@ -63,14 +63,9 @@ modal-change-profile-pic {
     max-height: 600px;
     position: absolute;
     top: 0;
-    right: -20%;
+    right: 0;
     height: 100%;
     border-left: 2px solid black;
-    @include transition(right 300ms ease);
-    
-    &.active {
-      right: 0;
-    }
     
     .bg-block {
       position: relative;

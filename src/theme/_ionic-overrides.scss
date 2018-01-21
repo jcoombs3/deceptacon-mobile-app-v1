@@ -30,3 +30,9 @@
 button {
   font-family: 'Avenir';
 }
+
+// ion-content 
+
+ion-content {
+  @include linear-gradient-bottom-diagonal-three(color($gradient_shine, start), color($gradient_shine, middle), color($gradient_shine, end));
+}

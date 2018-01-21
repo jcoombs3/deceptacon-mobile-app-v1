@@ -62,6 +62,12 @@ $bg-blue: color($profile, blue);
 $bg-black: color($profile, black);
 $bg-gray: color($profile, gray);
 
+$gradient_shine: (
+  start: color($colors, white),
+  middle: #fff8f0,
+  end: #EBDCCB
+);
+
 // App iOS Variables
 // --------------------------------------------------
 // iOS only Sass variables can go here
