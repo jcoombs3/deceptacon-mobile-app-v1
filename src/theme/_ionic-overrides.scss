@@ -15,9 +15,12 @@
 
 .toolbar-title {
   color: color($colors, white);
-  padding-top: 5px;
   overflow: visible;
-  
+}
+
+.bar-buttons button {
+  color: color($colors, white);
+  font-size: 27px;
 }
 
 // ion-input // ion-item

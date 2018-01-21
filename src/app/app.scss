@@ -17,4 +17,9 @@
 
 @import "../theme/mixins";
 @import "../theme/bg";
+@import "../theme/fonts/index";
 @import "../theme/ionic-overrides";
+
+ion-app.md, ion-app {
+  font-family: $avenir !important;
+}

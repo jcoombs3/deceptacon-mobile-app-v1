@@ -12,101 +12,103 @@
 </ion-header>
 
 <ion-content no-bounce>
-  <div class="grid-pics">
-    <ion-grid>
-      <ion-row>
-        <ion-col (click)="updatePicture('BodyGuard.png')" [ngClass]="{'active': picture === 'BodyGuard.png'}">
-          <div class="bg-{{color}}">
-            <img [src]="assets.getProfileUrl() + 'BodyGuard.png'">
-          </div>
-        </ion-col>
-        <ion-col (click)="updatePicture('CultLeader.png')" [ngClass]="{'active': picture === 'CultLeader.png'}">
-          <div class="bg-{{color}}">
-            <img [src]="assets.getProfileUrl() + 'CultLeader.png'">
-          </div>
-        </ion-col>
-        <ion-col (click)="updatePicture('Cupid.png')" [ngClass]="{'active': picture === 'Cupid.png'}">
-          <div class="bg-{{color}}">
-            <img [src]="assets.getProfileUrl() + 'Cupid.png'">
-          </div>
-        </ion-col>
-        <ion-col (click)="updatePicture('Drunk.png')" [ngClass]="{'active': picture === 'Drunk.png'}">
-          <div class="bg-{{color}}">
-            <img [src]="assets.getProfileUrl() + 'Drunk.png'">
-          </div>
-        </ion-col>
-      </ion-row>
-      <ion-row>
-        <ion-col (click)="updatePicture('FrankensteinMonster.png')" [ngClass]="{'active': picture === 'FrankensteinMonster.png'}">
-          <div class="bg-{{color}}">
-            <img [src]="assets.getProfileUrl() + 'FrankensteinMonster.png'">
-          </div>
-        </ion-col>
-        <ion-col (click)="updatePicture('Huntress.png')" [ngClass]="{'active': picture === 'Huntress.png'}">
-          <div class="bg-{{color}}">
-            <img [src]="assets.getProfileUrl() + 'Huntress.png'">
-          </div>
-        </ion-col>
-        <ion-col (click)="updatePicture('Lycan.png')" [ngClass]="{'active': picture === 'Lycan.png'}">
-          <div class="bg-{{color}}">
-            <img [src]="assets.getProfileUrl() + 'Lycan.png'">
-          </div>
-        </ion-col>
-        <ion-col (click)="updatePicture('Seer.png')" [ngClass]="{'active': picture === 'Seer.png'}">
-          <div class="bg-{{color}}">
-            <img [src]="assets.getProfileUrl() + 'Seer.png'">
-          </div>
-        </ion-col>
-      </ion-row>
-      <ion-row>
-        <ion-col (click)="updatePicture('Sorcerer.png')" [ngClass]="{'active': picture === 'Sorcerer.png'}">
-          <div class="bg-{{color}}">
-            <img [src]="assets.getProfileUrl() + 'Sorcerer.png'">
-          </div>
-        </ion-col>
-        <ion-col (click)="updatePicture('ToughGuy.png')" [ngClass]="{'active': picture === 'ToughGuy.png'}">
-          <div class="bg-{{color}}">
-            <img [src]="assets.getProfileUrl() + 'ToughGuy.png'">
-          </div>
-        </ion-col>
-        <ion-col (click)="updatePicture('Vampire.png')" [ngClass]="{'active': picture === 'Vampire.png'}">
-          <div class="bg-{{color}}">
-            <img [src]="assets.getProfileUrl() + 'Vampire.png'">
-          </div>
-        </ion-col>
-        <ion-col (click)="updatePicture('VillagerF.png')" [ngClass]="{'active': picture === 'VillagerF.png'}">
-          <div class="bg-{{color}}">
-            <img [src]="assets.getProfileUrl() + 'VillagerF.png'">
-          </div>
-        </ion-col>
-      </ion-row>
-      <ion-row>
-        <ion-col (click)="updatePicture('VillagerM.png')" [ngClass]="{'active': picture === 'VillagerM.png'}">
-          <div class="bg-{{color}}">
-            <img [src]="assets.getProfileUrl() + 'VillagerM.png'">
-          </div>
-        </ion-col>
-        <ion-col (click)="updatePicture('Werewolf.png')" [ngClass]="{'active': picture === 'Werewolf.png'}">
-          <div class="bg-{{color}}">
-            <img [src]="assets.getProfileUrl() + 'Werewolf.png'">
-          </div>
-        </ion-col>
-        <ion-col (click)="updatePicture('Witch.png')" [ngClass]="{'active': picture === 'Witch.png'}">
-          <div class="bg-{{color}}">
-            <img [src]="assets.getProfileUrl() + 'Witch.png'">
-          </div>
-        </ion-col>
-        <ion-col (click)="updatePicture('WolfCub.png')" [ngClass]="{'active': picture === 'WolfCub.png'}">
-          <div class="bg-{{color}}">
-            <img [src]="assets.getProfileUrl() + 'WolfCub.png'">
-          </div>
-        </ion-col>
-      </ion-row>
-    </ion-grid>
-  </div>
   
-  <div class="profile-actual">
-    <profile-pic [picture]="picture" [color]="color"></profile-pic>
+  <div class="profile-main-container">
+    <div class="profile-actual">
+      <profile-pic [picture]="picture" [color]="color"></profile-pic>
+    </div>
+    <div class="grid-pics">
+      <ion-grid>
+        <ion-row>
+          <ion-col (click)="updatePicture('BodyGuard.png')" [ngClass]="{'active': picture === 'BodyGuard.png'}">
+            <div class="bg-{{color}}">
+              <img [src]="assets.getProfileUrl() + 'BodyGuard.png'">
+            </div>
+          </ion-col>
+          <ion-col (click)="updatePicture('CultLeader.png')" [ngClass]="{'active': picture === 'CultLeader.png'}">
+            <div class="bg-{{color}}">
+              <img [src]="assets.getProfileUrl() + 'CultLeader.png'">
+            </div>
+          </ion-col>
+          <ion-col (click)="updatePicture('Cupid.png')" [ngClass]="{'active': picture === 'Cupid.png'}">
+            <div class="bg-{{color}}">
+              <img [src]="assets.getProfileUrl() + 'Cupid.png'">
+            </div>
+          </ion-col>
+          <ion-col (click)="updatePicture('Drunk.png')" [ngClass]="{'active': picture === 'Drunk.png'}">
+            <div class="bg-{{color}}">
+              <img [src]="assets.getProfileUrl() + 'Drunk.png'">
+            </div>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col (click)="updatePicture('FrankensteinMonster.png')" [ngClass]="{'active': picture === 'FrankensteinMonster.png'}">
+            <div class="bg-{{color}}">
+              <img [src]="assets.getProfileUrl() + 'FrankensteinMonster.png'">
+            </div>
+          </ion-col>
+          <ion-col (click)="updatePicture('Huntress.png')" [ngClass]="{'active': picture === 'Huntress.png'}">
+            <div class="bg-{{color}}">
+              <img [src]="assets.getProfileUrl() + 'Huntress.png'">
+            </div>
+          </ion-col>
+          <ion-col (click)="updatePicture('Lycan.png')" [ngClass]="{'active': picture === 'Lycan.png'}">
+            <div class="bg-{{color}}">
+              <img [src]="assets.getProfileUrl() + 'Lycan.png'">
+            </div>
+          </ion-col>
+          <ion-col (click)="updatePicture('Seer.png')" [ngClass]="{'active': picture === 'Seer.png'}">
+            <div class="bg-{{color}}">
+              <img [src]="assets.getProfileUrl() + 'Seer.png'">
+            </div>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col (click)="updatePicture('Sorcerer.png')" [ngClass]="{'active': picture === 'Sorcerer.png'}">
+            <div class="bg-{{color}}">
+              <img [src]="assets.getProfileUrl() + 'Sorcerer.png'">
+            </div>
+          </ion-col>
+          <ion-col (click)="updatePicture('ToughGuy.png')" [ngClass]="{'active': picture === 'ToughGuy.png'}">
+            <div class="bg-{{color}}">
+              <img [src]="assets.getProfileUrl() + 'ToughGuy.png'">
+            </div>
+          </ion-col>
+          <ion-col (click)="updatePicture('Vampire.png')" [ngClass]="{'active': picture === 'Vampire.png'}">
+            <div class="bg-{{color}}">
+              <img [src]="assets.getProfileUrl() + 'Vampire.png'">
+            </div>
+          </ion-col>
+          <ion-col (click)="updatePicture('VillagerF.png')" [ngClass]="{'active': picture === 'VillagerF.png'}">
+            <div class="bg-{{color}}">
+              <img [src]="assets.getProfileUrl() + 'VillagerF.png'">
+            </div>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col (click)="updatePicture('VillagerM.png')" [ngClass]="{'active': picture === 'VillagerM.png'}">
+            <div class="bg-{{color}}">
+              <img [src]="assets.getProfileUrl() + 'VillagerM.png'">
+            </div>
+          </ion-col>
+          <ion-col (click)="updatePicture('Werewolf.png')" [ngClass]="{'active': picture === 'Werewolf.png'}">
+            <div class="bg-{{color}}">
+              <img [src]="assets.getProfileUrl() + 'Werewolf.png'">
+            </div>
+          </ion-col>
+          <ion-col (click)="updatePicture('Witch.png')" [ngClass]="{'active': picture === 'Witch.png'}">
+            <div class="bg-{{color}}">
+              <img [src]="assets.getProfileUrl() + 'Witch.png'">
+            </div>
+          </ion-col>
+          <ion-col (click)="updatePicture('WolfCub.png')" [ngClass]="{'active': picture === 'WolfCub.png'}">
+            <div class="bg-{{color}}">
+              <img [src]="assets.getProfileUrl() + 'WolfCub.png'">
+            </div>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </div>
   </div>
   
   <div class="swatches">

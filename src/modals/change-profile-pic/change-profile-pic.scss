@@ -5,39 +5,15 @@ modal-change-profile-pic {
     padding: 25px 0px;
   }
   
-  .grid-pics {
-    height: 70%;
+  .profile-main-container {
+    max-height: 600px;
     width: 80%;
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    
-    ion-grid {
-      @include vertical-align();
-      position: absolute;
-    }
-    
-    [class*=" bg-"], [class^=bg-] {
-      border: 2px solid black;
-      @include transition(background 200ms ease);
-    }
-    
-    ion-col {
-      opacity: 0.6;
-      @include transition(opacity 200ms ease);
-
-      &.active {
-        opacity: 1;
-      }
-    }
-  }
-  
-  img {
-    display: block;
+    height: 100%;
+    position: relative;
   }
   
   .profile-actual {
-    width: 80%;
+    width: 100%;
     height: 100% - $gridPicHeight;
     position: relative;
     top: 0;
@@ -56,6 +32,40 @@ modal-change-profile-pic {
         width: 150px;
       }
     }
+  }
+    
+  [class*=" bg-"], [class^=bg-] {
+    @include transition(background 200ms ease);
+  }
+  
+  .grid-pics {
+    height: 70%;
+    width: 100%;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    
+    ion-grid {
+      @include vertical-align();
+      position: absolute;
+    }
+    
+    [class*=" bg-"], [class^=bg-] {
+      border: 2px solid black;
+    }
+    
+    ion-col {
+      opacity: 0.6;
+      @include transition(opacity 200ms ease);
+
+      &.active {
+        opacity: 1;
+      }
+    }
+  }
+  
+  img {
+    display: block;
   }
   
   .swatches {
