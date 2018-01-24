@@ -1,7 +1,7 @@
 page-login {
   
   $loginBtnsAnim: 600ms; 
-  $loginBtnsDelay: 900ms;
+  $loginBtnsDelay: 400ms;
   
   ion-content {
     @include linear-gradient-bottom-diagonal-three(lighten(color($login, primary), 10%), lighten(color($login, primary), 5%), color($login, primary));
@@ -26,7 +26,7 @@ page-login {
   }
 
   .login-logo {
-    border-radius: 50%;
+    border-radius: 25px;
     border: 8px solid darken(color($login, primary), 10%);
     width: 250px;
     height: 250px;
@@ -36,15 +36,20 @@ page-login {
     text-align: center;
     @include box-shadow();
     @include vertical-align();
-      
-    @media only screen and (max-device-height: 650px) {
-      width: 180px;
-      height: 180px;
-    }
+    @include transition(width 500ms ease, border-radius 500ms ease, top 500ms ease, transform 500ms ease);
     
     img {
-      max-width: 90%;
+      max-height: 180px;
       @include vertical-align();
+    }
+      
+    @media only screen and (max-device-height: 600px) {
+      width: 180px;
+      height: 180px;
+      
+      img {
+        max-height: 130px;
+      }
     }
   }
   
@@ -56,7 +61,7 @@ page-login {
       position: relative;
       top: 25px;
       opacity: 0;
-      @include transition(top $loginBtnsAnim ease, opacity, $loginBtnsAnim/(5/4) ease);
+      @include transition(top $loginBtnsAnim ease, opacity $loginBtnsAnim/(5/4) ease);
       transition-delay: $loginBtnsDelay;
       
       &:nth-child(2) {
@@ -74,7 +79,7 @@ page-login {
       max-width: 250px;
       margin-bottom: 25px;
       
-      @media only screen and (max-device-height: 650px) {
+      @media only screen and (max-device-height: 600px) {
         margin-bottom: 10px;
       }
     }

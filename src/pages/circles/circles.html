@@ -1,0 +1,16 @@
+<ion-content>
+  <div class="circle" *ngFor="let circle of circles">
+    <div>{{circle.name}}</div>
+    <div *ngIf="circle.moderator">
+      Moderator: {{circle.moderator.fullname}}
+    </div>
+    <div *ngIf="circle.game">
+      {{circle.game.villagers.length}}/{{circle.game.seats}}
+    </div>
+    <button ion-button (click)="goToCircle(circle)" *ngIf="circle.moderator">View</button>
+    <div *ngIf="!isMod">
+      <button ion-button (click)="moderate(circle)" *ngIf="!circle.moderator">Moderate</button>
+      <button ion-button (click)="joinGame(circle)" *ngIf="circle.game && circle.game.villagers.length < circle.game.seats">Join</button>
+    </div>
+  </div>
+</ion-content>

@@ -1,0 +1,19 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>
+      {{villager.fullname}}
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+  <profile-pic [picture]="villager.picture" [color]="villager.color" (click)="editProfilePic()"></profile-pic>
+  
+  <div *ngFor="let game of villager.gameHistory" class="game">
+    {{game.timestamp}} <br/>
+    Status: <span *ngIf="game.status.active">Active</span>
+    <span *ngIf="game.status.end">Ended</span>
+    <span *ngIf="game.status.cancelled">Cancelled</span>
+    <span *ngIf="!game.status.active && !game.status.end && !game.status.cancelled">Waiting</span>
+  </div>
+</ion-content>

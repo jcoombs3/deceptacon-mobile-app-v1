@@ -1,12 +1,13 @@
 import { Component, ViewChild } from '@angular/core';
-import { Platform, Nav } from 'ionic-angular';
+import { Platform, Nav, Events } from 'ionic-angular';
+import { Socket } from 'ng-socket-io';
 
 import { LoginPage } from '../pages/login/login';
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { Keyboard } from '@ionic-native/keyboard';
-
+import { ScreenOrientation } from '@ionic-native/screen-orientation';
 
 @Component({
   templateUrl: 'app.html'
@@ -19,7 +20,10 @@ export class MyApp {
     public platform: Platform,
     public statusBar: StatusBar,
     public splashScreen: SplashScreen,
-    private keyboard: Keyboard
+    private keyboard: Keyboard,
+    private screenOrientation: ScreenOrientation,
+    private socket: Socket,
+    private events: Events
   ) {
     this.initializeApp();
   }
@@ -28,9 +32,13 @@ export class MyApp {
     this.platform.ready().then(() => {
       // Okay, so the platform is ready and our plugins are available.
       // Here you can do any higher level native things you might need.
-      this.statusBar.styleLightContent();
-      this.splashScreen.hide();
-      this.keyboard.hideKeyboardAccessoryBar(false);
+      if (this.platform.is('cordova')) {
+        this.statusBar.styleLightContent();
+        this.splashScreen.hide();
+        this.keyboard.hideKeyboardAccessoryBar(false);
+        this.screenOrientation.lock(this.screenOrientation.ORIENTATIONS.PORTRAIT);
+      }
+      this.socket.connect();
     });
   }
 

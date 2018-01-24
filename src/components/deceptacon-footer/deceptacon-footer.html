@@ -1,0 +1,13 @@
+<ion-footer [ngClass]="{'active': user}">
+  <div class="footer-left">
+    <button *ngIf="user && user.currentGame" class="btn-footer" (click)="goToCurrentGame()">
+      Current Game
+    </button>
+  </div>
+  <button class="logo" (click)="goToHome()">
+    <img [src]="assets.assetsUrl + 'logo.png'" />
+  </button>
+  <div class="footer-right">
+    <button class="btn-footer" (click)="goToProfile()">My Profile</button>
+  </div>
+</ion-footer>

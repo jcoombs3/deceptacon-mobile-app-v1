@@ -1,13 +1,13 @@
-<ion-content padding [ngClass]="{'anim-active': anim}">
+<ion-content no-bounce [ngClass]="{'anim-active': anim}">
   
   <div class="login-container">
-    <div class="login-logo-container">
+    <div class="login-logo-container" *ngIf="!showLogin">
       <div class="login-logo">
-        <img [src]="assets.assetsUrl + 'deceptacon-logo.png'"/>
+        <img [src]="assets.assetsUrl + 'deceptacon-logo.png'" />
       </div>
     </div>
     <div class="login-buttons-container">
-      <ion-grid class="login-buttons">
+      <ion-grid class="login-buttons" *ngIf="!showLogin">
         <ion-row>
           <ion-col>
             <button ion-button (click)="displayLogin()" class="ion-button-special">Sign In</button>
@@ -27,6 +27,13 @@
           </ion-col>
         </ion-row>
       </ion-grid>
+      <div class="signin-form" *ngIf="showLogin">
+        <ion-item>
+          <ion-label color="primary" stacked>Username</ion-label>
+          <ion-input type="text" [(ngModel)]="villager.username"></ion-input>
+        </ion-item>
+        <pin-pad (validated)="retrievePIN($event)"></pin-pad>
+      </div>
     </div>
   </div>
 </ion-content>

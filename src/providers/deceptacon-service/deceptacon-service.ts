@@ -77,8 +77,32 @@ export class DeceptaconService {
       .catch(this.handleError);
   }
   
+  removeVillager(arr: any) {
+    return this.http.post(this.deceptaconUrl + '/game/remove', arr)
+      .map(res => res.json())
+      .catch(this.handleError);
+  }
+  
   getGame(id: String) {
     return this.http.get(this.deceptaconUrl + '/game/' + id)
+      .map(res => res.json())
+      .catch(this.handleError);
+  }
+  
+  beginGame(arr: any) {
+    return this.http.post(this.deceptaconUrl + '/game/begin/', arr)
+      .map(res => res.json())
+      .catch(this.handleError);
+  }
+  
+  endGame(arr: any) {
+    return this.http.post(this.deceptaconUrl + '/game/end/', arr)
+      .map(res => res.json())
+      .catch(this.handleError);
+  }
+  
+  cancelGame(arr: any) {
+    return this.http.post(this.deceptaconUrl + '/game/cancel/', arr)
       .map(res => res.json())
       .catch(this.handleError);
   }

@@ -1,0 +1,34 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>
+      {{circle.name}}
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+  <button ion-button (click)="createGame()" *ngIf="isMod && !circle.game">Create Game</button>
+  <div *ngIf="circle.game">
+    <div *ngIf="circle.game.status">
+      Status: <span *ngIf="circle.game.status.active">Active</span>
+      <span *ngIf="circle.game.status.end">Ended</span>
+      <span *ngIf="circle.game.status.cancelled">Cancelled</span>
+      <span *ngIf="!circle.game.status.active && !circle.game.status.end && !circle.game.status.cancelled">Open</span>
+    </div>
+  
+    <div>
+      <button ion-button *ngIf="circle.game.villagers.length > 0 && isMod && !circle.game.status.active && !circle.game.status.end && !circle.game.status.cancelled" (click)="beginGame()">Start Game</button>
+      <button ion-button *ngIf="circle.game.villagers.length > 0 && isMod && circle.game.status.active" (click)="endGame()">End Game</button>
+      <button ion-button *ngIf="circle.game.villagers.length > 0 && isMod && circle.game.status.active" (click)="cancelGame()">Cancel</button>
+    </div>
+    
+    <div>{{circle.game.villagers.length}}/{{circle.game.seats}}</div>
+    <div *ngFor="let aVillager of circle.game.villagers">
+      <profile-pic [picture]="aVillager.picture" [color]="aVillager.color" (click)="goToProfile(aVillager)"></profile-pic>
+      {{aVillager.fullname}} 
+      <button ion-button (click)="removeVillager(aVillager)" *ngIf="isMod">Remove</button>
+      <button ion-button (click)="removeVillager(aVillager)" 
+              *ngIf="aVillager._id === villager._id">Leave</button>
+    </div>
+  </div>
+</ion-content>
