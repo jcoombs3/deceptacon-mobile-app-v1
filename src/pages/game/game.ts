@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams, Events } from 'ionic-angular';
+import { NavController, NavParams, Events, AlertController } from 'ionic-angular';
 import { Storage } from '@ionic/storage';
 import { Socket } from 'ng-socket-io';
 
@@ -22,6 +22,7 @@ export class GamePage {
 
   constructor(
     public navCtrl: NavController,
+    public alertCtrl: AlertController,
     private navParams: NavParams,
     private deceptaconService: DeceptaconService,
     private storage: Storage,
@@ -33,7 +34,6 @@ export class GamePage {
     this.storage.get('user').then(data => {
       if (data) {
         this.villager = data;
-        this.checkIfMod();
       }
     });
     this.setEventListeners();
@@ -54,6 +54,7 @@ export class GamePage {
     if (this.circle.game) {
       this.deceptaconService.getGame(this.circle.game._id).subscribe(data => {
         this.circle.game = data;
+        this.checkIfMod();
         this.checkIfInGame();
       }, error => {
         console.log('++ error');
@@ -62,7 +63,7 @@ export class GamePage {
   }
   
   checkIfMod() {
-    if (this.villager._id === this.circle.moderator._id) {
+    if (this.villager._id === this.circle.game.moderator._id) {
       this.isMod = true;
     }
   }
@@ -100,25 +101,55 @@ export class GamePage {
     });
   }
   
+  leaveGame(villager: any) {
+    this.showKickAlert(`Leaving ${this.circle.name}`, villager);
+  }
+  
+  kickVillager(villager: any) {
+    this.showKickAlert(`Kick ${villager.fullname}`, villager);
+  }
+  
+  showKickAlert(title: String, villager: any) {
+    let alert = this.alertCtrl.create({
+      title: title,
+      message: `Are you sure?`,
+      buttons: [
+        {
+          text: 'No',
+          role: 'cancel',
+          handler: () => {}
+        },
+        {
+          text: 'Yes',
+          handler: () => {
+            this.removeVillager(villager);
+          }
+        }
+      ]
+    });
+    alert.present();
+  }
+  
   removeVillager(villager: any) {
     let arr = {
       villagerId: villager._id,
       gameId: this.circle.game._id
-    }
+    };
+    
     this.deceptaconService.removeVillager(arr)
       .subscribe(data => {
-      this.circle = data;
-      this.socket.emit('com.deceptacon.event', {
-        event: `circle-updated-${data._id}`,
-        data: data
+        this.circle = data;
+        this.socket.emit('com.deceptacon.event', {
+          event: `circle-updated-${data._id}`,
+          data: data
+        });
+        this.socket.emit('com.deceptacon.event', {
+          event: `villager-removed-${arr.villagerId}`,
+          data: null
+        });
+      }, error => {
+        console.log('++ error');
       });
-      this.socket.emit('com.deceptacon.event', {
-        event: `villager-removed-${arr.villagerId}`,
-        data: null
-      });
-    }, error => {
-      console.log('++ error');
-    });
   }
   
   beginGame() {

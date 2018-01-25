@@ -35,11 +35,11 @@
       <ul *ngIf="circle.game.villagers.length > 0">
         <li *ngIf="inGame">
           <villager-detail [villager]="villager" (click)="goToProfile(villager)"></villager-detail>
-          <button class="leave"></button>
+          <button class="leave" (click)="leaveGame(villager)"></button>
         </li>
         <li *ngFor="let aVillager of otherVillagers">
           <villager-detail [villager]="aVillager" (click)="goToProfile(aVillager)"></villager-detail>
-          <button class="remove" *ngIf="isMod && !circle.game.status.active && !circle.game.status.end && !circle.game.status.cancelled"></button>
+          <button class="kick" *ngIf="isMod && !circle.game.status.active && !circle.game.status.end && !circle.game.status.cancelled" (click)="kickVillager(aVillager)"></button>
         </li>
       </ul>
       <div *ngIf="circle.game.villagers.length === 0">
@@ -58,13 +58,10 @@
   
   
 <!--
-  
-  
     <div>
       <button ion-button *ngIf="circle.game.villagers.length > 0 && isMod && !circle.game.status.active && !circle.game.status.end && !circle.game.status.cancelled" (click)="beginGame()">Start Game</button>
       <button ion-button *ngIf="circle.game.villagers.length > 0 && isMod && circle.game.status.active" (click)="endGame()">End Game</button>
       <button ion-button *ngIf="circle.game.villagers.length > 0 && isMod && circle.game.status.active" (click)="cancelGame()">Cancel</button>
     </div>
-    
 -->
 </ion-content>
