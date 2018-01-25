@@ -23,15 +23,23 @@
   </div>
   <div class="game-moderator">
     <h2>Moderator</h2>
-    Moderator: {{circle.game.moderator}}
+    <ul>
+      <li>
+        <villager-detail [villager]="circle.game.moderator" (click)="goToProfile(circle.game.moderator)"></villager-detail>
+      </li>
+    </ul>
+    
   </div>
   
   <div class="game-villagers">
     <h2>Villagers</h2>
     <ul>
-      <li *ngFor="let aVillager of circle.game.villagers">
+      <li *ngIf="inGame">
+        <villager-detail [villager]="villager" (click)="goToProfile(villager)"></villager-detail>
+        <button class="leave"></button>
+      </li>
+      <li *ngFor="let aVillager of otherVillagers">
         <villager-detail [villager]="aVillager" (click)="goToProfile(aVillager)"></villager-detail>
-        <button class="leave" *ngIf="aVillager._id === villager._id"></button>
         <button class="remove" *ngIf="isMod && !circle.game.status.active && !circle.game.status.end && !circle.game.status.cancelled"></button>
       </li>
     </ul>

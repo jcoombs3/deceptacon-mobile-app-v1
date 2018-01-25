@@ -16,7 +16,9 @@ import { DeceptaconService } from '../../providers/deceptacon-service/deceptacon
 export class GamePage {
   circle: any = {};
   villager: any = {};
+  otherVillagers: any = [];
   isMod: boolean = false;
+  inGame: boolean = false;
 
   constructor(
     public navCtrl: NavController,
@@ -52,6 +54,7 @@ export class GamePage {
     if (this.circle.game) {
       this.deceptaconService.getGame(this.circle.game._id).subscribe(data => {
         this.circle.game = data;
+        this.checkIfInGame();
       }, error => {
         console.log('++ error');
       });
@@ -59,9 +62,20 @@ export class GamePage {
   }
   
   checkIfMod() {
-    if (this.villager._id === this.circle.moderator ||
-        this.villager._id === this.circle.moderator._id) {
+    if (this.villager._id === this.circle.moderator._id) {
       this.isMod = true;
+    }
+  }
+  
+  checkIfInGame() {
+    console.log('// checkifInGame');
+    let villagers = this.circle.game.villagers;
+    for (let i = 0; i < villagers.length; i++) {
+      if (this.villager._id === villagers[i]._id) {
+        this.inGame = true;
+      } else {
+        this.otherVillagers.push(villagers[i]);
+      }
     }
   }
   

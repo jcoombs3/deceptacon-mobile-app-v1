@@ -39,8 +39,8 @@ page-game {
     padding: 0;
     margin: 0;
     background: lighten(color($colors, secondary), 15%);
-    border-bottom: 2px solid black;
     position: relative;
+    border-bottom: 2px solid black;
     
     &:first-child {
       border-top: 2px solid black;
