@@ -38,7 +38,12 @@ export class CirclesPage {
     });
   }
   
+  ionViewWillLeave() {
+    this.unsubscribeToEvents();
+  }
+  
   getCircles() {
+    this.unsubscribeToEvents();
     this.deceptaconService.getCircles().subscribe(data => {
       this.circles = data;
       this.setEventListeners();
@@ -55,6 +60,12 @@ export class CirclesPage {
       this.socket.on(`circle-updated-${this.circles[i]._id}`, function(circle){
         iThis.updateCircle(circle);
       });
+    } 
+  }
+  
+  unsubscribeToEvents() {
+    for (let i = 0; i < this.circles.length; i++) {
+      this.socket.removeListener(`circle-updated-${this.circles[i]._id}`);
     } 
   }
   
@@ -98,7 +109,6 @@ export class CirclesPage {
           position: 'top'
         });
         toast.present();
-        this.updateCircle(data);
         this.socket.emit('com.deceptacon.event', {
           event: `circle-updated-${data._id}`,
           data: data
@@ -135,7 +145,6 @@ export class CirclesPage {
         });
         toast.present();
         this.events.publish('user:joinedgame', arr.gameId);
-        this.updateCircle(data);
         this.socket.emit('com.deceptacon.event', {
           event: `villager-joined-${data._id}`,
           data: this.villager

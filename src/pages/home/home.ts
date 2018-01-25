@@ -11,12 +11,19 @@ import { LoginPage } from '../login/login';
   templateUrl: 'home.html'
 })
 export class HomePage {
+  villager: any = {};
 
   constructor(
     public navCtrl: NavController,
     private storage: Storage,
     private events: Events
-  ) {}
+  ) {
+    this.storage.get('user').then(data => {
+      if (data) {
+        this.villager = data;
+      }
+    });  
+  }
   
   goToCircles() {
     this.navCtrl.push(CirclesPage);

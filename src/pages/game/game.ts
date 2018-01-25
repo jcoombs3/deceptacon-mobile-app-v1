@@ -152,12 +152,15 @@ export class GamePage {
       villagerId: villager._id,
       gameId: this.circle.game._id
     };
-    
     this.deceptaconService.removeVillager(arr)
       .subscribe(data => {
         this.circle = data;
         this.socket.emit('com.deceptacon.event', {
           event: `circle-updated-${data._id}`,
+          data: data
+        });
+        this.socket.emit('com.deceptacon.event', {
+          event: `villager-removed-${arr.villagerId}`,
           data: data
         });
       }, error => {
@@ -177,10 +180,6 @@ export class GamePage {
         this.socket.emit('com.deceptacon.event', {
           event: `circle-updated-${data._id}`,
           data: data
-        });
-        this.socket.emit('com.deceptacon.event', {
-          event: `villager-removed-${arr.villagerId}`,
-          data: null
         });
       }, error => {
         console.log('++ error');

@@ -29,7 +29,7 @@
           <villager-detail [villager]="circle.game.moderator" (click)="goToProfile(circle.game.moderator)"></villager-detail>
         </li>
       </ul>
-      <button ion-button *ngIf="circle.game.villagers.length < circle.game.seats"
+      <button ion-button *ngIf="isMod && circle.game.villagers.length < circle.game.seats"
               (click)="addPlaceholder()">
         + Placeholder
       </button>
