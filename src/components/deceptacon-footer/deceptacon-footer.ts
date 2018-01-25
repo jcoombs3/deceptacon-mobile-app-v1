@@ -1,5 +1,7 @@
 import { Component, Input } from '@angular/core';
 import { Events } from 'ionic-angular';
+import { Socket } from 'ng-socket-io';
+import { Storage } from '@ionic/storage';
 
 // PAGES
 import { ProfilePage } from '../../pages/profile/profile';
@@ -21,7 +23,9 @@ export class DeceptaconFooter {
   constructor(
     private assets: AssetsService, 
     private deceptaconService: DeceptaconService, 
-    public events: Events
+    private events: Events,
+    private socket: Socket,
+    private storage: Storage
   ) {
     this.addEventListeners();
   }
@@ -31,6 +35,24 @@ export class DeceptaconFooter {
       console.log('event: user:authenticated', 'DeceptaconFooter');
       this.user = user;
     });
+    this.events.subscribe('user:creategame', () => {
+      console.log('event: user:creategame', 'DeceptaconFooter');
+      this.getUser();
+    });
+    this.events.subscribe('user:joinedgame', () => {
+      console.log('event: user:joinedgame', 'DeceptaconFooter');
+      this.getUser();
+    });
+  }
+  
+  addDynamicListeners() {
+    console.log('addDynamicListeners');
+    if (this.user.currentGame) {
+      this.socket.on(`villager-removed-${this.user._id}`, (data) => {
+        console.log('event: villager:removed', 'DeceptaconFooter');
+        this.getUser();
+      });
+    }
   }
   
   goToHome() {
@@ -51,12 +73,14 @@ export class DeceptaconFooter {
     } 
   }
   
-//  eventGetVillager() {
-//    this.deceptaconService.getVillager(this.user._id).subscribe(villager => {
-//      this.storage.set('user', villager);
-//      this.user = villager;
-//    }, error => {
-//
-//    });
-//  }
+  getUser() {
+    this.deceptaconService.getVillager(this.user._id)
+    .subscribe(data => {
+      this.storage.set('user', data);
+      this.user = data;
+      this.addDynamicListeners();
+    }, error => {
+      console.log('++ error');
+    });
+  }
 }

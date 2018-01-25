@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, ToastController, LoadingController } from 'ionic-angular';
+import { NavController, ToastController, LoadingController, Events } from 'ionic-angular';
 import { Storage } from '@ionic/storage';
 import { Socket } from 'ng-socket-io';
 
@@ -17,6 +17,7 @@ export class CirclesPage {
   circles: any = [];
   villager: any = {};
   isMod: boolean = false;
+  inGame: boolean = false;
   
   constructor(
     public navCtrl: NavController,
@@ -24,7 +25,8 @@ export class CirclesPage {
     public loadingCtrl: LoadingController,
     private deceptaconService: DeceptaconService,
     private storage: Storage,
-    private socket: Socket
+    private socket: Socket,
+    private events: Events,
   ) { 
     this.storage.get('user').then(data => {
       if (data) {
@@ -39,6 +41,7 @@ export class CirclesPage {
       this.circles = data;
       this.setEventListeners();
       this.checkIfMod();
+      this.checkIfInGame();
     }, error => {
       console.log('++ error');
     });
@@ -54,13 +57,25 @@ export class CirclesPage {
   }
   
   checkIfMod() {
-    const iThis = this;
     for (let i = 0; i < this.circles.length; i++) {
       if (this.villager._id === this.circles[i].moderator ||
         (this.circles[i].moderator && this.villager._id === this.circles[i].moderator._id)) {
         this.isMod = true;
       }
-    } 
+    }
+  }
+  
+  checkIfInGame() {
+    for (let i = 0; i < this.circles.length; i++) {
+      if (this.circles[i].game) {
+        let villagers = this.circles[i].game.villagers;
+        for (let j = 0; j < villagers.length; j++) {
+          if (this.villager._id === villagers[j]) {
+            this.inGame = true;
+          }
+        }
+      }
+    }
   }
   
   moderate(circle: any) {
@@ -118,6 +133,7 @@ export class CirclesPage {
         });
         toast.present();
         this.updateCircle(data);
+        this.events.publish('user:joinedgame');
         this.socket.emit('com.deceptacon.event', {
           event: `villager-joined-${data._id}`,
           data: this.villager

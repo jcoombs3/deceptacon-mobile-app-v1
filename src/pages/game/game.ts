@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams } from 'ionic-angular';
+import { NavController, NavParams, Events } from 'ionic-angular';
 import { Storage } from '@ionic/storage';
 import { Socket } from 'ng-socket-io';
 
@@ -23,7 +23,8 @@ export class GamePage {
     private navParams: NavParams,
     private deceptaconService: DeceptaconService,
     private storage: Storage,
-    private socket: Socket
+    private socket: Socket,
+    private events: Events
   ) { 
     this.circle = this.navParams.data;
     this.getGame();
@@ -43,6 +44,7 @@ export class GamePage {
     });
     this.socket.on(`villager-joined-${this.circle._id}`, function(villager) {
       iThis.circle.game.villagers.push(villager);
+      iThis.events.publish(`circle-updated-${iThis.circle._id}`, iThis.circle);
     });
   }
   
@@ -74,6 +76,7 @@ export class GamePage {
     this.deceptaconService.createGame(arr)
       .subscribe(data => {
       this.circle = data;
+      this.events.publish('user:creategame');
       this.socket.emit('com.deceptacon.event', {
         event: `circle-updated-${data._id}`,
         data: data
@@ -91,13 +94,22 @@ export class GamePage {
     this.deceptaconService.removeVillager(arr)
       .subscribe(data => {
       this.circle = data;
+      console.log(`circle-updated-${data._id}`);
       this.socket.emit('com.deceptacon.event', {
         event: `circle-updated-${data._id}`,
         data: data
       });
+      this.socket.emit('com.deceptacon.event', {
+        event: `villager-removed-${arr.villagerId}`,
+        data: null
+      });
     }, error => {
       console.log('++ error');
     });
+  }
+  
+  addPlaceholder() {
+    console.log('++ addPlaceholder');
   }
   
   beginGame() {
