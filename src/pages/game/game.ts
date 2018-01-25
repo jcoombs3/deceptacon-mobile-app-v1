@@ -94,7 +94,6 @@ export class GamePage {
     this.deceptaconService.removeVillager(arr)
       .subscribe(data => {
       this.circle = data;
-      console.log(`circle-updated-${data._id}`);
       this.socket.emit('com.deceptacon.event', {
         event: `circle-updated-${data._id}`,
         data: data

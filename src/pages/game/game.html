@@ -27,9 +27,9 @@
     <ion-list>
       <ion-item *ngFor="let aVillager of circle.game.villagers">
         <villager-detail [villager]="aVillager" (click)="goToProfile(aVillager)"></villager-detail>
-        <button ion-button (click)="removeVillager(aVillager)" *ngIf="isMod">Remove</button>
+        <button ion-button (click)="removeVillager(aVillager)" *ngIf="isMod && !circle.game.status.active && !circle.game.status.end && !circle.game.status.cancelled">Remove</button>
         <button ion-button (click)="removeVillager(aVillager)" 
-                *ngIf="aVillager._id === villager._id">Leave</button>
+                *ngIf="aVillager._id === villager._id">Leave/Quit</button>
       </ion-item>
     </ion-list>
 

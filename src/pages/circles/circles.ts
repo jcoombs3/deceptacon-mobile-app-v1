@@ -132,8 +132,8 @@ export class CirclesPage {
           position: 'top'
         });
         toast.present();
+        this.events.publish('user:joinedgame', arr.gameId);
         this.updateCircle(data);
-        this.events.publish('user:joinedgame');
         this.socket.emit('com.deceptacon.event', {
           event: `villager-joined-${data._id}`,
           data: this.villager

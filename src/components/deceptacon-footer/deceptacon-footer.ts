@@ -34,12 +34,13 @@ export class DeceptaconFooter {
     this.events.subscribe('user:authenticated', (user) => {
       console.log('event: user:authenticated', 'DeceptaconFooter');
       this.user = user;
+      this.addDynamicListeners();
     });
     this.events.subscribe('user:creategame', () => {
       console.log('event: user:creategame', 'DeceptaconFooter');
       this.getUser();
     });
-    this.events.subscribe('user:joinedgame', () => {
+    this.events.subscribe('user:joinedgame', (gameId) => {
       console.log('event: user:joinedgame', 'DeceptaconFooter');
       this.getUser();
     });
