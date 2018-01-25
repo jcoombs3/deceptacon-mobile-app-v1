@@ -55,7 +55,6 @@ export class GamePage {
     if (this.circle.game) {
       this.deceptaconService.getGame(this.circle.game._id).subscribe(data => {
         this.circle.game = data;
-        
         this.checkIfInGame();
       }, error => {
         console.log('++ error');
@@ -102,6 +101,23 @@ export class GamePage {
     });
   }
   
+  addPlaceholder() {
+    let arr = {
+      modId: this.villager._id,
+      gameId: this.circle.game._id
+    };
+    this.deceptaconService.addPlaceholder(arr)
+      .subscribe(data => {
+      this.circle = data;
+      this.socket.emit('com.deceptacon.event', {
+        event: `circle-updated-${data._id}`,
+        data: data
+      });
+    }, error => {
+      console.log('++ error');
+    });
+  }
+  
   leaveGame(villager: any) {
     this.showKickAlert(`Leaving ${this.circle.name}`, villager);
   }
@@ -110,9 +126,9 @@ export class GamePage {
     this.showKickAlert(`Kick ${villager.fullname}`, villager);
   }
   
-  showKickAlert(title: String, villager: any) {
+  showKickAlert(txt: string, villager: any) {
     let alert = this.alertCtrl.create({
-      title: title,
+      title: txt,
       message: `Are you sure?`,
       buttons: [
         {
@@ -138,6 +154,24 @@ export class GamePage {
     };
     
     this.deceptaconService.removeVillager(arr)
+      .subscribe(data => {
+        this.circle = data;
+        this.socket.emit('com.deceptacon.event', {
+          event: `circle-updated-${data._id}`,
+          data: data
+        });
+      }, error => {
+        console.log('++ error');
+      });
+  }
+  
+  removePlaceholder() {
+    console.log('++ removePlaceholder');
+    let arr = {
+      modId: this.villager._id,
+      gameId: this.circle.game._id
+    };
+    this.deceptaconService.removePlaceholder(arr)
       .subscribe(data => {
         this.circle = data;
         this.socket.emit('com.deceptacon.event', {

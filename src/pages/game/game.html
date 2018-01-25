@@ -19,7 +19,7 @@
         </div>
       </div>
       <div class="games-seats">
-        Seats: {{circle.game.villagers.length}}/{{circle.game.seats}}
+        Seats: {{circle.game.villagers.length + circle.game.placeholders.length}}/{{circle.game.seats}}
       </div>
     </div>
     <div class="game-moderator">
@@ -29,10 +29,14 @@
           <villager-detail [villager]="circle.game.moderator" (click)="goToProfile(circle.game.moderator)"></villager-detail>
         </li>
       </ul>
+      <button ion-button *ngIf="circle.game.villagers.length < circle.game.seats"
+              (click)="addPlaceholder()">
+        + Placeholder
+      </button>
     </div>
     <div class="game-villagers">
       <h2>Villagers</h2>
-      <ul *ngIf="circle.game.villagers.length > 0">
+      <ul *ngIf="circle.game.villagers.length + circle.game.placeholders.length > 0">
         <li *ngIf="inGame">
           <villager-detail [villager]="villager" (click)="goToProfile(villager)"></villager-detail>
           <button class="leave" (click)="leaveGame(villager)"></button>
@@ -41,8 +45,12 @@
           <villager-detail [villager]="aVillager" (click)="goToProfile(aVillager)"></villager-detail>
           <button class="kick" *ngIf="isMod && !circle.game.status.active && !circle.game.status.end && !circle.game.status.cancelled" (click)="kickVillager(aVillager)"></button>
         </li>
+        <li *ngFor="let placeholder of circle.game.placeholders">
+          <placeholder-detail></placeholder-detail>
+          <button class="kick" *ngIf="isMod && !circle.game.status.active && !circle.game.status.end && !circle.game.status.cancelled" (click)="removePlaceholder()"></button>
+        </li>
       </ul>
-      <div *ngIf="circle.game.villagers.length === 0">
+      <div *ngIf="circle.game.villagers.length + circle.game.placeholders.length === 0">
         Hungry werewolves and eager villagers on the way!
       </div>
     </div>

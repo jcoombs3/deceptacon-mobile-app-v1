@@ -1,0 +1,19 @@
+placeholder-detail {
+  display: table;
+  width: 100%;
+  padding: 15px;
+  
+  .profile-pic {
+    width: 60px;
+    height: 60px;
+  }
+  
+  .detail-cell {
+    display: table-cell;
+    vertical-align: middle;
+  }
+  
+  .detail-name {
+    padding-left: 15px;
+  }
+}

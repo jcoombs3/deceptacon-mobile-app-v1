@@ -78,13 +78,27 @@ export class DeceptaconService {
   }
   
   removeVillager(arr: any) {
-    return this.http.post(this.deceptaconUrl + '/game/remove', arr)
+    return this.http.post(this.deceptaconUrl + '/game/remove/villager', arr)
       .map(res => res.json())
       .catch(this.handleError);
   }
   
   getGame(id: String) {
     return this.http.get(this.deceptaconUrl + '/game/' + id)
+      .map(res => res.json())
+      .catch(this.handleError);
+  }
+  
+  // TODO: verify if Moderator
+  addPlaceholder(arr: any) {
+    return this.http.post(this.deceptaconUrl + '/game/placeholder/', arr)
+      .map(res => res.json())
+      .catch(this.handleError);
+  }
+  
+  // TODO: verify if Moderator
+  removePlaceholder(arr: any) {
+    return this.http.post(this.deceptaconUrl + '/game/remove/placeholder', arr)
       .map(res => res.json())
       .catch(this.handleError);
   }

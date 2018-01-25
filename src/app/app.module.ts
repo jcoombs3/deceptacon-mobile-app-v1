@@ -24,6 +24,7 @@ import { DeceptaconFooter } from '../components/deceptacon-footer/deceptacon-foo
 import { ProfilePic } from '../components/profile-pic/profile-pic';
 import { PinPad } from '../components/pin-pad/pin-pad';
 import { VillagerDetail } from '../components/villager-detail/villager-detail';
+import { PlaceholderDetail } from '../components/placeholder-detail/placeholder-detail';
 
 // PROVIDERS
 import { DeceptaconService } from '../providers/deceptacon-service/deceptacon-service';
@@ -51,7 +52,8 @@ import { ScreenOrientation } from '@ionic-native/screen-orientation';
     DeceptaconFooter,
     ProfilePic,
     PinPad,
-    VillagerDetail
+    VillagerDetail,
+    PlaceholderDetail
   ],
   imports: [
     BrowserModule,
@@ -76,7 +78,8 @@ import { ScreenOrientation } from '@ionic-native/screen-orientation';
     DeceptaconFooter,
     ProfilePic,
     PinPad,
-    VillagerDetail
+    VillagerDetail,
+    PlaceholderDetail
   ],
   providers: [
     StatusBar,

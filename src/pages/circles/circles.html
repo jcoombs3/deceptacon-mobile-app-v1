@@ -13,7 +13,7 @@
       Moderator: {{circle.moderator.fullname}}
     </div>
     <div *ngIf="circle.game">
-      {{circle.game.villagers.length}}/{{circle.game.seats}}
+      {{circle.game.villagers.length + circle.game.placeholders.length}}/{{circle.game.seats}}
     </div>
     <button ion-button (click)="goToCircle(circle)" *ngIf="circle.moderator">View</button>
     <div *ngIf="!isMod && !inGame">

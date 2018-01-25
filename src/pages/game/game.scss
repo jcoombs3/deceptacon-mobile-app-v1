@@ -47,9 +47,14 @@ page-game {
     }
   }
   
-  villager-detail {
+  villager-detail, placeholder-detail {
     padding-right: 50px;
     position: relative;
+  }
+  
+  placeholder-detail {
+    @include linear-gradient-bottom-diagonal-three(lighten(color($colors, primary), 10%), lighten(color($colors, primary), 5%), color($colors, primary));
+    color: color($colors, white);
   }
   
   button.kick {
