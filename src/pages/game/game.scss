@@ -1,3 +1,72 @@
 page-game {
   
+  .game-header {
+    margin: -16px -16px 0px;
+    padding: 16px;
+    background: lighten(color($colors, secondary), 15%);
+    border-bottom: 2px solid black;
+  }
+  
+  .game-moderator {
+    margin: 35px 0px;
+  }
+  
+  .status-open {
+    color: blue;
+  }
+  .status-active {
+    color: green;
+  }
+  .status-cancelled {
+    color: red;
+  }
+  .status-end {
+    color: gray;
+  }
+  
+  .games-status, .games-seats {
+    width: 50%;
+    float: left;
+  }
+  
+  ul {
+    padding: 0;
+    margin: 0px -16px;
+    list-style-type: none;
+  }
+  
+  li {
+    padding: 0;
+    margin: 0;
+    background: lighten(color($colors, secondary), 15%);
+    border-bottom: 2px solid black;
+    position: relative;
+    
+    &:first-child {
+      border-top: 2px solid black;
+    }
+  }
+  
+  villager-detail {
+    padding-right: 50px;
+    position: relative;
+  }
+  
+  button.remove {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 50px;
+    height: 100%;
+    background: orange;
+  }
+  
+  button.leave {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 50px;
+    height: 100%;
+    background: yellow;
+  }
 }
