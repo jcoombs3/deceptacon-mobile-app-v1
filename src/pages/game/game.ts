@@ -108,10 +108,6 @@ export class GamePage {
     });
   }
   
-  addPlaceholder() {
-    console.log('++ addPlaceholder');
-  }
-  
   beginGame() {
     let arr = {
       gameId: this.circle.game._id

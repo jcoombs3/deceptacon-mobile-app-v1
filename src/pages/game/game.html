@@ -17,19 +17,21 @@
     </div>
   
     <div>
-      <button ion-button *ngIf="isMod && circle.game.villagers.length < circle.game.seats && !circle.game.status.active && !circle.game.status.end && !circle.game.status.cancelled" (click)="addPlaceholder()">Add Placeholder</button>
       <button ion-button *ngIf="circle.game.villagers.length > 0 && isMod && !circle.game.status.active && !circle.game.status.end && !circle.game.status.cancelled" (click)="beginGame()">Start Game</button>
       <button ion-button *ngIf="circle.game.villagers.length > 0 && isMod && circle.game.status.active" (click)="endGame()">End Game</button>
       <button ion-button *ngIf="circle.game.villagers.length > 0 && isMod && circle.game.status.active" (click)="cancelGame()">Cancel</button>
     </div>
     
     <div>{{circle.game.villagers.length}}/{{circle.game.seats}}</div>
-    <div *ngFor="let aVillager of circle.game.villagers">
-      <profile-pic [picture]="aVillager.picture" [color]="aVillager.color" (click)="goToProfile(aVillager)"></profile-pic>
-      {{aVillager.fullname}} 
-      <button ion-button (click)="removeVillager(aVillager)" *ngIf="isMod">Remove</button>
-      <button ion-button (click)="removeVillager(aVillager)" 
-              *ngIf="aVillager._id === villager._id">Leave</button>
-    </div>
+    
+    <ion-list>
+      <ion-item *ngFor="let aVillager of circle.game.villagers">
+        <villager-detail [villager]="aVillager" (click)="goToProfile(aVillager)"></villager-detail>
+        <button ion-button (click)="removeVillager(aVillager)" *ngIf="isMod">Remove</button>
+        <button ion-button (click)="removeVillager(aVillager)" 
+                *ngIf="aVillager._id === villager._id">Leave</button>
+      </ion-item>
+    </ion-list>
+
   </div>
 </ion-content>

@@ -1,0 +1,18 @@
+villager-detail {
+  display: table;
+  width: 100%;
+  
+  .profile-pic {
+    width: 45px;
+    height: 45px;
+  }
+  
+  .detail-cell {
+    display: table-cell;
+    vertical-align: middle;
+  }
+  
+  .detail-name {
+    padding-left: 15px;
+  }
+}
