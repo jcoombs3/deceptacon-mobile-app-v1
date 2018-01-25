@@ -8,49 +8,57 @@
 
 <ion-content padding>
   
-  <div class="game-header clearfix" *ngIf="circle.game">
-    <div class="games-status">
-      <div *ngIf="circle.game.status">
-        Status: <span *ngIf="circle.game.status.active" class="status-active">Active</span>
-        <span *ngIf="circle.game.status.end" class="status-ended">Ended</span>
-        <span *ngIf="circle.game.status.cancelled" class="status-cancelled">Cancelled</span>
-        <span *ngIf="!circle.game.status.active && !circle.game.status.end && !circle.game.status.cancelled" class="status-open">Open</span>
+  <div *ngIf="circle.game">
+    <div class="game-header clearfix">
+      <div class="games-status">
+        <div *ngIf="circle.game.status">
+          Status: <span *ngIf="circle.game.status.active" class="status-active">Active</span>
+          <span *ngIf="circle.game.status.end" class="status-ended">Ended</span>
+          <span *ngIf="circle.game.status.cancelled" class="status-cancelled">Cancelled</span>
+          <span *ngIf="!circle.game.status.active && !circle.game.status.end && !circle.game.status.cancelled" class="status-open">Open</span>
+        </div>
+      </div>
+      <div class="games-seats">
+        Seats: {{circle.game.villagers.length}}/{{circle.game.seats}}
       </div>
     </div>
-    <div class="games-seats">
-      Seats: {{circle.game.villagers.length}}/{{circle.game.seats}}
+    <div class="game-moderator">
+      <h2>Moderator</h2>
+      <ul>
+        <li>
+          <villager-detail [villager]="circle.game.moderator" (click)="goToProfile(circle.game.moderator)"></villager-detail>
+        </li>
+      </ul>
+    </div>
+    <div class="game-villagers">
+      <h2>Villagers</h2>
+      <ul *ngIf="circle.game.villagers.length > 0">
+        <li *ngIf="inGame">
+          <villager-detail [villager]="villager" (click)="goToProfile(villager)"></villager-detail>
+          <button class="leave"></button>
+        </li>
+        <li *ngFor="let aVillager of otherVillagers">
+          <villager-detail [villager]="aVillager" (click)="goToProfile(aVillager)"></villager-detail>
+          <button class="remove" *ngIf="isMod && !circle.game.status.active && !circle.game.status.end && !circle.game.status.cancelled"></button>
+        </li>
+      </ul>
+      <div *ngIf="circle.game.villagers.length === 0">
+        Hungry werewolves and eager villagers on the way!
+      </div>
     </div>
   </div>
-  <div class="game-moderator">
-    <h2>Moderator</h2>
-    <ul>
-      <li>
-        <villager-detail [villager]="circle.game.moderator" (click)="goToProfile(circle.game.moderator)"></villager-detail>
-      </li>
-    </ul>
-    
+  <div *ngIf="!circle.game">
+    <button ion-button (click)="createGame()" 
+            *ngIf="isMod && !circle.game">Create Game</button>
   </div>
   
-  <div class="game-villagers">
-    <h2>Villagers</h2>
-    <ul>
-      <li *ngIf="inGame">
-        <villager-detail [villager]="villager" (click)="goToProfile(villager)"></villager-detail>
-        <button class="leave"></button>
-      </li>
-      <li *ngFor="let aVillager of otherVillagers">
-        <villager-detail [villager]="aVillager" (click)="goToProfile(aVillager)"></villager-detail>
-        <button class="remove" *ngIf="isMod && !circle.game.status.active && !circle.game.status.end && !circle.game.status.cancelled"></button>
-      </li>
-    </ul>
-  </div>
     
   
   
   
   
-  <button ion-button (click)="createGame()" *ngIf="isMod && !circle.game">Create Game</button>
-  <div >
+<!--
+  
   
     <div>
       <button ion-button *ngIf="circle.game.villagers.length > 0 && isMod && !circle.game.status.active && !circle.game.status.end && !circle.game.status.cancelled" (click)="beginGame()">Start Game</button>
@@ -58,15 +66,5 @@
       <button ion-button *ngIf="circle.game.villagers.length > 0 && isMod && circle.game.status.active" (click)="cancelGame()">Cancel</button>
     </div>
     
-    <div></div>
-  
-        
-<!--
-        <button ion-button (click)="removeVillager(aVillager)" *ngIf="isMod && !circle.game.status.active && !circle.game.status.end && !circle.game.status.cancelled">Remove</button>
-        <button ion-button (click)="removeVillager(aVillager)" 
-                >Leave/Quit</button>
 -->
-    
-
-  </div>
 </ion-content>
