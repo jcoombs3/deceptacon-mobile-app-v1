@@ -9,6 +9,7 @@ const config: SocketIoConfig = { url: 'http://localhost:4200', options: {} };
 
 // PAGES
 import { LoginPage } from '../pages/login/login';
+import { HomePage } from '../pages/home/home';
 import { CirclesPage } from '../pages/circles/circles';
 import { GamePage } from '../pages/game/game';
 import { ProfilePage } from '../pages/profile/profile';
@@ -38,6 +39,7 @@ import { ScreenOrientation } from '@ionic-native/screen-orientation';
   declarations: [
     MyApp,
     LoginPage,
+    HomePage,
     CirclesPage,
     GamePage,
     ProfilePage,
@@ -62,6 +64,7 @@ import { ScreenOrientation } from '@ionic-native/screen-orientation';
   entryComponents: [
     MyApp,
     LoginPage,
+    HomePage,
     CirclesPage,
     GamePage,
     ProfilePage,

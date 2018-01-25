@@ -6,7 +6,7 @@ import { Storage } from '@ionic/storage';
 import { Socket } from 'ng-socket-io';
 
 // PAGES
-import { CirclesPage } from '../circles/circles';
+import { HomePage } from '../home/home';
 
 // MODALS
 import { CreateAccountModal } from '../../modals/create-account/create-account';
@@ -83,7 +83,7 @@ export class LoginPage {
       this.deceptaconService.login(this.villager)
         .subscribe(data => {
           loading.dismiss();
-          this.goToCircles(data);
+          this.goToHome(data);
         }, error => {
           let toast = this.toastCtrl.create({
             message: error,
@@ -118,14 +118,14 @@ export class LoginPage {
     }
   }
   
-  goToCircles(villager: any) {
+  goToHome(villager: any) {
     this.storage.set('user', villager);
     this.events.publish('user:authenticated', villager);
     this.socket.emit('com.deceptacon.event', {
       event: `logged-in-${this.villager._id}`,
       data: this.villager
     });
-    this.navCtrl.setRoot(CirclesPage, this.villager);
+    this.navCtrl.setRoot(HomePage);
   }
   
   openCodeConduct() {
