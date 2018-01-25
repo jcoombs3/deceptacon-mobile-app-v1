@@ -44,6 +44,10 @@ export class DeceptaconFooter {
       console.log('event: user:joinedgame', 'DeceptaconFooter');
       this.getUser();
     });
+    this.events.subscribe('user:loggedout', (user) => {
+      console.log('event: user:loggedout', 'DeceptaconFooter');
+      this.user = user;
+    });
   }
   
   addDynamicListeners() {
