@@ -27,7 +27,9 @@ export class CirclesPage {
     private storage: Storage,
     private socket: Socket,
     private events: Events,
-  ) { 
+  ) { }
+  
+  ionViewWillEnter() {
     this.storage.get('user').then(data => {
       if (data) {
         this.villager = data;

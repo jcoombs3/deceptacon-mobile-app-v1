@@ -53,7 +53,6 @@ export class DeceptaconFooter {
   }
   
   unsubscribeEvents(user: any) {
-    console.log('// unsubscribeEvents');
     this.events.unsubscribe('user:authenticated');
     this.events.unsubscribe('user:creategame');
     this.events.unsubscribe('user:joinedgame');
@@ -79,8 +78,6 @@ export class DeceptaconFooter {
       this.getUser();
     });
   }
-  
-  
   
   goToHome() {
     this.nav.popToRoot();
