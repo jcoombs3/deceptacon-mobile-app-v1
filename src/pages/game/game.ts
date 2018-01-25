@@ -34,6 +34,7 @@ export class GamePage {
     this.storage.get('user').then(data => {
       if (data) {
         this.villager = data;
+        this.checkIfMod();
       }
     });
     this.setEventListeners();
@@ -54,7 +55,7 @@ export class GamePage {
     if (this.circle.game) {
       this.deceptaconService.getGame(this.circle.game._id).subscribe(data => {
         this.circle.game = data;
-        this.checkIfMod();
+        
         this.checkIfInGame();
       }, error => {
         console.log('++ error');
@@ -63,13 +64,12 @@ export class GamePage {
   }
   
   checkIfMod() {
-    if (this.villager._id === this.circle.game.moderator._id) {
+    if (this.villager._id === this.circle.moderator._id) {
       this.isMod = true;
     }
   }
   
   checkIfInGame() {
-    console.log('// checkifInGame');
     let villagers = this.circle.game.villagers;
     for (let i = 0; i < villagers.length; i++) {
       if (this.villager._id === villagers[i]._id) {

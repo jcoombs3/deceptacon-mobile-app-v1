@@ -47,21 +47,15 @@
       </div>
     </div>
   </div>
-  <div *ngIf="!circle.game">
+  <div *ngIf="!circle.game && isMod">
+    <span>TODO: Add input to add # of seats</span>
     <button ion-button (click)="createGame()" 
-            *ngIf="isMod && !circle.game">Create Game</button>
-  </div>
-  
-    
-  
-  
-  
-  
+      *ngIf="!circle.game">Create Game</button>
 <!--
-    <div>
-      <button ion-button *ngIf="circle.game.villagers.length > 0 && isMod && !circle.game.status.active && !circle.game.status.end && !circle.game.status.cancelled" (click)="beginGame()">Start Game</button>
-      <button ion-button *ngIf="circle.game.villagers.length > 0 && isMod && circle.game.status.active" (click)="endGame()">End Game</button>
-      <button ion-button *ngIf="circle.game.villagers.length > 0 && isMod && circle.game.status.active" (click)="cancelGame()">Cancel</button>
-    </div>
+    
+    <button ion-button *ngIf="circle.game.villagers.length > 0 && isMod && !circle.game.status.active && !circle.game.status.end && !circle.game.status.cancelled" (click)="beginGame()">Start Game</button>
+    <button ion-button *ngIf="circle.game.villagers.length > 0 && isMod && circle.game.status.active" (click)="endGame()">End Game</button>
+    <button ion-button *ngIf="circle.game.villagers.length > 0 && isMod && circle.game.status.active" (click)="cancelGame()">Cancel</button>
 -->
+  </div>
 </ion-content>

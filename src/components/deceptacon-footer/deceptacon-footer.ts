@@ -55,6 +55,7 @@ export class DeceptaconFooter {
     if (this.user.currentGame) {
       this.socket.on(`villager-removed-${this.user._id}`, (data) => {
         console.log('event: villager:removed', 'DeceptaconFooter');
+        this.nav.pop();
         this.getUser();
       });
     }
