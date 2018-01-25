@@ -6,8 +6,8 @@
         <img [src]="assets.assetsUrl + 'deceptacon-logo.png'" />
       </div>
     </div>
-    <div class="login-buttons-container">
-      <ion-grid class="login-buttons" *ngIf="!showLogin">
+    <div class="login-buttons-container" *ngIf="!showLogin">
+      <ion-grid class="login-buttons">
         <ion-row>
           <ion-col>
             <button ion-button (click)="displayLogin()" class="ion-button-special">Sign In</button>
@@ -27,12 +27,18 @@
           </ion-col>
         </ion-row>
       </ion-grid>
-      <div class="signin-form" *ngIf="showLogin">
+    </div>
+    
+    <div *ngIf="showLogin">
+      <div class="signin-form">
         <ion-item>
           <ion-label color="primary" stacked>Username</ion-label>
           <ion-input type="text" [(ngModel)]="villager.username"></ion-input>
         </ion-item>
         <pin-pad (validated)="retrievePIN($event)"></pin-pad>
+        <div class="cancel-container" style="text-align:right">
+          <button ion-button (click)="cancel()">Cancel</button>
+        </div>
       </div>
     </div>
   </div>

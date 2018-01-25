@@ -95,4 +95,17 @@ page-login {
       top: 0;
     }
   }
+  
+  .signin-form {
+    width: 90%;
+    margin: 0 auto;
+    padding: 16px;
+    border: 8px solid darken(color($login, primary), 10%);
+    @include linear-gradient-bottom-diagonal-three(color($colors, white), darken(color($colors, white), 3%), darken(color($colors, white), 6%));
+    @include box-shadow();
+    
+    .pin-pad-container {
+      padding-top: 25px;
+    }
+  }
 }

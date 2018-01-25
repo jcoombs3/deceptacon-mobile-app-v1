@@ -58,6 +58,10 @@ export class LoginPage {
     this.showLogin = true;
   }
   
+  cancel() {
+    this.showLogin = false;
+  }
+  
   createAccount() {
     const createAccountModal = this.modalCtrl.create(CreateAccountModal);
     createAccountModal.onDidDismiss(data => {
