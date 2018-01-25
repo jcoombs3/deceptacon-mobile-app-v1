@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { Events } from 'ionic-angular';
+import { Events, ToastController } from 'ionic-angular';
 import { Socket } from 'ng-socket-io';
 import { Storage } from '@ionic/storage';
 
@@ -21,6 +21,7 @@ export class DeceptaconFooter {
   user: any = null;
   
   constructor(
+    public toastCtrl: ToastController,
     private assets: AssetsService, 
     private deceptaconService: DeceptaconService, 
     private events: Events,
@@ -46,20 +47,40 @@ export class DeceptaconFooter {
     });
     this.events.subscribe('user:loggedout', (user) => {
       console.log('event: user:loggedout', 'DeceptaconFooter');
+      this.unsubscribeEvents(this.user);
       this.user = user;
     });
   }
   
-  addDynamicListeners() {
-    console.log('addDynamicListeners');
-    if (this.user.currentGame) {
-      this.socket.on(`villager-removed-${this.user._id}`, (data) => {
-        console.log('event: villager:removed', 'DeceptaconFooter');
-        this.nav.pop();
-        this.getUser();
-      });
-    }
+  unsubscribeEvents(user: any) {
+    console.log('// unsubscribeEvents');
+    this.events.unsubscribe('user:authenticated');
+    this.events.unsubscribe('user:creategame');
+    this.events.unsubscribe('user:joinedgame');
+    this.events.unsubscribe('user:loggedout');
+    this.socket.removeListener(`villager-removed-${user._id}`);
   }
+  
+  addDynamicListeners() {
+    this.socket.on(`villager-removed-${this.user._id}`, (data) => {
+      console.log('event: villager:removed', 'DeceptaconFooter');
+      let toast = this.toastCtrl.create({
+        message: `You have been removed from ${this.user.currentGame.name}`,
+        duration: 3000,
+        position: 'top',
+        showCloseButton: true,
+        cssClass: 'error'
+      });
+      toast.present();
+      let active = this.nav.last().instance instanceof GamePage;
+      if (active) {
+        this.nav.pop();
+      } 
+      this.getUser();
+    });
+  }
+  
+  
   
   goToHome() {
     this.nav.popToRoot();
@@ -84,7 +105,6 @@ export class DeceptaconFooter {
     .subscribe(data => {
       this.storage.set('user', data);
       this.user = data;
-      this.addDynamicListeners();
     }, error => {
       console.log('++ error');
     });

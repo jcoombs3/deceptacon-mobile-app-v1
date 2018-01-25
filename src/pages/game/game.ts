@@ -64,7 +64,8 @@ export class GamePage {
   }
   
   checkIfMod() {
-    if (this.villager._id === this.circle.moderator._id) {
+    if (this.villager._id === this.circle.moderator._id || 
+        this.villager._id === this.circle.moderator) {
       this.isMod = true;
     }
   }
