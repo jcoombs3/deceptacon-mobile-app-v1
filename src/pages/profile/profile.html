@@ -12,8 +12,8 @@
   <div *ngFor="let game of villager.gameHistory" class="game">
     {{game.timestamp}} <br/>
     Status: <span *ngIf="game.status.active">Active</span>
-    <span *ngIf="game.status.end">Ended</span>
+    <span *ngIf="game.status.ended">Ended</span>
     <span *ngIf="game.status.cancelled">Cancelled</span>
-    <span *ngIf="!game.status.active && !game.status.end && !game.status.cancelled">Waiting</span>
+    <span *ngIf="!game.status.active && !game.status.ended && !game.status.cancelled">Waiting</span>
   </div>
 </ion-content>
