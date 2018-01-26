@@ -138,6 +138,7 @@ export class GamePage {
     this.deceptaconService.addPlaceholder(arr)
       .subscribe(data => {
       this.circle = data;
+      this.circle.moderator = this.villager;
       this.socket.emit('com.deceptacon.event', {
         event: `circle-updated-${data._id}`,
         data: data
