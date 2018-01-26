@@ -104,19 +104,19 @@ export class DeceptaconService {
   }
   
   beginGame(arr: any) {
-    return this.http.post(this.deceptaconUrl + '/game/begin/', arr)
+    return this.http.post(this.deceptaconUrl + '/game/begin', arr)
       .map(res => res.json())
       .catch(this.handleError);
   }
   
   endGame(arr: any) {
-    return this.http.post(this.deceptaconUrl + '/game/end/', arr)
+    return this.http.post(this.deceptaconUrl + '/game/end', arr)
       .map(res => res.json())
       .catch(this.handleError);
   }
   
   cancelGame(arr: any) {
-    return this.http.post(this.deceptaconUrl + '/game/cancel/', arr)
+    return this.http.post(this.deceptaconUrl + '/game/cancel', arr)
       .map(res => res.json())
       .catch(this.handleError);
   }

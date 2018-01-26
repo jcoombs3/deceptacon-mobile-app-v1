@@ -64,14 +64,7 @@ export class DeceptaconFooter {
   addDynamicListeners() {
     this.socket.on(`villager-removed-${this.user._id}`, (data) => {
       console.log('event: villager:removed', 'DeceptaconFooter');
-      let toast = this.toastCtrl.create({
-        message: `You have been removed from ${this.user.currentGame.name}`,
-        duration: 3000,
-        position: 'top',
-        showCloseButton: true,
-        cssClass: 'error'
-      });
-      toast.present();
+      this.showToast(`You have been removed from ${this.user.currentGame.name}`, 'error');
       let active = this.nav.last().instance instanceof GamePage;
       if (active) {
         this.nav.popToRoot();
@@ -142,11 +135,7 @@ export class DeceptaconFooter {
   }
   
   checkForSurvey() {
-    console.log('++ checkForSurvey');
-    console.log(this.user._id);
-    console.log(this.user.currentGame.moderator._id);
-    
-    if (this.user._id !== this.user.currentGame.moderator._id) {
+    if (this.user._id !== this.user.currentGame.game.moderator) {
       this.goToSurvey();
     } else {
       this.getUser();
