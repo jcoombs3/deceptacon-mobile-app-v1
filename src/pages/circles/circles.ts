@@ -70,6 +70,7 @@ export class CirclesPage {
   }
   
   checkIfMod() {
+    this.isMod = false;
     for (let i = 0; i < this.circles.length; i++) {
       if (this.villager._id === this.circles[i].moderator ||
         (this.circles[i].moderator && this.villager._id === this.circles[i].moderator._id)) {
@@ -79,6 +80,7 @@ export class CirclesPage {
   }
   
   checkIfInGame() {
+    this.inGame = false;
     for (let i = 0; i < this.circles.length; i++) {
       if (this.circles[i].game) {
         let villagers = this.circles[i].game.villagers;
@@ -89,6 +91,7 @@ export class CirclesPage {
         }
       }
     }
+    console.log('++ inGame', this.inGame);
   }
   
   moderate(circle: any) {

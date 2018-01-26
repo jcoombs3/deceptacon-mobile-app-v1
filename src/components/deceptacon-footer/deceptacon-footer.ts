@@ -73,7 +73,7 @@ export class DeceptaconFooter {
       toast.present();
       let active = this.nav.last().instance instanceof GamePage;
       if (active) {
-        this.nav.pop();
+        this.nav.popToRoot();
       } 
       this.getUser();
     });

@@ -18,7 +18,7 @@
     <button ion-button (click)="goToCircle(circle)" *ngIf="circle.moderator">View</button>
     <div *ngIf="!isMod && !inGame">
       <button ion-button (click)="moderate(circle)" *ngIf="!circle.moderator">Moderate</button>
-      <button ion-button (click)="joinGame(circle)" *ngIf="circle.game && circle.game.villagers.length < circle.game.seats && !villager.currentGame">Join</button>
+      <button ion-button (click)="joinGame(circle)" *ngIf="circle.game && circle.game.villagers.length + circle.game.placeholders.length < circle.game.seats && !villager.currentGame">Join</button>
     </div>
   </div>
 </ion-content>

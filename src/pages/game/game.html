@@ -37,7 +37,7 @@
     <div class="game-villagers">
       <h2>Villagers</h2>
       <ul *ngIf="circle.game.villagers.length + circle.game.placeholders.length > 0">
-        <li *ngIf="inGame">
+        <li *ngIf="inGame && !isMod">
           <villager-detail [villager]="villager" (click)="goToProfile(villager)"></villager-detail>
           <button class="leave" (click)="leaveGame(villager)"></button>
         </li>

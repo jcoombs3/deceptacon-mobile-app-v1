@@ -58,6 +58,10 @@ page-game {
     color: color($colors, white);
     padding-right: 50px;
     position: relative;
+    
+    .profile-pic {
+      border-color: color($colors, white);
+    }
   }
   
   button.kick {

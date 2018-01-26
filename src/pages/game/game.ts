@@ -17,6 +17,7 @@ export class GamePage {
   circle: any = {};
   villager: any = {};
   otherVillagers: any = [];
+  isConstructed: boolean = false;
   isMod: boolean = false;
   inGame: boolean = false;
 
@@ -29,15 +30,26 @@ export class GamePage {
     private socket: Socket,
     private events: Events
   ) { 
-    this.circle = this.navParams.data;
-    this.getGame();
     this.storage.get('user').then(data => {
       if (data) {
         this.villager = data;
-        this.checkIfMod();
       }
     });
+    this.circle = this.navParams.data;
+    this.getGame();
     this.setEventListeners();
+    this.isConstructed = true;
+  }
+  
+  ionViewWillEnter() {
+    if (this.isConstructed) {
+      this.getGame();
+      this.setEventListeners();
+    }
+  }
+  
+  ionViewWillLeave() {
+    this.unsubscribeToEvents();
   }
   
   setEventListeners() {
@@ -49,6 +61,11 @@ export class GamePage {
       iThis.circle.game.villagers.push(villager);
       iThis.events.publish(`circle-updated-${iThis.circle._id}`, iThis.circle);
     });
+  }
+  
+  unsubscribeToEvents() {
+    this.socket.removeListener(`circle-updated-${this.circle._id}`);
+    this.socket.removeListener(`villager-joined-${this.circle._id}`);
   }
   
   getGame() {
@@ -63,21 +80,32 @@ export class GamePage {
   }
   
   checkIfMod() {
-    if (this.villager._id === this.circle.moderator._id || 
-        this.villager._id === this.circle.moderator) {
-      this.isMod = true;
+    if (this.circle.moderator && this.circle.moderator._id) {
+      if (this.villager._id === this.circle.moderator._id) {
+        this.isMod = true;
+      }
+    } else if (this.circle.moderator) {
+      if (this.villager._id === this.circle.moderator) {
+        this.isMod = true;
+      }
     }
   }
   
   checkIfInGame() {
+    let villagerArray = this.otherVillagers;
     let villagers = this.circle.game.villagers;
-    for (let i = 0; i < villagers.length; i++) {
-      if (this.villager._id === villagers[i]._id) {
-        this.inGame = true;
-      } else {
-        this.otherVillagers.push(villagers[i]);
+    if (villagerArray.length !== villagers.length) {
+      villagerArray = [];
+      for (let i = 0; i < villagers.length; i++) {
+        if (this.villager._id === villagers[i]._id) {
+          this.inGame = true;
+        } else {
+          villagerArray.push(villagers[i]);
+          
+        }
       }
     }
+    this.otherVillagers = villagerArray;
   }
   
   createGame() {
