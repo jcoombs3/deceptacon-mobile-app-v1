@@ -4,6 +4,7 @@ import { Socket } from 'ng-socket-io';
 import { Storage } from '@ionic/storage';
 
 // PAGES
+import { HomePage } from '../../pages/home/home';
 import { ProfilePage } from '../../pages/profile/profile';
 import { GamePage } from '../../pages/game/game';
 
@@ -39,6 +40,7 @@ export class DeceptaconFooter {
     this.events.subscribe('user:authenticated', (user) => {
       console.log('event: user:authenticated', 'DeceptaconFooter');
       this.user = user;
+      this.nav.setRoot(HomePage);
       this.checkForSurvey(false);
       this.unsubscribeEvents(this.user);
       this.addDynamicListeners();
@@ -73,7 +75,11 @@ export class DeceptaconFooter {
   addDynamicListeners() {
     this.socket.on(`villager-removed-${this.user._id}`, (data) => {
       console.log('event: villager:removed', 'DeceptaconFooter');
-      this.showToast(`You have been removed from ${this.user.currentGame.name}`, 'error');
+      if (!data.game.status.active) {
+        this.showToast(`You have been removed from ${this.user.currentGame.name}`, 'error');
+      } else {
+        this.checkForSurvey(true);
+      }
       let active = this.nav.last().instance instanceof GamePage;
       if (active) {
         this.nav.popToRoot();
@@ -152,13 +158,14 @@ export class DeceptaconFooter {
       }
     } else if (!isActive && this.user.currentGame) {
       let status = this.user.currentGame.game.status;
-      if (this.user.currentGame && (status.ended || status.cancelled)) {
+      if (status.ended || status.cancelled) {
         if (this.user._id !== this.user.currentGame.moderator) {
           this.goToSurvey();
         }
-      } 
+      } else if (status.active) {
+        this.goToCurrentGame();
+      }
     }
-    
   }
   
   goToSurvey() {

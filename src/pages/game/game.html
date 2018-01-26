@@ -26,7 +26,7 @@
       <!-- status-open -->
       <button ion-button class="game-begin" (click)="beginGame()" *ngIf="isMod && circle.game.villagers.length + circle.game.placeholders.length > 0 && !circle.game.status.active && !circle.game.status.end && !circle.game.status.cancelled">Start Game</button>
       <!-- status-active -->
-      <button ion-button class="game-end" *ngIf="circle.game.villagers.length + circle.game.placeholders.length > 0 && isMod && circle.game.status.active" (click)="endGame()">End Game</button>
+      <button ion-button class="game-end" *ngIf="isMod && circle.game.status.active" (click)="endGame()">End Game</button>
       <!-- TODO: cancel Game -->
     </div>
     <div class="game-moderator">

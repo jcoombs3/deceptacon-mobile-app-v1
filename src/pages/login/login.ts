@@ -5,9 +5,6 @@ import { NavController, ModalController,
 import { Storage } from '@ionic/storage';
 import { Socket } from 'ng-socket-io';
 
-// PAGES
-import { HomePage } from '../home/home';
-
 // MODALS
 import { CreateAccountModal } from '../../modals/create-account/create-account';
 
@@ -87,7 +84,7 @@ export class LoginPage {
       this.deceptaconService.login(this.villager)
         .subscribe(data => {
           loading.dismiss();
-          this.goToHome(data);
+          this.authenticate(data);
         }, error => {
           let toast = this.toastCtrl.create({
             message: error,
@@ -122,14 +119,13 @@ export class LoginPage {
     }
   }
   
-  goToHome(villager: any) {
+  authenticate(villager: any) {
     this.storage.set('user', villager);
     this.events.publish('user:authenticated', villager);
     this.socket.emit('com.deceptacon.event', {
       event: `logged-in-${this.villager._id}`,
       data: this.villager
     });
-    this.navCtrl.setRoot(HomePage);
   }
   
   openCodeConduct() {
