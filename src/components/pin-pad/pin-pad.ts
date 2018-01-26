@@ -20,7 +20,9 @@ export class PinPad {
   }
   
   insertPIN(num: number) {
-    this.pin.push(num);
-    this.validatePIN();
+    if (this.pin.length < 4) {
+      this.pin.push(num);
+      this.validatePIN();
+    }
   }
 }
