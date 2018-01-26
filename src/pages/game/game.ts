@@ -33,6 +33,7 @@ export class GamePage {
     this.storage.get('user').then(data => {
       if (data) {
         this.villager = data;
+        this.checkIfMod();
       }
     });
     this.circle = this.navParams.data;
@@ -154,6 +155,26 @@ export class GamePage {
     this.showKickAlert(`Kick ${villager.fullname}`, villager);
   }
   
+  showAlert(txt: string, callback: Function) {
+    let alert = this.alertCtrl.create({
+      title: txt,
+      buttons: [
+        {
+          text: 'No',
+          role: 'cancel',
+          handler: () => {}
+        },
+        {
+          text: 'Yes',
+          handler: () => {
+            callback();
+          }
+        }
+      ]
+    });
+    alert.present();
+  }
+  
   showKickAlert(txt: string, villager: any) {
     let alert = this.alertCtrl.create({
       title: txt,
@@ -188,7 +209,7 @@ export class GamePage {
           data: data
         });
         this.socket.emit('com.deceptacon.event', {
-          event: `villager-removed-${arr.villagerId}`,
+          event: `villager-removed-${villager._id}`,
           data: data
         });
       }, error => {
@@ -215,32 +236,42 @@ export class GamePage {
   }
   
   beginGame() {
-    let arr = {
-      gameId: this.circle.game._id
-    };
-    this.deceptaconService.beginGame(arr)
-      .subscribe(data => {
-      this.circle.game = data;
-      this.socket.emit('com.deceptacon.event', {
-        event: `circle-updated-${data._id}`,
-        data: this.circle
+    this.showAlert('Start game?', () => {
+      let arr = {
+        gameId: this.circle.game._id
+      };
+      this.deceptaconService.beginGame(arr)
+        .subscribe(data => {
+        this.circle.game = data;
+        this.socket.emit('com.deceptacon.event', {
+          event: `game-begin-${data._id}`,
+          data: this.circle
+        });
+        this.socket.emit('com.deceptacon.event', {
+          event: `circle-updated-${data._id}`,
+          data: this.circle
+        });
+      }, error => {
+        console.log('++ error');
       });
-    }, error => {
-      console.log('++ error');
-    });
+    }); 
   }
   
   endGame() {
-    let arr = {
-      gameId: this.circle.game._id
-    };
-    console.log('++ endGame');
-    this.deceptaconService.endGame(arr)
-      .subscribe(data => {
-      console.log('++ game has ended');
-    }, error => {
-      console.log('++ error');
-    });
+    this.showAlert('End game?', () => {
+      let arr = {
+        gameId: this.circle.game._id
+      };
+      this.deceptaconService.endGame(arr)
+        .subscribe(data => {
+        this.socket.emit('com.deceptacon.event', {
+          event: `game-ended-${data._id}`,
+          data: this.circle
+        });
+      }, error => {
+        console.log('++ error');
+      });
+    });  
   }
   
   cancelGame() {

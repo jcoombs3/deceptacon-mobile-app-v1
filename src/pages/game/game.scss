@@ -8,7 +8,7 @@ page-game {
   }
   
   .game-moderator {
-    margin: 35px 0px;
+    margin: 15px 0px 35px;
   }
   
   .status-open {
@@ -24,9 +24,43 @@ page-game {
     color: gray;
   }
   
-  .games-status, .games-seats {
+  .game-status, .game-seats {
     width: 50%;
     float: left;
+  }
+  
+  .game-buttons {
+    text-align: right;
+    
+    button {
+      margin: 0;
+    }
+    
+    .game-begin {
+      background: color($colors, special);
+      border-radius: 50%;
+      border-top-left-radius: 0px;
+      border-top-right-radius: 0px;
+      padding: 0px 30px 10px;
+      box-sizing: content-box;
+      
+      &:active {
+        background: lighten(color($colors, special), 5%);
+      }
+    }
+    
+    .game-end {
+      background: darkred;
+      border-radius: 50%;
+      border-top-left-radius: 0px;
+      border-top-right-radius: 0px;
+      padding: 0px 30px 10px;
+      box-sizing: content-box;
+      
+      &:active {
+        background: lighten(darkred, 5%);
+      }
+    }
   }
   
   ul {

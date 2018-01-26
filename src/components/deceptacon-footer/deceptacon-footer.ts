@@ -35,6 +35,7 @@ export class DeceptaconFooter {
     this.events.subscribe('user:authenticated', (user) => {
       console.log('event: user:authenticated', 'DeceptaconFooter');
       this.user = user;
+      this.unsubscribeEvents(this.user);
       this.addDynamicListeners();
     });
     this.events.subscribe('user:creategame', () => {
@@ -54,6 +55,10 @@ export class DeceptaconFooter {
   
   unsubscribeEvents(user: any) {
     this.socket.removeListener(`villager-removed-${user._id}`);
+    if (this.user.currentGame) {
+      this.socket.removeListener(`game-begin-${this.user.currentGame._id}`);
+      this.socket.removeListener(`game-ended-${this.user.currentGame._id}`);
+    }
   }
   
   addDynamicListeners() {
@@ -73,6 +78,26 @@ export class DeceptaconFooter {
       } 
       this.getUser();
     });
+    if (this.user.currentGame) {
+      let game = this.user.currentGame.game;
+      this.socket.on(`game-begin-${game._id}`, (data) => {
+        console.log('event: game:begin', 'DeceptaconFooter');
+        this.showToast(`${this.user.currentGame.name}'s game has started`, '');
+        let active = this.nav.last().instance instanceof GamePage;
+        if (!active) {
+          this.goToCurrentGame();
+        } 
+      });
+      this.socket.on(`game-ended-${game._id}`, (data) => {
+        console.log('event: game:ended', 'DeceptaconFooter');
+        this.showToast(`${this.user.currentGame.name}'s game has ended`, 'error');
+        let active = this.nav.last().instance instanceof GamePage;
+        if (active) {
+          this.goToHome();
+          this.checkForSurvey();
+        } 
+      });
+    }
   }
   
   goToHome() {
@@ -98,8 +123,37 @@ export class DeceptaconFooter {
     .subscribe(data => {
       this.storage.set('user', data);
       this.user = data;
+      this.unsubscribeEvents(this.user);
+      this.addDynamicListeners();
     }, error => {
       console.log('++ error');
     });
+  }
+  
+  showToast(txt: string, type: string) {
+    let toast = this.toastCtrl.create({
+      message: txt,
+      duration: 3000,
+      position: 'top',
+      showCloseButton: true,
+      cssClass: type
+    });
+    toast.present();
+  }
+  
+  checkForSurvey() {
+    console.log('++ checkForSurvey');
+    console.log(this.user._id);
+    console.log(this.user.currentGame.moderator._id);
+    
+    if (this.user._id !== this.user.currentGame.moderator._id) {
+      this.goToSurvey();
+    } else {
+      this.getUser();
+    }
+  }
+  
+  goToSurvey() {
+    console.log('++ goToSurvey');
   }
 }

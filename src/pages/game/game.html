@@ -10,7 +10,7 @@
   
   <div *ngIf="circle.game">
     <div class="game-header clearfix">
-      <div class="games-status">
+      <div class="game-status">
         <div *ngIf="circle.game.status">
           Status: <span *ngIf="circle.game.status.active" class="status-active">Active</span>
           <span *ngIf="circle.game.status.end" class="status-ended">Ended</span>
@@ -18,9 +18,15 @@
           <span *ngIf="!circle.game.status.active && !circle.game.status.end && !circle.game.status.cancelled" class="status-open">Open</span>
         </div>
       </div>
-      <div class="games-seats">
+      <div class="game-seats">
         Seats: {{circle.game.villagers.length + circle.game.placeholders.length}}/{{circle.game.seats}}
       </div>
+    </div>
+    <div class="game-buttons">
+      <!-- status-open -->
+      <button ion-button class="game-begin" (click)="beginGame()" *ngIf="isMod && circle.game.villagers.length + circle.game.placeholders.length > 0 && !circle.game.status.active && !circle.game.status.end && !circle.game.status.cancelled">Start Game</button>
+      <!-- status-active -->
+      <button ion-button class="game-end" *ngIf="circle.game.villagers.length + circle.game.placeholders.length > 0 && isMod && circle.game.status.active" (click)="endGame()">End Game</button>
     </div>
     <div class="game-moderator">
       <h2>Moderator</h2>
@@ -61,8 +67,6 @@
       *ngIf="!circle.game">Create Game</button>
 <!--
     
-    <button ion-button *ngIf="circle.game.villagers.length > 0 && isMod && !circle.game.status.active && !circle.game.status.end && !circle.game.status.cancelled" (click)="beginGame()">Start Game</button>
-    <button ion-button *ngIf="circle.game.villagers.length > 0 && isMod && circle.game.status.active" (click)="endGame()">End Game</button>
     <button ion-button *ngIf="circle.game.villagers.length > 0 && isMod && circle.game.status.active" (click)="cancelGame()">Cancel</button>
 -->
   </div>

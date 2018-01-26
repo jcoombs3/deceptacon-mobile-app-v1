@@ -91,7 +91,6 @@ export class CirclesPage {
         }
       }
     }
-    console.log('++ inGame', this.inGame);
   }
   
   moderate(circle: any) {
