@@ -53,10 +53,6 @@ export class DeceptaconFooter {
   }
   
   unsubscribeEvents(user: any) {
-    this.events.unsubscribe('user:authenticated');
-    this.events.unsubscribe('user:creategame');
-    this.events.unsubscribe('user:joinedgame');
-    this.events.unsubscribe('user:loggedout');
     this.socket.removeListener(`villager-removed-${user._id}`);
   }
   
