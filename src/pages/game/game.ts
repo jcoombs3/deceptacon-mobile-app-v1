@@ -211,6 +211,7 @@ export class GamePage {
         this.circle = data;
         this.circle.moderator = this.villager;
         this.circle.game.moderator = this.villager;
+        this.checkIfInGame();
         this.socket.emit('com.deceptacon.event', {
           event: `circle-updated-${data._id}`,
           data: data
@@ -225,7 +226,6 @@ export class GamePage {
   }
   
   removePlaceholder() {
-    console.log('++ removePlaceholder');
     let arr = {
       modId: this.villager._id,
       gameId: this.circle.game._id
