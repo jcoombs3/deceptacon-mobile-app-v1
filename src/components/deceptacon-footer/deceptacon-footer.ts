@@ -145,7 +145,7 @@ export class DeceptaconFooter {
   
   checkForSurvey(isActive: boolean) {
     if (isActive && this.user.currentGame) {
-      if (this.user._id !== this.user.currentGame.game.moderator) {
+      if (this.user._id !== this.user.currentGame.moderator) {
         this.goToSurvey();
       } else {
         this.getUser();
@@ -153,7 +153,7 @@ export class DeceptaconFooter {
     } else if (!isActive && this.user.currentGame) {
       let status = this.user.currentGame.game.status;
       if (this.user.currentGame && (status.ended || status.cancelled)) {
-        if (this.user._id !== this.user.currentGame.game.moderator) {
+        if (this.user._id !== this.user.currentGame.moderator) {
           this.goToSurvey();
         }
       } 

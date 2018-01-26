@@ -33,7 +33,7 @@
       <div class="signin-form">
         <ion-item>
           <ion-label color="primary" stacked>Username</ion-label>
-          <ion-input type="text" [(ngModel)]="villager.username"></ion-input>
+          <ion-input type="text" [(ngModel)]="villager.username" required autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"></ion-input>
         </ion-item>
         <pin-pad (validated)="retrievePIN($event)"></pin-pad>
         <div class="cancel-container" style="text-align:right">

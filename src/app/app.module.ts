@@ -5,7 +5,10 @@ import { IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular';
 import { MyApp } from './app.component';
 import { IonicStorageModule } from '@ionic/storage';
 import { SocketIoModule, SocketIoConfig } from 'ng-socket-io';
-const config: SocketIoConfig = { url: 'http://localhost:4200', options: {} };
+const config: SocketIoConfig = { 
+  url:'https://deceptacon-mobile-socket.herokuapp.com/', 
+  options: {} 
+};
 
 // PAGES
 import { LoginPage } from '../pages/login/login';

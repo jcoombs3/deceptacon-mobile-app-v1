@@ -111,6 +111,7 @@ export class CirclesPage {
           position: 'top'
         });
         toast.present();
+        data.moderator = this.villager;
         this.socket.emit('com.deceptacon.event', {
           event: `circle-updated-${data._id}`,
           data: data
