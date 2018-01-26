@@ -1,0 +1,40 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>
+      Game Survey
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+  <p>Your game has ended! Please fill out information regarding your game play for records. </p>
+  <p>TODO: Give user ability to publish their role and alignment</p>
+  <div>
+    <ion-item>
+      <ion-label>Alignment</ion-label>
+      <ion-select [(ngModel)]="alignment">
+        <ion-option value="good">Good</ion-option>
+        <ion-option value="evil">Evil</ion-option>
+        <ion-option value="neutral">Neutral</ion-option>
+      </ion-select>
+    </ion-item>
+    <ion-item>
+      <ion-label>Role</ion-label>
+      <ion-select [(ngModel)]="role">
+        <ion-option value="villager">Villager</ion-option>
+        <ion-option value="seer">Seer</ion-option>
+        <ion-option value="werewolf">Werewolf</ion-option>
+      </ion-select>
+    </ion-item>
+  </div>
+</ion-content>
+
+<ion-footer>
+  <ion-navbar>
+    <ion-buttons end>
+      <button ion-button (click)="publishRole()">
+        Publish
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+</ion-footer>

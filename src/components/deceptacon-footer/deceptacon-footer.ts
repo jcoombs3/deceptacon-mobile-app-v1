@@ -1,11 +1,14 @@
 import { Component, Input } from '@angular/core';
-import { Events, ToastController } from 'ionic-angular';
+import { Events, ModalController, ToastController } from 'ionic-angular';
 import { Socket } from 'ng-socket-io';
 import { Storage } from '@ionic/storage';
 
 // PAGES
 import { ProfilePage } from '../../pages/profile/profile';
 import { GamePage } from '../../pages/game/game';
+
+// PAGES
+import { GameSurveyModal } from '../../modals/game-survey/game-survey';
 
 // PROVIDERS
 import { DeceptaconService } from '../../providers/deceptacon-service/deceptacon-service';
@@ -21,6 +24,7 @@ export class DeceptaconFooter {
   user: any = null;
   
   constructor(
+    public modalCtrl: ModalController,
     public toastCtrl: ToastController,
     private assets: AssetsService, 
     private deceptaconService: DeceptaconService, 
@@ -35,6 +39,7 @@ export class DeceptaconFooter {
     this.events.subscribe('user:authenticated', (user) => {
       console.log('event: user:authenticated', 'DeceptaconFooter');
       this.user = user;
+      this.checkForSurvey();
       this.unsubscribeEvents(this.user);
       this.addDynamicListeners();
     });
@@ -48,7 +53,7 @@ export class DeceptaconFooter {
     });
     this.events.subscribe('user:loggedout', (user) => {
       console.log('event: user:loggedout', 'DeceptaconFooter');
-      this.unsubscribeEvents(this.user);
+      this.socket.removeAllListeners();
       this.user = user;
     });
   }
@@ -87,8 +92,8 @@ export class DeceptaconFooter {
         let active = this.nav.last().instance instanceof GamePage;
         if (active) {
           this.goToHome();
-          this.checkForSurvey();
         } 
+        this.checkForSurvey();
       });
     }
   }
@@ -135,14 +140,22 @@ export class DeceptaconFooter {
   }
   
   checkForSurvey() {
-    if (this.user._id !== this.user.currentGame.game.moderator) {
-      this.goToSurvey();
-    } else {
-      this.getUser();
-    }
+    if (this.user.currentGame) {
+      if (this.user._id !== this.user.currentGame.game.moderator) {
+        this.goToSurvey();
+      } else {
+        this.getUser();
+      }
+    } 
   }
   
   goToSurvey() {
-    console.log('++ goToSurvey');
+    const gameSurveyModal = this.modalCtrl.create(GameSurveyModal, this.user);
+    gameSurveyModal.onWillDismiss(data => {
+      if (data) {
+        console.log('++ gameSurveyModal.onWillDismiss');
+      }
+    });
+    gameSurveyModal.present();
   }
 }
