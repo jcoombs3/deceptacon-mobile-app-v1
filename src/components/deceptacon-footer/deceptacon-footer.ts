@@ -39,7 +39,7 @@ export class DeceptaconFooter {
     this.events.subscribe('user:authenticated', (user) => {
       console.log('event: user:authenticated', 'DeceptaconFooter');
       this.user = user;
-      this.checkForSurvey();
+      this.checkForSurvey(false);
       this.unsubscribeEvents(this.user);
       this.addDynamicListeners();
     });
@@ -49,6 +49,10 @@ export class DeceptaconFooter {
     });
     this.events.subscribe('user:joinedgame', (gameId) => {
       console.log('event: user:joinedgame', 'DeceptaconFooter');
+      this.getUser();
+    });
+    this.events.subscribe('user:published', (user) => {
+      console.log('event: user:published', 'DeceptaconFooter');
       this.getUser();
     });
     this.events.subscribe('user:loggedout', (user) => {
@@ -93,7 +97,7 @@ export class DeceptaconFooter {
         if (active) {
           this.goToHome();
         } 
-        this.checkForSurvey();
+        this.checkForSurvey(true);
       });
     }
   }
@@ -139,14 +143,22 @@ export class DeceptaconFooter {
     toast.present();
   }
   
-  checkForSurvey() {
-    if (this.user.currentGame) {
+  checkForSurvey(isActive: boolean) {
+    if (isActive && this.user.currentGame) {
       if (this.user._id !== this.user.currentGame.game.moderator) {
         this.goToSurvey();
       } else {
         this.getUser();
       }
-    } 
+    } else if (!isActive && this.user.currentGame) {
+      let status = this.user.currentGame.game.status;
+      if (this.user.currentGame && (status.ended || status.cancelled)) {
+        if (this.user._id !== this.user.currentGame.game.moderator) {
+          this.goToSurvey();
+        }
+      } 
+    }
+    
   }
   
   goToSurvey() {
