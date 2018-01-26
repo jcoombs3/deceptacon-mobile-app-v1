@@ -59,8 +59,9 @@ export class GamePage {
       iThis.circle = circle;
     });
     this.socket.on(`villager-joined-${this.circle._id}`, function(villager) {
-      iThis.circle.game.villagers.push(villager);
-      iThis.events.publish(`circle-updated-${iThis.circle._id}`, iThis.circle);
+      //iThis.circle.game.villagers.push(villager);
+      iThis.getGame();
+      //iThis.events.publish(`circle-updated-${iThis.circle._id}`, iThis.circle);
     });
   }
   
@@ -120,6 +121,8 @@ export class GamePage {
     this.deceptaconService.createGame(arr)
       .subscribe(data => {
       this.circle = data;
+      this.circle.moderator = this.villager;
+      this.circle.game.moderator = this.villager;
       this.events.publish('user:creategame');
       this.socket.emit('com.deceptacon.event', {
         event: `circle-updated-${data._id}`,
@@ -139,6 +142,7 @@ export class GamePage {
       .subscribe(data => {
       this.circle = data;
       this.circle.moderator = this.villager;
+      this.circle.game.moderator = this.villager;
       this.socket.emit('com.deceptacon.event', {
         event: `circle-updated-${data._id}`,
         data: data
@@ -205,6 +209,8 @@ export class GamePage {
     this.deceptaconService.removeVillager(arr)
       .subscribe(data => {
         this.circle = data;
+        this.circle.moderator = this.villager;
+        this.circle.game.moderator = this.villager;
         this.socket.emit('com.deceptacon.event', {
           event: `circle-updated-${data._id}`,
           data: data
@@ -227,6 +233,8 @@ export class GamePage {
     this.deceptaconService.removePlaceholder(arr)
       .subscribe(data => {
         this.circle = data;
+        this.circle.moderator = this.villager;
+        this.circle.game.moderator = this.villager;
         this.socket.emit('com.deceptacon.event', {
           event: `circle-updated-${data._id}`,
           data: data
