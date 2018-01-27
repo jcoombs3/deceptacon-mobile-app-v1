@@ -47,21 +47,30 @@ $login: (
 );
 
 $profile: (
+  yellow: #F0F757,
+  magenta: #F23785,
+  cyan: #C0FDFB,
+  green: #6BF98F,
+  white: #FFFFFF,
+  
+  
   darkblue: color($colors, primary),
   tan: color($colors, secondary),
   orange: #FE5D26,
-  yellow: #F0F757,
-  green: #BEEF9E,
   blue: #507DBC,
   black: #262322,
   gray: #91818A,
 );
 
+$bg-yellow: color($profile, yellow);
+$bg-magenta: color($profile, magenta);
+$bg-cyan: color($profile, cyan);
+$bg-green: color($profile, green);
+$bg-white: color($profile, white);
+
 $bg-darkblue: color($profile, darkblue);
 $bg-tan: color($profile, tan);
 $bg-orange: color($profile, orange);
-$bg-yellow: color($profile, yellow);
-$bg-green: color($profile, green);
 $bg-blue: color($profile, blue);
 $bg-black: color($profile, black);
 $bg-gray: color($profile, gray);

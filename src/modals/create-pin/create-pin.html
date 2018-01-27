@@ -1,3 +1,17 @@
 <ion-content>
-  <pin-pad (validated)="completePIN($event)"></pin-pad>
+  <div class="header-container">
+    <p>
+      This is your Decepta Con Pin. Create a 4-digit pin to <br/> 
+      secure your account. As the convention is 4 days, <br/>  
+      this pin is permanent. Remember!
+    </p>
+  </div>
+  <div class="main-container">
+    <pin-pad (validated)="completePIN($event)"></pin-pad>
+  </div>
+  <div class="footer-container">
+    <p>Input your Decepta Con PIN again to confirm</p>
+  </div>
+  
+  
 </ion-content>

@@ -16,6 +16,7 @@
 // automatically applied to the <body> element in the app.
 
 @import "../theme/mixins";
+@import "../theme/media-queries/index";
 @import "../theme/fonts/index";
 @import "../theme/ionic-overrides";
 @import "../theme/global";

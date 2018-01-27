@@ -17,7 +17,7 @@ import { AssetsService } from '../../providers/assets-service/assets-service';
 })
 export class CreateAccountModal {
   pictures: any = ["BodyGuard.png", "CultLeader.png", "Cupid.png", "CultLeader.png", "Drunk.png", "FrankensteinMonster.png", "Huntress.png", "Lycan.png", "Seer.png", "Sorcerer.png", "ToughGuy.png", "Vampire.png", "VillagerF.png", "VillagerM.png", "Werewolf.png", "Witch.png", "WolfCub.png"]
-  colors: any = ["darkblue", "tan", "orange", "yellow", "green", "blue", "black", "gray"]
+  colors: any = ["yellow", "magenta", "cyan", "green", "white", "black"]
   villager: any = {
     firstname: '',
     lastname: '',

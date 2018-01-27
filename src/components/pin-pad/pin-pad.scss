@@ -3,23 +3,36 @@ pin-pad {
   .pin-pad-container {
     max-width: 250px;
     margin: 0 auto;
+    
+    @include media($Mobile_sm...) {
+      max-width: 220px;
+    }
   }
   
   .pin-input {
     width: 100%;
-    margin-bottom: 25px;
+    margin-bottom: 20px;
+    
+    @include media($Mobile_sm...) {
+      margin-bottom: 5px;
+    }
     
     ion-col div {
-      width: 30px;
-      height: 30px;
+      width: 35px;
+      height: 35px;
       border-radius: 5px;
       margin: 0 auto;
-      border: 2px solid darken(color($colors, secondary), 15%);
-      background: color($colors, secondary);
+      border: 2px solid darken(color($colors, white), 15%);
+      background: color($colors, primary);
       @include transition(background 200ms ease);
+    
+      @include media($Mobile_sm...) {
+        width: 30px;
+        height: 30px;
+      }
       
       &.active {
-        background: lighten(color($colors, secondary), 50%);
+        background: color($colors, white);
       }
     }
   }
@@ -29,13 +42,20 @@ pin-pad {
     text-align: center;
     
     button {
-      border: 2px solid darken(color($colors, secondary), 15%);
-      background: color($colors, secondary);
+      border: 2px solid darken(color($colors, white), 15%);
+      background: color($colors, primary);
+      color: color($colors, white);
       width: 50px;
       height: 50px;
+    
+      @include media($Mobile_sm...) {
+        width: 45px;
+        height: 45px;
+      }
       
       &:active {
-        background: darken(color($colors, secondary), 15%);
+        background: color($colors, white);
+        color: color($colors, primary);
       }
     }
   }

@@ -1,4 +1,43 @@
 modal-create-pin {
+  @include modal-primary();
+  color: color($colors, white);
+  
+  p {
+    margin: 0;
+    text-align: center;
+    display: table-cell;
+    
+    @include media($Mobile_sm...) {
+      font-size: 13px;
+    }
+  }
+  
+  .header-container {
+    position: relative;
+    height: 15%;
+    display: table;
+    width: 100%;
+    
+    p {
+      vertical-align: bottom;
+    }
+  }
+  
+  .footer-container {
+    position: relative;
+    height: 15%;
+    display: table;
+    width: 100%;
+    
+    p {
+      vertical-align: top;
+    }
+  }
+  
+  .main-container {
+    position: relative;
+    height: 70%;
+  }
   
   pin-pad {
     position: absolute;
