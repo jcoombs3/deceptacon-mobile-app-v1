@@ -20,7 +20,7 @@ export class GamePage {
   isConstructed: boolean = false;
   isMod: boolean = false;
   inGame: boolean = false;
-
+  
   constructor(
     public navCtrl: NavController,
     public alertCtrl: AlertController,
@@ -36,6 +36,7 @@ export class GamePage {
         this.checkIfMod();
       }
     });
+    this.unsubscribeToEvents();
     this.circle = this.navParams.data;
     this.getGame();
     this.setEventListeners();
@@ -43,6 +44,7 @@ export class GamePage {
   }
   
   ionViewWillEnter() {
+    this.unsubscribeToEvents();
     if (this.isConstructed) {
       this.getGame();
       this.setEventListeners();
@@ -55,17 +57,34 @@ export class GamePage {
   
   setEventListeners() {
     const iThis = this;
-    this.socket.on(`circle-updated-${this.circle._id}`, function(circle){
+    console.log('++ setEventListeners()');
+    this.events.subscribe(`circle-updated-${this.circle._id}`, function(circle) {
+      console.log(`++ event: circle-updated-${iThis.circle._id}`);
+      console.log(iThis.circle);
       iThis.circle = circle;
+      if (iThis.circle.game) {
+        iThis.checkIfInGame();
+      }
+    });
+    this.socket.on(`circle-updated-${this.circle._id}`, function(circle) {
+      console.log(`++ socket: circle-updated-${iThis.circle._id}`);
+      console.log(iThis.circle);
+      iThis.circle = circle;
+      if (iThis.circle.game) {
+        iThis.checkIfInGame();
+      }
     });
     this.socket.on(`villager-joined-${this.circle._id}`, function(villager) {
-      //iThis.circle.game.villagers.push(villager);
-      iThis.getGame();
-      //iThis.events.publish(`circle-updated-${iThis.circle._id}`, iThis.circle);
+      iThis.circle.game.villagers.push(villager);
+      console.log(`villager-joined-${iThis.circle._id}`);
+      console.log(iThis.circle);
+      iThis.events.publish(`circle-updated-${iThis.circle._id}`, iThis.circle);
     });
   }
   
   unsubscribeToEvents() {
+    console.log('++ unsubscribeToEvents()');
+    this.events.unsubscribe(`circle-updated-${this.circle._id}`);
     this.socket.removeListener(`circle-updated-${this.circle._id}`);
     this.socket.removeListener(`villager-joined-${this.circle._id}`);
   }
