@@ -1,3 +1,13 @@
+<ion-header>
+  <ion-navbar>
+    <ion-buttons start>
+      <button ion-button icon-only (click)="prev()" [ngClass]="{'active': slides.isEnd()}">
+        <ion-icon name="arrow-round-back"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+
 <ion-content no-bounce [ngClass]="{'anim-active': anim}">
     <ion-slides>
       <ion-slide>
@@ -29,13 +39,28 @@
           </ion-grid>
         </div>
       </ion-slide>
-      <ion-slide>
-        <ion-item>
-          <ion-label color="primary" stacked>Username</ion-label>
-          <ion-input type="text" [(ngModel)]="villager.username" required autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"></ion-input>
-        </ion-item>
-        <pin-pad (validated)="retrievePIN($event)"></pin-pad>
-        <button ion-button (click)="prev()">Cancel</button>
+      <ion-slide class="slide-signin">
+        <form #f="ngForm" (ngSubmit)="onSubmit(f)" novalidate>
+          <ion-list>
+            <div class="please-sign-in" [ngClass]="{'hide': revealPIN}">
+              <p>Please sign in with your Decepta Con username</p>
+            </div>
+            <ion-item [ngClass]="{'hide': revealPIN}">
+              <ion-label stacked color="primary">Username</ion-label>
+              <ion-input type="text" name="username" ngModel #username="ngModel" required 
+                         autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false">
+              </ion-input>
+            </ion-item>
+            <div [ngClass]="{'hide': !revealPIN}">
+              
+            </div>
+          </ion-list>
+          <button class="hidden-submit">Submit</button>
+        </form>
+        <div class="login-pad-container" [ngClass]="{'active': revealPIN}">
+          <p>Welcome <span *ngIf="isBack">back</span> {{villager.username}}!</p>
+          <pin-pad (validated)="retrievePIN($event)"></pin-pad>
+        </div>
       </ion-slide>
     </ion-slides>
 </ion-content>

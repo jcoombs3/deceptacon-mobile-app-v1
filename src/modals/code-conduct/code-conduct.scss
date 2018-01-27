@@ -7,6 +7,7 @@ modal-code-conduct {
     border-bottom: 2px solid color($colors, primary);
     margin: 0px -16px;
     text-align: center;
+    @include box-shadow(0 1px 3px lighten(color($colors, primary), 20%));
      
     img {
       max-width: 70%;

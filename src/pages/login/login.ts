@@ -4,6 +4,7 @@ import { NavController, ModalController,
          ToastController, Events, Slides } from 'ionic-angular';
 import { Storage } from '@ionic/storage';
 import { Socket } from 'ng-socket-io';
+import { NgForm } from '@angular/forms';
 
 // MODALS
 import { CreateAccountModal } from '../../modals/create-account/create-account';
@@ -20,6 +21,8 @@ import { AssetsService } from '../../providers/assets-service/assets-service';
 export class LoginPage {
   anim: boolean = false;
   showLogin: boolean = false;
+  revealPIN: boolean = false;
+  isBack: boolean = false;
   villager: any = {
     pin: [],
     username: ''
@@ -40,16 +43,20 @@ export class LoginPage {
   ) { }
   
   ionViewDidLoad() {
-    this.slides.lockSwipes(true);   
-  }
-  
-  ionViewDidEnter() {
+    this.slides.lockSwipes(true); 
     this.storage.get('user').then(data => {
       if (data) {
         this.villager = data;
-        this.showLogin = true;
+        this.revealPIN = true;
+        this.isBack = true;
+        this.slides.lockSwipes(false);
+        this.slides.slideTo(1, 0);
+        this.slides.lockSwipes(true);
       }
     });
+  }
+  
+  ionViewDidEnter() {
     this.anim = true;
   }
   
@@ -67,6 +74,8 @@ export class LoginPage {
     this.slides.lockSwipes(false);
     this.slides.slideTo(0);
     this.slides.lockSwipes(true);
+    this.villager.username = null; 
+    this.revealPIN = false;
   }
   
   createAccount() {
@@ -83,6 +92,16 @@ export class LoginPage {
   retrievePIN(pin: any) {
     this.villager.pin = pin;
     this.login();
+  }
+  
+  onSubmit(f: NgForm) {
+    this.isBack = false;
+    this.villager.username = f.value.username;
+    if (f.valid) {
+      this.revealPIN = true;
+    } else {
+      this.revealPIN = false;
+    }
   }
   
   login() {
@@ -103,6 +122,8 @@ export class LoginPage {
             showCloseButton: true,
             cssClass: 'error'
           });
+          this.revealPIN = false;
+          this.isBack = false;
           toast.present();
           loading.dismiss();
         });

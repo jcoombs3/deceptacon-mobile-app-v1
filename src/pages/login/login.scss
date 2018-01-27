@@ -1,13 +1,27 @@
 page-login {
   $loginBtnsAnim: 600ms; 
   $loginBtnsDelay: 400ms;
+  color: color($colors, white);
+  font-size: 14px;
+  @include modal-primary();
   
-  ion-content {
-    @include linear-gradient-bottom-diagonal-three(lighten(color($login, primary), 10%), lighten(color($login, primary), 5%), color($login, primary));
+  ion-header button {
+    opacity: 0;
+    pointer-events: none;
+    
+    &.active {
+      opacity: 1;
+      pointer-events: auto;
+    }
   }
   
   .slide-zoom {
     height: 100%;
+    padding: 16px;
+  }
+  
+  .swiper-slide {
+    font-size: inherit;
   }
   
   .login-logo-container {
@@ -74,39 +88,12 @@ page-login {
       width: 100%;
       max-width: 250px;
       margin-bottom: 25px;
-      
-      @media only screen and (max-device-height: 600px) {
-        
-      }
     
       @include media($Mobile_sm...) {
         max-width: 210px;
         margin-bottom: 10px;
       }
     }
-  }
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  .login-buttons-container {
-    height: 50%;
-    width: 100%;
-    position: relative;
-  }
-  
-  .create-account-terms {
-    color: color($colors, white);
-    font-size: 14px;
   }
   
   .anim-active {
@@ -116,16 +103,27 @@ page-login {
     }
   }
   
-  .signin-form {
-    width: 90%;
-    margin: 0 auto;
-    padding: 16px;
-    border: 8px solid darken(color($login, primary), 10%);
-    @include linear-gradient-bottom-diagonal-three(color($colors, white), darken(color($colors, white), 3%), darken(color($colors, white), 6%));
-    @include box-shadow();
+  // ------------------------- //
+  
+  .hidden-submit {
+    display: none;
+  }
+  
+  .slide-signin {
     
-    .pin-pad-container {
-      padding-top: 25px;
+    ion-item {
+      max-width: 250px;
+      margin: 0 auto;
+    }
+  }
+  
+  .login-pad-container {
+    @include vertical-align();
+    top: 40%;
+    opacity: 0;
+    
+    &.active {
+      opacity: 1;
     }
   }
 }
