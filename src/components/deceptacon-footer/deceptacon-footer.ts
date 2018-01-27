@@ -65,6 +65,7 @@ export class DeceptaconFooter {
   }
   
   unsubscribeEvents(user: any) {
+    this.events.unsubscribe(`villager-removed-${user._id}`);
     this.socket.removeListener(`villager-removed-${user._id}`);
     if (this.user.currentGame) {
       this.socket.removeListener(`game-begin-${this.user.currentGame._id}`);
@@ -73,18 +74,12 @@ export class DeceptaconFooter {
   }
   
   addDynamicListeners() {
+    this.events.subscribe(`villager-removed-${this.user._id}`, (data) => {
+      this.removeVillagerLogic(data);
+    });
     this.socket.on(`villager-removed-${this.user._id}`, (data) => {
       console.log('event: villager:removed', 'DeceptaconFooter');
-      if (!data.game.status.active) {
-        this.showToast(`You have been removed from ${this.user.currentGame.name}`, 'error');
-      } else {
-        this.checkForSurvey(true);
-      }
-      let active = this.nav.last().instance instanceof GamePage;
-      if (active) {
-        this.nav.popToRoot();
-      } 
-      this.getUser();
+      this.removeVillagerLogic(data);
     });
     if (this.user.currentGame) {
       let game = this.user.currentGame.game;
@@ -106,6 +101,19 @@ export class DeceptaconFooter {
         this.checkForSurvey(true);
       });
     }
+  }
+  
+  removeVillagerLogic(data: any) {
+    if (!data.game.status.active) {
+      this.showToast(`You have been removed from ${this.user.currentGame.name}`, 'error');
+    } else {
+      this.checkForSurvey(true);
+    }
+    let active = this.nav.last().instance instanceof GamePage;
+    if (active) {
+      this.nav.popToRoot();
+    } 
+    this.getUser();
   }
   
   goToHome() {

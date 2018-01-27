@@ -59,16 +59,12 @@ export class GamePage {
     const iThis = this;
     console.log('++ setEventListeners()');
     this.events.subscribe(`circle-updated-${this.circle._id}`, function(circle) {
-      console.log(`++ event: circle-updated-${iThis.circle._id}`);
-      console.log(iThis.circle);
       iThis.circle = circle;
       if (iThis.circle.game) {
         iThis.checkIfInGame();
       }
     });
     this.socket.on(`circle-updated-${this.circle._id}`, function(circle) {
-      console.log(`++ socket: circle-updated-${iThis.circle._id}`);
-      console.log(iThis.circle);
       iThis.circle = circle;
       if (iThis.circle.game) {
         iThis.checkIfInGame();
@@ -76,8 +72,6 @@ export class GamePage {
     });
     this.socket.on(`villager-joined-${this.circle._id}`, function(villager) {
       iThis.circle.game.villagers.push(villager);
-      console.log(`villager-joined-${iThis.circle._id}`);
-      console.log(iThis.circle);
       iThis.events.publish(`circle-updated-${iThis.circle._id}`, iThis.circle);
     });
   }
@@ -239,6 +233,7 @@ export class GamePage {
           event: `villager-removed-${villager._id}`,
           data: data
         });
+        this.events.publish(`villager-removed-${villager._id}`, data);
       }, error => {
         console.log('++ error');
       });
