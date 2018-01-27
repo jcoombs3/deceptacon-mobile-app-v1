@@ -1,17 +1,17 @@
 <ion-content>
   <div class="header-container">
-    <p>
+    <p [ngClass]="{'active': !confirmPIN}">
       This is your Decepta Con Pin. Create a 4-digit pin to <br/> 
-      secure your account. As the convention is 4 days, <br/>  
-      this pin is permanent. Remember!
+      secure your account. The convention is only 4 days, <br/>  
+      so pin is permanent. Remember it!
     </p>
   </div>
   <div class="main-container">
     <pin-pad (validated)="completePIN($event)"></pin-pad>
   </div>
   <div class="footer-container">
-    <p>Input your Decepta Con PIN again to confirm</p>
+    <p [ngClass]="{'active': confirmPIN}">
+      Input your Decepta Con PIN again to confirm
+    </p>
   </div>
-  
-  
 </ion-content>

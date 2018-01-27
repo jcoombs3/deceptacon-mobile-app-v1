@@ -6,6 +6,12 @@ modal-create-pin {
     margin: 0;
     text-align: center;
     display: table-cell;
+    opacity: 0;
+    @include transition(opacity 300ms ease);
+    
+    &.active {
+      opacity: 1;
+    }
     
     @include media($Mobile_sm...) {
       font-size: 13px;
