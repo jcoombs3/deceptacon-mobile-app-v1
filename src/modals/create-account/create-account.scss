@@ -39,6 +39,21 @@ modal-create-account {
     
     img {
       max-width: 50%;
+      display: inline-block;
+    }
+    
+    .checkmark-dark {
+      display: none;
+    }
+    
+    &.bg-cyan, &.bg-yellow, 
+    &.bg-green, &.bg-white {
+      .checkmark-light {
+        display: none;
+      }
+      .checkmark-dark {
+        display: inline-block;
+      }
     }
   }
   
@@ -47,7 +62,7 @@ modal-create-account {
   .not-ready {
     
     .create-account-pin {
-      @include linear-gradient-bottom-diagonal-three(darken(color($colors, white), 15%), darken(color($colors, white), 20%), darken(color($colors, white), 25%));
+      @include linear-gradient-bottom-diagonal-three(color($colors, white), darken(color($colors, white), 5%), darken(color($colors, white), 10%));
     }
   }
   

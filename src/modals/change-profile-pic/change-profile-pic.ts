@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
-import { ViewController, NavParams, ToastController } from 'ionic-angular';
+import { Platform, ViewController, NavParams, ToastController } from 'ionic-angular';
+
+import { StatusBar } from '@ionic-native/status-bar';
 
 // COMPONENTS
 import { ProfilePic } from '../../components/profile-pic/profile-pic';
@@ -17,6 +19,8 @@ export class ChangeProfilePicModal {
   picture: any;
   
   constructor(
+    public platform: Platform,
+    public statusBar: StatusBar,
     public viewCtrl: ViewController, 
     private navParams: NavParams, 
     private assets: AssetsService,
@@ -24,6 +28,18 @@ export class ChangeProfilePicModal {
   ) {
     this.color = navParams.get('color');
     this.picture = navParams.get('picture');
+  }
+  
+  ionViewWillEnter() {
+    if (this.platform.is('cordova')) {
+      this.statusBar.styleDefault(); 
+    }
+  }
+  
+  ionViewWillLeave() {
+    if (this.platform.is('cordova')) {
+      this.statusBar.styleLightContent(); 
+    }
   }
   
   updatePicture(pic: string) {

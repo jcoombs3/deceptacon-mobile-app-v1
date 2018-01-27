@@ -22,7 +22,10 @@
       <ion-col [ngClass]="{'not-ready': !villager.pin}">
         <button class="create-account-pin" (click)="createPIN()" *ngIf="!villager.pin"></button>
         <button class="create-account-pin bg-{{villager.color}}" (click)="createPIN()" *ngIf="villager.pin">
-          <img [src]="assets.assetsUrl + 'checkmark.png'">
+          <img [src]="assets.assetsUrl + 'checkmark.png'" 
+               class="checkmark-light">
+          <img [src]="assets.assetsUrl + 'checkmark-dark.png'" 
+               class="checkmark-dark">
         </button>
       </ion-col>
     </ion-row>
