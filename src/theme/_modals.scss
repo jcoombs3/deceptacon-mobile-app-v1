@@ -1,11 +1,3 @@
-.modals-secondary {
-  
-  ion-header .toolbar-background {
-    background: color($colors, secondary);
-    color: color($colors, white);
-  }
-}
-
 @mixin modal-primary() {
   
   ion-header .toolbar-background, 
@@ -20,5 +12,26 @@
   
   .label, ion-input, a {
     color: color($colors, white) !important;
+  }
+}
+
+@mixin modal-tertiary() {
+  
+  ion-header .toolbar-background, 
+  ion-footer .toolbar-background {
+    background: color($colors, white);
+    color: color($colors, primary);
+  }
+  
+  .toolbar-title, .bar-buttons button {
+    color: color($colors, primary);
+  }
+  
+  ion-content {
+    @include linear-gradient-bottom-diagonal-three($bg-white, darken($bg-white, 5%), darken($bg-white, 10%));
+  }
+  
+  .label, ion-input, a {
+    color: color($colors, primary) !important;
   }
 }

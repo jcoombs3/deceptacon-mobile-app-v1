@@ -1,8 +1,17 @@
 modal-change-profile-pic {
   $gridPicHeight: 70%;
+  @include modal-tertiary();
   
   .scroll-content {
     padding: 25px 0px;
+    
+    @include media($Mobile_sm...) { 
+      padding: 10px 0px;
+    }
+    
+    @include media($Mobile_lg...) { 
+      padding: 50px 0px;
+    }
   }
   
   .profile-main-container {
@@ -23,14 +32,28 @@ modal-change-profile-pic {
       width: 145px;
       @include center-align();
       position: absolute;
-      
-      @media only screen and (max-device-height: 650px) {
+    
+      @include media($Mobile_sm...) {
         width: 100px;
       }
-      
-      @media only screen and (min-device-height: 700px) {
-        width: 150px;
+    
+      @include media($Mobile_lg...) { 
+        width: 200px;
+        height: 200px;
+        max-width: 200px;
+        max-height: 200px;
       }
+    }
+  }
+  
+  .profile-pic {
+    border-color: color($colors, primary);
+    
+    @include media($Mobile_lg...) { 
+      width: 200px;
+      height: 200px;
+      max-width: 200px;
+      max-height: 200px;
     }
   }
   
@@ -47,7 +70,7 @@ modal-change-profile-pic {
     }
     
     [class*=" bg-"], [class^=bg-] {
-      border: 2px solid black;
+      border: 2px solid color($colors, primary);
     }
     
     ion-col {
@@ -71,7 +94,7 @@ modal-change-profile-pic {
     top: 0;
     right: 0;
     height: 100%;
-    border-left: 2px solid black;
+    border-left: 2px solid color($colors, primary);
     
     .bg-block {
       position: relative;
@@ -81,11 +104,11 @@ modal-change-profile-pic {
       border: none;
       display: block;
     } 
-      
-    @media only screen and (min-device-height: 700px) {
+    
+    @include media($Mobile_lg...) { 
       @include vertical-align();
       position: absolute;
-      border: 2px solid black;
+      border: 2px solid color($colors, primary);
       border-right: none;
     }
   }

@@ -42,9 +42,9 @@ page-login {
       max-height: 180px;
       @include vertical-align();
     }
-      
-    @media only screen and (max-device-height: 600px) {
-      width: 180px;
+    
+    @include media($Mobile_sm...) {
+      width: 210px;
       height: 180px;
       
       img {
@@ -80,6 +80,11 @@ page-login {
       margin-bottom: 25px;
       
       @media only screen and (max-device-height: 600px) {
+        
+      }
+    
+      @include media($Mobile_sm...) {
+        max-width: 210px;
         margin-bottom: 10px;
       }
     }
