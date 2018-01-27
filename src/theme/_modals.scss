@@ -1,0 +1,24 @@
+.modals-secondary {
+  
+  ion-header .toolbar-background {
+    background: color($colors, secondary);
+    color: color($colors, white);
+  }
+}
+
+@mixin modal-primary() {
+  
+  ion-header .toolbar-background, 
+  ion-footer .toolbar-background {
+    background: darken(color($login, primary), 15%);
+    color: color($colors, white);
+  }
+  
+  ion-content {
+    @include linear-gradient-bottom-diagonal-three(lighten(color($login, primary), 10%), lighten(color($login, primary), 5%), color($login, primary));
+  }
+  
+  .label, ion-input, a {
+    color: color($colors, white) !important;
+  }
+}
