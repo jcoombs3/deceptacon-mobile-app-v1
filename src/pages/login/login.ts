@@ -1,7 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { NavController, ModalController, 
          AlertController, LoadingController, 
-         ToastController, Events } from 'ionic-angular';
+         ToastController, Events, Slides } from 'ionic-angular';
 import { Storage } from '@ionic/storage';
 import { Socket } from 'ng-socket-io';
 
@@ -24,6 +24,7 @@ export class LoginPage {
     pin: [],
     username: ''
   };
+  @ViewChild(Slides) slides: Slides;
 
   constructor(
     public navCtrl: NavController, 
@@ -37,6 +38,10 @@ export class LoginPage {
     private socket: Socket,
     private events: Events
   ) { }
+  
+  ionViewDidLoad() {
+    this.slides.lockSwipes(true);   
+  }
   
   ionViewDidEnter() {
     this.storage.get('user').then(data => {
@@ -52,12 +57,16 @@ export class LoginPage {
     this.anim = false;
   }
   
-  displayLogin() {
-    this.showLogin = true;
+  next() {
+    this.slides.lockSwipes(false);
+    this.slides.slideTo(1);
+    this.slides.lockSwipes(true);
   }
   
-  cancel() {
-    this.showLogin = false;
+  prev() {
+    this.slides.lockSwipes(false);
+    this.slides.slideTo(0);
+    this.slides.lockSwipes(true);
   }
   
   createAccount() {

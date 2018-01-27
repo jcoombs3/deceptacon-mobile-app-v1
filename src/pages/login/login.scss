@@ -1,5 +1,4 @@
 page-login {
-  
   $loginBtnsAnim: 600ms; 
   $loginBtnsDelay: 400ms;
   
@@ -7,19 +6,11 @@ page-login {
     @include linear-gradient-bottom-diagonal-three(lighten(color($login, primary), 10%), lighten(color($login, primary), 5%), color($login, primary));
   }
   
-  .login-container {
-    padding: 14px 0px;
-    width: 100%;
+  .slide-zoom {
     height: 100%;
   }
   
   .login-logo-container {
-    height: 50%;
-    width: 100%;
-    position: relative;
-  }
-  
-  .login-buttons-container {
     height: 50%;
     width: 100%;
     position: relative;
@@ -53,9 +44,14 @@ page-login {
     }
   }
   
+  .login-main-container {
+    height: 50%;
+    width: 100%;
+    position: relative;
+  }
+  
   .login-buttons {
     text-align: center;
-    @include center-align();
     
     ion-row {
       position: relative;
@@ -90,8 +86,27 @@ page-login {
     }
   }
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  .login-buttons-container {
+    height: 50%;
+    width: 100%;
+    position: relative;
+  }
+  
   .create-account-terms {
     color: color($colors, white);
+    font-size: 14px;
   }
   
   .anim-active {

@@ -1,45 +1,41 @@
 <ion-content no-bounce [ngClass]="{'anim-active': anim}">
-  
-  <div class="login-container">
-    <div class="login-logo-container" *ngIf="!showLogin">
-      <div class="login-logo">
-        <img [src]="assets.assetsUrl + 'deceptacon-logo.png'" />
-      </div>
-    </div>
-    <div class="login-buttons-container" *ngIf="!showLogin">
-      <ion-grid class="login-buttons">
-        <ion-row>
-          <ion-col>
-            <button ion-button (click)="displayLogin()" class="ion-button-special">Sign In</button>
-          </ion-col>
-        </ion-row>
-        <ion-row>
-          <ion-col>
-            <button ion-button (click)="createAccount()">Create Account</button>
-          </ion-col>
-        </ion-row>
-        <ion-row>
-          <ion-col>
-            <p class="create-account-terms">
-              By attending Decepta Con 2018, <br/> you agree to our
-              <a (click)="openCodeConduct()" class="a-white">Code of Conduct</a>
-            </p>
-          </ion-col>
-        </ion-row>
-      </ion-grid>
-    </div>
-    
-    <div *ngIf="showLogin">
-      <div class="signin-form">
+    <ion-slides>
+      <ion-slide>
+        <div class="login-logo-container">
+          <div class="login-logo">
+            <img [src]="assets.assetsUrl + 'deceptacon-logo.png'" />
+          </div>
+        </div>
+        <div class="login-main-container">
+          <ion-grid class="login-buttons">
+            <ion-row>
+              <ion-col>
+                <button ion-button (click)="next()" class="ion-button-special">Sign In</button>
+              </ion-col>
+            </ion-row>
+            <ion-row>
+              <ion-col>
+                <button ion-button (click)="createAccount()">Create Account</button>
+              </ion-col>
+            </ion-row>
+            <ion-row>
+              <ion-col>
+                <p class="create-account-terms">
+                  By attending Decepta Con 2018, <br/> you agree to our
+                  <a (click)="openCodeConduct()" class="a-white">Code of Conduct</a>
+                </p>
+              </ion-col>
+            </ion-row>
+          </ion-grid>
+        </div>
+      </ion-slide>
+      <ion-slide>
         <ion-item>
           <ion-label color="primary" stacked>Username</ion-label>
           <ion-input type="text" [(ngModel)]="villager.username" required autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"></ion-input>
         </ion-item>
         <pin-pad (validated)="retrievePIN($event)"></pin-pad>
-        <div class="cancel-container" style="text-align:right">
-          <button ion-button (click)="cancel()">Cancel</button>
-        </div>
-      </div>
-    </div>
-  </div>
+        <button ion-button (click)="prev()">Cancel</button>
+      </ion-slide>
+    </ion-slides>
 </ion-content>
