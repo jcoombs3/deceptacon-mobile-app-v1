@@ -19,6 +19,11 @@ modal-create-account {
   
   .profile-pic {
     margin: 0 auto;
+    
+    @include media($Mobile_sm...) { 
+      width: 125px;
+      height: 125px;
+    }
   }
   
   // ------------- //
@@ -44,6 +49,11 @@ modal-create-account {
     
     .checkmark-dark {
       display: none;
+    }
+    
+    @include media($Mobile_sm...) { 
+      width: 125px;
+      height: 125px;
     }
     
     &.bg-cyan, &.bg-yellow, 
