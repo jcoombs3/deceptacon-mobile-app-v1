@@ -1,0 +1,19 @@
+modal-code-conduct {
+  @include modal-tertiary();
+  
+  .conduct-header {
+    background: lighten(color($colors, primary), 35%);
+    border-top: 2px solid color($colors, primary);
+    border-bottom: 2px solid color($colors, primary);
+    margin: 0px -16px;
+    text-align: center;
+     
+    img {
+      max-width: 70%;
+    }
+  }
+  
+  p {
+    margin: 16px 0px;
+  }
+}

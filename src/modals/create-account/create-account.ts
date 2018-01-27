@@ -5,6 +5,7 @@ import { NgForm } from '@angular/forms';
 // MODALS
 import { ChangeProfilePicModal } from '../change-profile-pic/change-profile-pic';
 import { CreatePinModal } from '../create-pin/create-pin';
+import { CodeConductModal } from '../code-conduct/code-conduct';
 
 // PROVIDERS
 import { DeceptaconService } from '../../providers/deceptacon-service/deceptacon-service';
@@ -133,14 +134,8 @@ export class CreateAccountModal {
     createPinModal.present();
   }
   
-  
-
-  
-  // TODO: openCodeConduct
   openCodeConduct() {
-    console.log('++ openCodeConduct');
-//    const conductModal = this.modalCtrl.create(ConductModal);
-//    conductModal.present();
+    const codeConductModal = this.modalCtrl.create(CodeConductModal);
+    codeConductModal.present();
   }
-  
 }

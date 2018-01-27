@@ -7,6 +7,7 @@ import { Socket } from 'ng-socket-io';
 
 // MODALS
 import { CreateAccountModal } from '../../modals/create-account/create-account';
+import { CodeConductModal } from '../../modals/code-conduct/code-conduct';
 
 // PROVIDERS
 import { DeceptaconService } from '../../providers/deceptacon-service/deceptacon-service';
@@ -129,6 +130,7 @@ export class LoginPage {
   }
   
   openCodeConduct() {
-    console.log('++ openCodeConduct');
+    const codeConductModal = this.modalCtrl.create(CodeConductModal);
+    codeConductModal.present();
   }
 }
