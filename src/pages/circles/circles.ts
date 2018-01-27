@@ -152,6 +152,10 @@ export class CirclesPage {
           event: `villager-joined-${data._id}`,
           data: this.villager
         });
+        this.socket.emit('com.deceptacon.event', {
+          event: `circle-updated-${data._id}`,
+          data: data
+        });
         this.goToCircle(data);
     }, error => {
       let toast = this.toastCtrl.create({
@@ -167,6 +171,8 @@ export class CirclesPage {
   }
   
   updateCircle(iCircle: any) {
+    console.log('++ updateCircle');
+    console.log(iCircle);
     for (let i = 0; i < this.circles.length; i++) {
       if (this.circles[i]._id === iCircle._id) {
         this.circles[i] = iCircle;
