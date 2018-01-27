@@ -36,7 +36,7 @@ $Mobile_sm: "screen", "<=320px", "portrait";
   $Mobile_md
 */
 
-$Mobile_md: "screen", "<=375px", "portrait";
+$Mobile_md: "screen", "<=375px", ">320px", "portrait";
 
 /* --------------------------------------- */
 // For Large Phones -- use $Mobile_lg
@@ -54,7 +54,7 @@ $Mobile_md: "screen", "<=375px", "portrait";
   $Mobile_lg
 */
 
-$Mobile_lg: "screen", "<=600px", "portrait";
+$Mobile_lg: "screen", ">375px", "portrait";
 
 /* --------------------------------------- */
 // For Small Tablets -- use $Tablet_sm
