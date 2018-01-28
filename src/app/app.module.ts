@@ -22,6 +22,7 @@ import { CreateAccountModal } from '../modals/create-account/create-account';
 import { ChangeProfilePicModal } from '../modals/change-profile-pic/change-profile-pic';
 import { CreatePinModal } from '../modals/create-pin/create-pin';
 import { GameSurveyModal } from '../modals/game-survey/game-survey';
+import { ModSurveyModal } from '../modals/mod-survey/mod-survey';
 import { CodeConductModal } from '../modals/code-conduct/code-conduct';
 
 // COMPONENTS
@@ -55,6 +56,7 @@ import { ScreenOrientation } from '@ionic-native/screen-orientation';
     CreatePinModal,
     GameSurveyModal,
     CodeConductModal,
+    ModSurveyModal,
     
     DeceptaconFooter,
     ProfilePic,
@@ -83,6 +85,7 @@ import { ScreenOrientation } from '@ionic-native/screen-orientation';
     CreatePinModal,
     GameSurveyModal,
     CodeConductModal,
+    ModSurveyModal,
     
     DeceptaconFooter,
     ProfilePic,

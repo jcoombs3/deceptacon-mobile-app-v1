@@ -10,20 +10,12 @@
   <p>Your game has ended! Please fill out information regarding your game play for records. </p>
   <div>
     <ion-item>
-      <ion-label>Alignment</ion-label>
-      <ion-select [(ngModel)]="alignment">
+      <ion-label>Who Won?</ion-label>
+      <ion-select [(ngModel)]="winner">
         <ion-option value="good">Good</ion-option>
         <ion-option value="evil">Evil</ion-option>
         <ion-option value="neutral">Neutral</ion-option>
         <ion-option value="other">Other</ion-option>
-      </ion-select>
-    </ion-item>
-    <ion-item>
-      <ion-label>Role</ion-label>
-      <ion-select [(ngModel)]="role">
-        <ion-option value="villager">Villager</ion-option>
-        <ion-option value="seer">Seer</ion-option>
-        <ion-option value="werewolf">Werewolf</ion-option>
       </ion-select>
     </ion-item>
   </div>

@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { NavController, NavParams, Events, AlertController } from 'ionic-angular';
 import { Storage } from '@ionic/storage';
 import { Socket } from 'ng-socket-io';
+import { NgForm } from '@angular/forms';
 
 // PAGES
 import { ProfilePage } from '../profile/profile';
@@ -15,9 +16,9 @@ import { DeceptaconService } from '../../providers/deceptacon-service/deceptacon
 })
 export class GamePage {
   circle: any = {};
+  seats: any;
   villager: any = {};
   otherVillagers: any = [];
-  isConstructed: boolean = false;
   isMod: boolean = false;
   inGame: boolean = false;
   
@@ -30,6 +31,10 @@ export class GamePage {
     private socket: Socket,
     private events: Events
   ) { 
+    this.circle = this.navParams.data;
+  }
+  
+  ionViewWillEnter() {
     this.storage.get('user').then(data => {
       if (data) {
         this.villager = data;
@@ -37,18 +42,8 @@ export class GamePage {
       }
     });
     this.unsubscribeToEvents();
-    this.circle = this.navParams.data;
     this.getGame();
     this.setEventListeners();
-    this.isConstructed = true;
-  }
-  
-  ionViewWillEnter() {
-    this.unsubscribeToEvents();
-    if (this.isConstructed) {
-      this.getGame();
-      this.setEventListeners();
-    }
   }
   
   ionViewWillLeave() {
@@ -65,6 +60,8 @@ export class GamePage {
       }
     });
     this.socket.on(`circle-updated-${this.circle._id}`, function(circle) {
+      console.log('++ socket: circle updated');
+      console.log(circle);
       iThis.circle = circle;
       if (iThis.circle.game) {
         iThis.checkIfInGame();
@@ -84,6 +81,7 @@ export class GamePage {
   }
   
   getGame() {
+    console.log('++ getGame');
     if (this.circle.game) {
       this.deceptaconService.getGame(this.circle.game._id).subscribe(data => {
         this.circle.game = data;
@@ -107,43 +105,53 @@ export class GamePage {
   }
   
   checkIfInGame() {
-    let villagerArray = this.otherVillagers;
+    let villagerArray = [];//this.otherVillagers;
     let villagers = this.circle.game.villagers;
-    if (villagerArray.length !== villagers.length) {
-      villagerArray = [];
+    //if (villagerArray.length !== villagers.length) {
+      //villagerArray = [];
       for (let i = 0; i < villagers.length; i++) {
         if (this.villager._id === villagers[i]._id) {
           this.inGame = true;
         } else {
           villagerArray.push(villagers[i]);
-          
         }
       }
-    }
+    //}
     this.otherVillagers = villagerArray;
   }
   
+  onSubmit(f: NgForm) {
+    if (f.valid) {
+      this.seats = f.value.seats;
+      this.createGame();
+    }
+  }
+  
   createGame() {
-    let arr = {
-      villagerId: this.villager._id,
-      circleId: this.circle._id,
-      game: {
-        seats: 14
-      }
-    };
-    this.deceptaconService.createGame(arr)
-      .subscribe(data => {
-      this.circle = data;
-      this.circle.moderator = this.villager;
-      this.circle.game.moderator = this.villager;
-      this.events.publish('user:creategame');
-      this.socket.emit('com.deceptacon.event', {
-        event: `circle-updated-${data._id}`,
-        data: data
+    if (this.seats) {
+      let arr = {
+        villagerId: this.villager._id,
+        circleId: this.circle._id,
+        game: {
+          seats: this.seats
+        }
+      };
+      this.deceptaconService.createGame(arr)
+        .subscribe(data => {
+        this.circle = data;
+        this.circle.moderator = this.villager;
+        this.circle.game.moderator = this.villager;
+        this.events.publish('user:creategame');
+        this.socket.emit('com.deceptacon.event', {
+          event: `circle-updated-${data._id}`,
+          data: data
+        });
+      }, error => {
+        console.log('++ error');
       });
-    }, error => {
-      console.log('++ error');
-    });
+    } else {
+      console.log('++ no seats');
+    }
   }
   
   addPlaceholder() {
@@ -222,8 +230,6 @@ export class GamePage {
     this.deceptaconService.removeVillager(arr)
       .subscribe(data => {
         this.circle = data;
-        this.circle.moderator = this.villager;
-        this.circle.game.moderator = this.villager;
         this.checkIfInGame();
         this.socket.emit('com.deceptacon.event', {
           event: `circle-updated-${data._id}`,
@@ -287,6 +293,7 @@ export class GamePage {
       };
       this.deceptaconService.endGame(arr)
         .subscribe(data => {
+        this.events.publish('user:endedgame', data._id)
         this.socket.emit('com.deceptacon.event', {
           event: `game-ended-${data._id}`,
           data: this.circle

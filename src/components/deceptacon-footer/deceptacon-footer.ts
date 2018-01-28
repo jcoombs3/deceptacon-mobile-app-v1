@@ -10,6 +10,7 @@ import { GamePage } from '../../pages/game/game';
 
 // PAGES
 import { GameSurveyModal } from '../../modals/game-survey/game-survey';
+import { ModSurveyModal } from '../../modals/mod-survey/mod-survey';
 
 // PROVIDERS
 import { DeceptaconService } from '../../providers/deceptacon-service/deceptacon-service';
@@ -48,6 +49,11 @@ export class DeceptaconFooter {
     this.events.subscribe('user:creategame', () => {
       console.log('event: user:creategame', 'DeceptaconFooter');
       this.getUser();
+    });
+    this.events.subscribe('user:endedgame', (gameId) => {
+      console.log('event: user:endedgame', 'DeceptaconFooter');
+      this.goToHome();
+      this.goToModSurvey();
     });
     this.events.subscribe('user:joinedgame', (gameId) => {
       console.log('event: user:joinedgame', 'DeceptaconFooter');
@@ -162,18 +168,30 @@ export class DeceptaconFooter {
       if (this.user._id !== this.user.currentGame.moderator) {
         this.goToSurvey();
       } else {
-        this.getUser();
+        this.goToModSurvey();
       }
     } else if (!isActive && this.user.currentGame) {
       let status = this.user.currentGame.game.status;
       if (status.ended || status.cancelled) {
         if (this.user._id !== this.user.currentGame.moderator) {
           this.goToSurvey();
+        } else {
+          this.goToModSurvey();
         }
       } else if (status.active) {
         this.goToCurrentGame();
       }
     }
+  }
+  
+  goToModSurvey() {
+    const modSurveyModal = this.modalCtrl.create(ModSurveyModal, this.user);
+    modSurveyModal.onWillDismiss(data => {
+      if (data) {
+        console.log('++ modSurveyModal.onWillDismiss');
+      }
+    });
+    modSurveyModal.present();
   }
   
   goToSurvey() {

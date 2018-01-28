@@ -89,14 +89,12 @@ export class DeceptaconService {
       .catch(this.handleError);
   }
   
-  // TODO: verify if Moderator
   addPlaceholder(arr: any) {
     return this.http.post(this.deceptaconUrl + '/game/placeholder/', arr)
       .map(res => res.json())
       .catch(this.handleError);
   }
   
-  // TODO: verify if Moderator
   removePlaceholder(arr: any) {
     return this.http.post(this.deceptaconUrl + '/game/remove/placeholder', arr)
       .map(res => res.json())
@@ -123,6 +121,12 @@ export class DeceptaconService {
   
   publishGameDetails(arr: any) {
     return this.http.post(this.deceptaconUrl + '/game/publish', arr)
+      .map(res => res.json())
+      .catch(this.handleError);
+  }
+  
+  publishWinnerDetails(arr: any) {
+    return this.http.post(this.deceptaconUrl + '/game/winner', arr)
       .map(res => res.json())
       .catch(this.handleError);
   }

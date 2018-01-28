@@ -46,15 +46,15 @@
       <ul *ngIf="circle.game.villagers.length + circle.game.placeholders.length > 0">
         <li *ngIf="inGame && !isMod">
           <villager-detail [villager]="villager" (click)="goToProfile(villager)"></villager-detail>
-          <button class="leave" (click)="leaveGame(villager)"></button>
+          <button class="leave" (click)="leaveGame(villager)">Leave</button>
         </li>
         <li *ngFor="let aVillager of otherVillagers">
           <villager-detail [villager]="aVillager" (click)="goToProfile(aVillager)"></villager-detail>
-          <button class="kick" *ngIf="isMod && !circle.game.status.active && !circle.game.status.end && !circle.game.status.cancelled" (click)="kickVillager(aVillager)"></button>
+          <button class="kick" *ngIf="isMod && !circle.game.status.active && !circle.game.status.end && !circle.game.status.cancelled" (click)="kickVillager(aVillager)">Kick</button>
         </li>
         <li *ngFor="let placeholder of circle.game.placeholders">
           <placeholder-detail></placeholder-detail>
-          <button class="kick" *ngIf="isMod && !circle.game.status.active && !circle.game.status.end && !circle.game.status.cancelled" (click)="removePlaceholder()"></button>
+          <button class="kick" *ngIf="isMod && !circle.game.status.active && !circle.game.status.end && !circle.game.status.cancelled" (click)="removePlaceholder()">Kick</button>
         </li>
       </ul>
       <div *ngIf="circle.game.villagers.length + circle.game.placeholders.length === 0">
@@ -63,11 +63,17 @@
     </div>
   </div>
   <div *ngIf="!circle.game && isMod">
-    <span>TODO: Add input to add # of seats</span>
-    <button ion-button (click)="createGame()" 
-      *ngIf="!circle.game">Create Game</button>
-<!--
+    <form #f="ngForm" (ngSubmit)="onSubmit(f)" novalidate *ngIf="!circle.game">
+      <ion-item>
+        <ion-label stacked color="primary">Seats</ion-label>
+        <ion-input type="number" name="seats" ngModel #seats="ngModel" required 
+                   autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false">
+        </ion-input>
+      </ion-item>
+      <button ion-button>Create Game</button>
+    </form>
     
+<!--
     <button ion-button *ngIf="circle.game.villagers.length > 0 && isMod && circle.game.status.active" (click)="cancelGame()">Cancel</button>
 -->
   </div>

@@ -5,14 +5,13 @@ import { ViewController, NavParams, LoadingController, Events } from 'ionic-angu
 import { DeceptaconService } from '../../providers/deceptacon-service/deceptacon-service';
 
 @Component({
-  selector: 'modal-game-survey',
-  templateUrl: 'game-survey.html',
+  selector: 'modal-mod-survey',
+  templateUrl: 'mod-survey.html',
   providers: [ DeceptaconService ]
 })
-export class GameSurveyModal {
+export class ModSurveyModal {
   villager: any;
-  alignment: any;
-  role: any;
+  winner: any;
   
   constructor(
     public viewCtrl: ViewController,
@@ -33,14 +32,13 @@ export class GameSurveyModal {
       let arr = {
         villagerId: this.villager._id,
         gameId: this.villager.currentGame.game._id,
-        alignment: this.alignment,
-        role: this.role
+        winner: this.winner
       };
       let loading = this.loadingCtrl.create({
         content: 'Saving...'
       });
       loading.present();
-      this.deceptaconService.publishGameDetails(arr)
+      this.deceptaconService.publishWinnerDetails(arr)
         .subscribe(data => {
           console.log('++ success');
           loading.dismiss();
@@ -54,11 +52,8 @@ export class GameSurveyModal {
   }
   
   verify() {
-    if (!this.alignment) {
-      console.log('++ no alignment');
-      return false;
-    } else if (!this.role) {
-      console.log('++ no role');
+    if (!this.winner) {
+      console.log('++ no winner');
       return false;
     }
     return true;
