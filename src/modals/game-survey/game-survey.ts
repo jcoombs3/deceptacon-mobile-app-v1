@@ -2,6 +2,8 @@ import { Component, ViewChild } from '@angular/core';
 import { ViewController, NavParams, LoadingController, 
          Events, AlertController, Slides } from 'ionic-angular';
 
+import { StatusBar } from '@ionic-native/status-bar';
+
 // PROVIDERS
 import { DeceptaconService } from '../../providers/deceptacon-service/deceptacon-service';
 
@@ -23,11 +25,24 @@ export class GameSurveyModal {
     public viewCtrl: ViewController,
     public loadingCtrl: LoadingController,
     public alertCtrl: AlertController,
+    public statusBar: StatusBar,
     private navParams: NavParams,
     private events: Events,
     private deceptaconService: DeceptaconService
   ) { 
     this.villager = this.navParams.data;  
+  }
+  
+  ionViewWillEnter() {
+    if (this.platform.is('cordova')) {
+      this.statusBar.styleDefault(); 
+    }
+  }
+  
+  ionViewWillLeave() {
+    if (this.platform.is('cordova')) {
+      this.statusBar.styleLightContent(); 
+    }
   }
   
   ionViewDidLoad() {
