@@ -1,3 +1,106 @@
 modal-game-survey {
+  color: color($colors, white);
+  @include modal-tertiary();
   
+  ion-header button {
+    opacity: 0;
+    pointer-events: none;
+    
+    &.active {
+      opacity: 1;
+      pointer-events: auto;
+    }
+  }
+  
+  .slide-zoom {
+    height: 100%;
+  }
+  
+  .alignment-section {
+    width: 100%;
+    height: 33.333%;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+  } 
+  
+  .alignment-divider {
+    display: table;
+    width: 100%;
+  }
+  
+  .alignment-good {
+    @include linear-gradient-bottom-diagonal-three(lighten(color($werewolf, good), 20%), lighten(color($werewolf, good), 10%), color($werewolf, good));
+  }
+  
+  .alignment-evil {
+    @include linear-gradient-bottom-diagonal-three(lighten(color($werewolf, evil), 20%), lighten(color($werewolf, evil), 10%), color($werewolf, evil));
+  }
+  
+  .alignment-neutral {
+    @include linear-gradient-bottom-diagonal-three(lighten(color($werewolf, neutral), 20%), lighten(color($werewolf, neutral), 10%), color($werewolf, neutral));
+  }
+  
+  .alignment-other {
+    @include linear-gradient-bottom-diagonal-three(lighten(color($werewolf, other), 20%), lighten(color($werewolf, other), 10%), color($werewolf, other));
+  }
+  
+  .alignment-slide {
+    .alignment-good, .alignment-evil {
+      padding-bottom: 10px;
+      border-bottom: 2px solid color($colors, white);
+    }
+    
+    .alignment-neutral {
+      border-right: 1px solid color($colors, white);
+      display: table-cell;
+      width: 50%;
+      vertical-align: middle;
+    }
+    
+    .alignment-other {
+      border-left: 1px solid color($colors, white);
+      display: table-cell;
+      width: 50%;
+      vertical-align: middle;
+    }
+  }
+  
+  .role-slide {
+    height: 100%;
+    overflow-y: auto;
+    
+    .item, .label {
+      color: color($colors, white);
+    }
+    
+    ion-list {
+      margin: 0;
+    }
+    
+    .role-name {
+      padding: 16px;
+      text-align: center;
+      text-transform: capitalize;
+    }
+    
+    .item-block .item-inner {
+      border-bottom: 2px solid color($colors, white);
+    }
+    
+    ion-item:last-child .item-inner {
+      border-bottom: 2px solid color($colors, white) !important;
+    }
+    
+    ion-item {
+      background: transparent;
+      @include transition(background 200ms ease);
+      
+      &:active {
+        background: rgba(color($colors, white), 0.25);
+      }
+    }
+  }
 }

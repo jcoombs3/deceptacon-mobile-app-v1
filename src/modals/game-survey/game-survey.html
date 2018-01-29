@@ -1,40 +1,35 @@
 <ion-header>
   <ion-navbar>
+    <ion-buttons start>
+      <button ion-button icon-only (click)="slideToAlignment()" [ngClass]="{'active': slides.isEnd()}">
+        <ion-icon name="arrow-round-back"></ion-icon>
+      </button>
+    </ion-buttons>
     <ion-title>
       Game Survey
     </ion-title>
   </ion-navbar>
 </ion-header>
 
-<ion-content padding>
-  <p>Your game has ended! Please fill out information regarding your game play for records. </p>
-  <div>
-    <ion-item>
-      <ion-label>Alignment</ion-label>
-      <ion-select [(ngModel)]="alignment">
-        <ion-option value="good">Good</ion-option>
-        <ion-option value="evil">Evil</ion-option>
-        <ion-option value="neutral">Neutral</ion-option>
-        <ion-option value="other">Other</ion-option>
-      </ion-select>
-    </ion-item>
-    <ion-item>
-      <ion-label>Role</ion-label>
-      <ion-select [(ngModel)]="role">
-        <ion-option value="villager">Villager</ion-option>
-        <ion-option value="seer">Seer</ion-option>
-        <ion-option value="werewolf">Werewolf</ion-option>
-      </ion-select>
-    </ion-item>
-  </div>
+<ion-content no-bounce>
+  <ion-slides>
+    <ion-slide class="alignment-slide">
+      <div class="alignment-section alignment-good" (click)="chooseAlignment('good')">Good</div>
+      <div class="alignment-section alignment-evil" (click)="chooseAlignment('evil')">Evil</div>
+      <div class="alignment-section alignment-divider">
+        <div class="alignment-cell alignment-neutral" (click)="chooseAlignment('neutral')">Neutral</div>
+        <div class="alignment-cell alignment-other" (click)="chooseAlignment('other')">Other</div>
+      </div>
+    </ion-slide>
+    <ion-slide>
+      <div class="role-slide alignment-{{alignment}}">
+        <ion-list>
+          <ion-item *ngFor="let role of roles">
+            <div class="role-name" (click)="chooseRole(role)">{{role}}</div>
+          </ion-item>
+        </ion-list>
+      </div>
+    </ion-slide>
+  </ion-slides>
+    
 </ion-content>
-
-<ion-footer>
-  <ion-navbar>
-    <ion-buttons end>
-      <button ion-button (click)="publishRole()">
-        Publish
-      </button>
-    </ion-buttons>
-  </ion-navbar>
-</ion-footer>

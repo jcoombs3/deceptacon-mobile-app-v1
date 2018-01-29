@@ -61,6 +61,7 @@ export class DeceptaconFooter {
     });
     this.events.subscribe('user:published', (user) => {
       console.log('event: user:published', 'DeceptaconFooter');
+      this.goToHome();
       this.getUser();
     });
     this.events.subscribe('user:loggedout', (user) => {

@@ -10,8 +10,8 @@ import { DeceptaconService } from '../../providers/deceptacon-service/deceptacon
   providers: [ DeceptaconService ]
 })
 export class ModSurveyModal {
+  alignment: any;
   villager: any;
-  winner: any;
   
   constructor(
     public viewCtrl: ViewController,
