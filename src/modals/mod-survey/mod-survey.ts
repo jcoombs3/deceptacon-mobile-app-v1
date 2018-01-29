@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { ViewController, NavParams, LoadingController, Events } from 'ionic-angular';
+import { ViewController, NavParams, LoadingController, Events, AlertController } from 'ionic-angular';
 
 // PROVIDERS
 import { DeceptaconService } from '../../providers/deceptacon-service/deceptacon-service';
@@ -16,6 +16,7 @@ export class ModSurveyModal {
   constructor(
     public viewCtrl: ViewController,
     public loadingCtrl: LoadingController,
+    public alertCtrl: AlertController,
     private navParams: NavParams,
     private events: Events,
     private deceptaconService: DeceptaconService
@@ -23,39 +24,58 @@ export class ModSurveyModal {
     this.villager = this.navParams.data;  
   }
   
+  chooseAlignment(alignment: string, extraTxt: string) {
+    this.alignment = alignment;
+    this.showAlert(extraTxt);
+    console.log('++ chooseAlignment', alignment); 
+  }
+  
+  showAlert(extraTxt: string) {
+    let alignmentTxt = new String(this.alignment);
+    alignmentTxt = alignmentTxt.charAt(0).toUpperCase() + alignmentTxt.slice(1);
+    if (extraTxt) {
+      alignmentTxt = `${extraTxt} ${alignmentTxt}`;
+    }
+    let alert = this.alertCtrl.create({
+      title: `Confirm ${alignmentTxt} won?`,
+      buttons: [
+        {
+          text: 'No',
+          role: 'cancel',
+          handler: () => {}
+        },
+        {
+          text: 'Yes',
+          handler: () => {
+            this.publish();
+          }
+        }
+      ]
+    });
+    alert.present();
+  }
+  
+  publish() {
+    let arr = {
+      villagerId: this.villager._id,
+      gameId: this.villager.currentGame.game._id,
+      winner: this.alignment
+    };
+    let loading = this.loadingCtrl.create({
+      content: 'Saving...'
+    });
+    loading.present();
+    this.deceptaconService.publishWinnerDetails(arr)
+      .subscribe(data => {
+        loading.dismiss();
+        this.events.publish('user:published');
+        this.closeModal();
+    }, error => {
+      loading.dismiss();
+    });
+  }
+  
   closeModal() {
     this.viewCtrl.dismiss();
-  }
-  
-  publishRole() {
-    if (this.verify()) {
-      let arr = {
-        villagerId: this.villager._id,
-        gameId: this.villager.currentGame.game._id,
-        winner: this.winner
-      };
-      let loading = this.loadingCtrl.create({
-        content: 'Saving...'
-      });
-      loading.present();
-      this.deceptaconService.publishWinnerDetails(arr)
-        .subscribe(data => {
-          console.log('++ success');
-          loading.dismiss();
-          this.events.publish('user:published');
-          this.closeModal();
-      }, error => {
-        console.log('++ error');
-        loading.dismiss();
-      });
-    }
-  }
-  
-  verify() {
-    if (!this.winner) {
-      console.log('++ no winner');
-      return false;
-    }
-    return true;
   }
 }

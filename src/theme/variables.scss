@@ -54,12 +54,24 @@ $profile: (
   white: #FFFFFF,
   
   
+  
+  
+  
+  
+  
   darkblue: color($colors, primary),
   tan: color($colors, secondary),
   orange: #FE5D26,
   blue: #507DBC,
   black: #262322,
   gray: #91818A,
+);
+
+$werewolf: (
+  good: #2A4E71,
+  evil: #9A363E,
+  neutral: #915233,
+  other: #6E444E
 );
 
 $bg-yellow: color($profile, yellow);

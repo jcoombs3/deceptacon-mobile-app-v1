@@ -1,32 +1,16 @@
 <ion-header>
   <ion-navbar>
     <ion-title>
-      Game Survey
+      Who Won?
     </ion-title>
   </ion-navbar>
 </ion-header>
 
-<ion-content padding>
-  <p>Your game has ended! Please fill out information regarding your game play for records. </p>
-  <div>
-    <ion-item>
-      <ion-label>Who Won?</ion-label>
-      <ion-select [(ngModel)]="winner">
-        <ion-option value="good">Good</ion-option>
-        <ion-option value="evil">Evil</ion-option>
-        <ion-option value="neutral">Neutral</ion-option>
-        <ion-option value="other">Other</ion-option>
-      </ion-select>
-    </ion-item>
+<ion-content no-bounce>
+  <div class="alignment-section alignment-good" (click)="chooseAlignment('good')">Good</div>
+  <div class="alignment-section alignment-evil" (click)="chooseAlignment('evil')">Evil</div>
+  <div class="alignment-section alignment-divider">
+    <div class="alignment-cell alignment-neutral" (click)="chooseAlignment('neutral', 'a')">Neutral</div>
+    <div class="alignment-cell alignment-other" (click)="chooseAlignment('other', 'an')">Other</div>
   </div>
 </ion-content>
-
-<ion-footer>
-  <ion-navbar>
-    <ion-buttons end>
-      <button ion-button (click)="publishRole()">
-        Publish
-      </button>
-    </ion-buttons>
-  </ion-navbar>
-</ion-footer>
