@@ -1,0 +1,61 @@
+role-list {
+  
+  .role-name {
+    padding: 16px;
+    text-align: center;
+    text-transform: capitalize;
+  }
+  
+  .role-list {
+    height: 100%;
+    
+    ion-list .item-block .item-inner {
+      border-bottom: 2px solid color($colors, white);
+    }
+    
+    ion-item:last-child .item-inner {
+      border-bottom: 2px solid color($colors, white) !important;
+    }
+
+    .item, .label {
+      color: color($colors, white);
+    }
+
+    ion-list {
+      margin: 0;
+    }
+    
+    ion-item {
+      background: transparent;
+      @include transition(background 200ms ease);
+
+      &:active {
+        background: rgba(color($colors, white), 0.25);
+      }
+    }
+  }
+  
+  .alignment-good {
+    @include linear-gradient-bottom-diagonal-three(lighten(color($werewolf, good), 20%), lighten(color($werewolf, good), 10%), color($werewolf, good));
+  }
+  
+  .alignment-evil {
+    @include linear-gradient-bottom-diagonal-three(lighten(color($werewolf, evil), 20%), lighten(color($werewolf, evil), 10%), color($werewolf, evil));
+  }
+  
+  .alignment-vampire {
+    @include linear-gradient-bottom-diagonal-three(lighten(color($werewolf, vampire), 20%), lighten(color($werewolf, vampire), 10%), color($werewolf, vampire));
+  }
+  
+  .alignment-cult {
+    @include linear-gradient-bottom-diagonal-three(lighten(color($werewolf, cult), 20%), lighten(color($werewolf, cult), 10%), color($werewolf, cult));
+  }
+  
+  .alignment-neutral {
+    @include linear-gradient-bottom-diagonal-three(lighten(color($werewolf, neutral), 20%), lighten(color($werewolf, neutral), 10%), color($werewolf, neutral));
+  }
+  
+  .alignment-other {
+    @include linear-gradient-bottom-diagonal-three(lighten(color($werewolf, other), 20%), lighten(color($werewolf, other), 10%), color($werewolf, other));
+  }
+}  

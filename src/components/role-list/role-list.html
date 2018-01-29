@@ -1,0 +1,11 @@
+<div class="role-list" 
+     [ngClass]="{'alignment-good': alignment.name === 'Good',
+                 'alignment-evil': alignment.name === 'Evil',
+                 'alignment-vampire': alignment.name === 'Vampire',
+                 'alignment-cult': alignment.name === 'Cult',
+                 'alignment-neutral': alignment.name === 'Neutral',
+                 'alignment-other': alignment.name === 'Other'}">
+  <ion-list>
+    <ion-item *ngFor="let role of roles" (click)="chooseRole(role)"><div class="role-name">{{role.name}}</div></ion-item>
+  </ion-list>
+</div>

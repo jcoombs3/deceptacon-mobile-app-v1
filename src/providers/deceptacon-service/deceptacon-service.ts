@@ -132,6 +132,22 @@ export class DeceptaconService {
   }
   
   // ---------------------- //
+  
+  // ALIGNMENTS / ROLES
+
+  getAlignments() {
+    return this.http.get(this.deceptaconUrl + '/alignment')
+      .map(res => res.json())
+      .catch(this.handleError);
+  }
+
+  getRoles(id: String) {
+    return this.http.get(this.deceptaconUrl + '/roles/' + id)
+      .map(res => res.json())
+      .catch(this.handleError);
+  }
+  
+  // ---------------------- //
 
   handleError(error) {
     //console.error(error);

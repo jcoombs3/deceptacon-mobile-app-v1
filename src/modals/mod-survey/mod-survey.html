@@ -7,10 +7,7 @@
 </ion-header>
 
 <ion-content no-bounce>
-  <div class="alignment-section alignment-good" (click)="chooseAlignment('good')">Good</div>
-  <div class="alignment-section alignment-evil" (click)="chooseAlignment('evil')">Evil</div>
-  <div class="alignment-section alignment-divider">
-    <div class="alignment-cell alignment-neutral" (click)="chooseAlignment('neutral', 'a')">Neutral</div>
-    <div class="alignment-cell alignment-other" (click)="chooseAlignment('other', 'an')">Other</div>
+  <div class="alignment-container">
+    <alignment-chart (selected)="publishWinner($event)"></alignment-chart>
   </div>
 </ion-content>

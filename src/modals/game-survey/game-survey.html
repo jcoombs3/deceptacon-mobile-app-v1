@@ -14,22 +14,11 @@
 <ion-content no-bounce>
   <ion-slides>
     <ion-slide class="alignment-slide">
-      <div class="alignment-section alignment-good" (click)="chooseAlignment('good')">Good</div>
-      <div class="alignment-section alignment-evil" (click)="chooseAlignment('evil')">Evil</div>
-      <div class="alignment-section alignment-divider">
-        <div class="alignment-cell alignment-neutral" (click)="chooseAlignment('neutral')">Neutral</div>
-        <div class="alignment-cell alignment-other" (click)="chooseAlignment('other')">Other</div>
-      </div>
+      <alignment-chart (selected)="chooseAlignment($event)"></alignment-chart>
     </ion-slide>
     <ion-slide>
-      <div class="role-slide alignment-{{alignment}}">
-        <ion-list>
-          <ion-item *ngFor="let role of roles">
-            <div class="role-name" (click)="chooseRole(role)">{{role}}</div>
-          </ion-item>
-        </ion-list>
-      </div>
+      <role-list [roles]="roles" [alignment]="alignment" 
+                 (selected)="chooseRole($event)" *ngIf="roles"></role-list>
     </ion-slide>
   </ion-slides>
-    
 </ion-content>

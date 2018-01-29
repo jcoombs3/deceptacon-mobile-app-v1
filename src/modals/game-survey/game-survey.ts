@@ -1,5 +1,5 @@
 import { Component, ViewChild } from '@angular/core';
-import { ViewController, NavParams, LoadingController, 
+import { Platform, ViewController, NavParams, LoadingController, 
          Events, AlertController, Slides } from 'ionic-angular';
 
 import { StatusBar } from '@ionic-native/status-bar';
@@ -14,23 +14,27 @@ import { DeceptaconService } from '../../providers/deceptacon-service/deceptacon
 })
 export class GameSurveyModal {
   villager: any;
+  alignments: any = null;
+  roles: any = null;
   alignment: any;
   role: any;
-  roles: any[] = [];
-  goodRoles: any[] = ["villager", "seer", "bodyguard", "witch", "thing", "hunter", "apprentice seer", "aura seer", "beholder", "diseased", "the count", "cupid", "ghost", "insomniac", "lycan", "matyr", "mason", "mayor", "old hag", "old man", "private investigator", "pacifist", "priest", "leprechaun", "prince", "spellcaster", "tough guy", "troublemaker", "cursed"].sort();
-  evilRoles: any[] = ["werewolf", "wolf cub", "dire wolf", "big bad wolf", "sorcerer", "minion"].sort();
   @ViewChild(Slides) slides: Slides;
   
   constructor(
+    public platform: Platform,
+    public statusBar: StatusBar,
     public viewCtrl: ViewController,
     public loadingCtrl: LoadingController,
     public alertCtrl: AlertController,
-    public statusBar: StatusBar,
     private navParams: NavParams,
     private events: Events,
     private deceptaconService: DeceptaconService
   ) { 
-    this.villager = this.navParams.data;  
+    this.villager = this.navParams.data; 
+    this.deceptaconService.getAlignments()
+      .subscribe(data => {
+      this.alignments = data;
+    }, error => {});
   }
   
   ionViewWillEnter() {
@@ -49,51 +53,6 @@ export class GameSurveyModal {
     this.slides.lockSwipes(true); 
   }
   
-  chooseAlignment(alignment: string) {
-    this.alignment = alignment;
-    switch (alignment) {
-      case 'good': 
-        this.roles = this.goodRoles;
-        break;
-      case 'evil': 
-        this.roles = this.evilRoles;
-        break;
-      default:
-    }
-    let iAlignment = alignment.charAt(0).toUpperCase() + alignment.slice(1);
-    this.showAlert(`Confirm you were ${iAlignment}?`, () => {
-      this.slideToRole();
-    });
-  }
-  
-  chooseRole(role: string) {
-    this.role = role;
-    let iRole = role.charAt(0).toUpperCase() + role.slice(1);
-    this.showAlert(`You were the ${iRole}?`, () => {
-      this.publishUserData();
-    });
-  }
-  
-  showAlert(txt: string, callback: Function) {
-    let alert = this.alertCtrl.create({
-      title: txt,
-      buttons: [
-        {
-          text: 'No',
-          role: 'cancel',
-          handler: () => {}
-        },
-        {
-          text: 'Yes',
-          handler: () => {
-            callback();
-          }
-        }
-      ]
-    });
-    alert.present();
-  }
-  
   slideToAlignment() {
     this.slides.lockSwipes(false);
     this.slides.slideTo(0);
@@ -106,17 +65,34 @@ export class GameSurveyModal {
     this.slides.lockSwipes(true);
   }
   
-  publishUserData() {
+  chooseAlignment(alignment: any) {
+    this.alignment = alignment;
+    let loading = this.loadingCtrl.create({
+      content: `Retrieving ${alignment.name} Roles...`
+    });
+    loading.present();
+    this.deceptaconService.getRoles(this.alignment._id)
+      .subscribe(data => {
+        loading.dismiss();
+        this.roles = data;
+        this.slideToRole();
+    }, error => {
+      loading.dismiss();
+    });
+  }
+  
+  chooseRole(role: any) {
+    this.role = role;
+    let loading = this.loadingCtrl.create({
+      content: `Saving...`
+    });
+    loading.present();
     let arr = {
       villagerId: this.villager._id,
       gameId: this.villager.currentGame.game._id,
-      alignment: this.alignment,
-      role: this.role
+      alignment: this.alignment._id,
+      role: this.role._id
     };
-    let loading = this.loadingCtrl.create({
-      content: 'Saving...'
-    });
-    loading.present();
     this.deceptaconService.publishGameDetails(arr)
       .subscribe(data => {
         loading.dismiss();

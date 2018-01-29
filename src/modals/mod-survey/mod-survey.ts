@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
-import { ViewController, NavParams, LoadingController, Events, AlertController } from 'ionic-angular';
+import { Platform, ViewController, NavParams, 
+         LoadingController, Events } from 'ionic-angular';
 
 import { StatusBar } from '@ionic-native/status-bar';
 
@@ -16,10 +17,10 @@ export class ModSurveyModal {
   villager: any;
   
   constructor(
+    public platform: Platform,
+    public statusBar: StatusBar,
     public viewCtrl: ViewController,
     public loadingCtrl: LoadingController,
-    public alertCtrl: AlertController,
-    public statusBar: StatusBar,
     private navParams: NavParams,
     private events: Events,
     private deceptaconService: DeceptaconService
@@ -39,42 +40,11 @@ export class ModSurveyModal {
     }
   }
   
-  chooseAlignment(alignment: string, extraTxt: string) {
-    this.alignment = alignment;
-    this.showAlert(extraTxt);
-    console.log('++ chooseAlignment', alignment); 
-  }
-  
-  showAlert(extraTxt: string) {
-    let alignmentTxt = new String(this.alignment);
-    alignmentTxt = alignmentTxt.charAt(0).toUpperCase() + alignmentTxt.slice(1);
-    if (extraTxt) {
-      alignmentTxt = `${extraTxt} ${alignmentTxt}`;
-    }
-    let alert = this.alertCtrl.create({
-      title: `Confirm ${alignmentTxt} won?`,
-      buttons: [
-        {
-          text: 'No',
-          role: 'cancel',
-          handler: () => {}
-        },
-        {
-          text: 'Yes',
-          handler: () => {
-            this.publish();
-          }
-        }
-      ]
-    });
-    alert.present();
-  }
-  
-  publish() {
+  publishWinner(alignment: any) {
     let arr = {
       villagerId: this.villager._id,
       gameId: this.villager.currentGame.game._id,
-      winner: this.alignment
+      winner: alignment._id
     };
     let loading = this.loadingCtrl.create({
       content: 'Saving...'

@@ -1,0 +1,24 @@
+<div *ngIf="alignments" class="alignment-chart">
+  <div class="alignment-section alignment-good" (click)="chooseAlignment(alignments[0])">
+    {{alignments[0].name}}
+  </div>
+  <div class="alignment-section alignment-evil" (click)="chooseAlignment(alignments[1])">
+    {{alignments[1].name}}
+  </div>
+  <div class="alignment-section alignment-divider">
+    <div class="alignment-cell alignment-vampire" (click)="chooseAlignment(alignments[2])">
+      {{alignments[2].name}}
+    </div>
+    <div class="alignment-cell alignment-cult" (click)="chooseAlignment(alignments[3])">
+      {{alignments[3].name}}
+    </div>
+  </div>
+  <div class="alignment-section alignment-divider">
+    <div class="alignment-cell alignment-neutral" (click)="chooseAlignment(alignments[4], 'a')">
+      {{alignments[4].name}}
+    </div>
+    <div class="alignment-cell alignment-other" (click)="chooseAlignment(alignments[5], 'an')">
+      {{alignments[5].name}}
+    </div>
+  </div>
+</div>
