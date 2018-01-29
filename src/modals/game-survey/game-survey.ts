@@ -15,7 +15,7 @@ export class GameSurveyModal {
   alignment: any;
   role: any;
   roles: any[] = [];
-  goodRoles: any[] = ["villager", "seer", "bodyguard", "witch", "thing", "hunter", "apprentice seer", "aura seer", "beholder", "diseased", "the count", "cupid", "ghost", "insomniac", "lycan", "matyr", "mason", "mayor", "old hag", "old man", "Private Investigator", "pacifist", "priest", "leprechaun", "prince", "spellcaster", "tough guy", "troublemaker", "cursed"].sort();
+  goodRoles: any[] = ["villager", "seer", "bodyguard", "witch", "thing", "hunter", "apprentice seer", "aura seer", "beholder", "diseased", "the count", "cupid", "ghost", "insomniac", "lycan", "matyr", "mason", "mayor", "old hag", "old man", "private investigator", "pacifist", "priest", "leprechaun", "prince", "spellcaster", "tough guy", "troublemaker", "cursed"].sort();
   evilRoles: any[] = ["werewolf", "wolf cub", "dire wolf", "big bad wolf", "sorcerer", "minion"].sort();
   @ViewChild(Slides) slides: Slides;
   
