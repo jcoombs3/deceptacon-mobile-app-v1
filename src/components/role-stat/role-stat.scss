@@ -1,0 +1,27 @@
+role-stat {
+  
+  .role-stat {
+    padding: 16px;
+  }
+  
+  .role-name {
+    margin-bottom: 5px;
+  }
+ 
+  .progress-bar {
+    width: 100%;
+    height: 10px;
+    border: 1px solid gray;
+    background: color($colors, white);
+    position: relative;
+  }
+  
+  .bar-filled {
+    width: 0px;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    background: blue;
+  }
+}

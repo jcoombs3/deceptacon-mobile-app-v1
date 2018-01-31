@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
-import { NavController, NavParams, ModalController } from 'ionic-angular';
+import { ViewChild, Component } from '@angular/core';
+import { NavController, NavParams, ModalController, Slides } from 'ionic-angular';
 import { Storage } from '@ionic/storage';
 
 // MODALS
@@ -16,6 +16,7 @@ export class ProfilePage {
   user: any = {};
   villager: any = {};
   gameHistory: any = [];
+  @ViewChild(Slides) slides: Slides;
   
   constructor(
     public navCtrl: NavController,
@@ -33,6 +34,10 @@ export class ProfilePage {
     });
   }
   
+  ionViewDidLoad() {
+    this.slides.lockSwipes(true); 
+  }
+  
   getVillagerData() {
     this.deceptaconService.getVillager(this.villager._id)
       .subscribe(data => {
@@ -41,6 +46,24 @@ export class ProfilePage {
       }, error => {
       
       });
+  }
+  
+  goToTimestamp() {
+    this.slides.lockSwipes(false);
+    this.slides.slideTo(0);
+    this.slides.lockSwipes(true);
+  }
+  
+  goToRoles() {
+    this.slides.lockSwipes(false);
+    this.slides.slideTo(1);
+    this.slides.lockSwipes(true);
+  }
+  
+  goToFriends() {
+    this.slides.lockSwipes(false);
+    this.slides.slideTo(2);
+    this.slides.lockSwipes(true);
   }
   
   editProfilePic() {

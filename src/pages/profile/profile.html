@@ -6,9 +6,36 @@
   </ion-navbar>
 </ion-header>
 
-<ion-content>
-  <profile-pic [picture]="villager.picture" [color]="villager.color" (click)="editProfilePic()"></profile-pic>
+<ion-content class="has-footer">
   
+  <div class="profile-header">
+    <profile-pic [picture]="villager.picture" [color]="villager.color" (click)="editProfilePic()"></profile-pic>
+  </div>
+  
+  <div class="profile-buttons clearfix">
+    <button (click)="goToTimestamp()">Date</button>
+    <button (click)="goToRoles()">Win %</button>
+    <button (click)="goToFriends()">Friends</button>
+  </div>
+  
+  <div class="profile-content">
+    <ion-slides>
+      <ion-slide>
+        <game-data [games]="gameHistory" [villager]="villager"></game-data>
+      </ion-slide>
+      <ion-slide>
+        <game-list [games]="gameHistory" [villager]="villager"></game-list>
+      </ion-slide>
+      <ion-slide>
+        slide 3
+      </ion-slide>
+    </ion-slides>
+  </div>
+ 
+  
+  
+  
+<!--
   <div *ngFor="let game of villager.gameHistory" class="game">
     {{game.timestamp}} <br/>
     Status: <span *ngIf="game.status.active">Active</span>
@@ -16,4 +43,5 @@
     <span *ngIf="game.status.cancelled">Cancelled</span>
     <span *ngIf="!game.status.active && !game.status.ended && !game.status.cancelled">Waiting</span>
   </div>
+-->
 </ion-content>

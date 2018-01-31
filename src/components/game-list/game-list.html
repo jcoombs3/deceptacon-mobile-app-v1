@@ -1,0 +1,13 @@
+<ion-list class="game-list">
+  <ion-item *ngFor="let game of games">
+    <div>Timestamp: {{game.timestamp | date:'EEE, h:mmaa'}}</div>
+    <div>Moderator: {{game.moderator.fullname}}</div>
+    <div *ngIf="game.userDetails.winner">
+      Winner: {{game.userDetails.winner.name}}
+    </div>
+    <div *ngIf="game.userDetails[villager._id]">
+      <div>Role: {{game.userDetails[villager._id].role.name}}</div>
+      <div>Alignment: {{game.userDetails[villager._id].alignment.name}}</div>
+    </div>
+  </ion-item>
+</ion-list>

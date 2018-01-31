@@ -8,6 +8,7 @@ role-list {
   
   .role-list {
     height: 100%;
+    overflow-y: auto;
     
     ion-list .item-block .item-inner {
       border-bottom: 2px solid color($colors, white);
@@ -26,6 +27,10 @@ role-list {
     }
     
     ion-item {
+      height: 82px;
+    }
+    
+    ion-item {
       background: transparent;
       @include transition(background 200ms ease);
 
@@ -33,6 +38,10 @@ role-list {
         background: rgba(color($colors, white), 0.25);
       }
     }
+  }
+  
+  .list > .item-block:last-child, .list > .item-wrapper:last-child .item-block {
+    border-bottom: none;
   }
   
   .alignment-good {

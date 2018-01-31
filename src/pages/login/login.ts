@@ -49,7 +49,6 @@ export class LoginPage {
         this.villager = data;
         this.revealPIN = true;
         this.isBack = true;
-//        this.next();
       }
     });
   }

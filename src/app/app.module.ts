@@ -33,10 +33,16 @@ import { VillagerDetail } from '../components/villager-detail/villager-detail';
 import { PlaceholderDetail } from '../components/placeholder-detail/placeholder-detail';
 import { AlignmentChart } from '../components/alignment-chart/alignment-chart';
 import { RoleList } from '../components/role-list/role-list';
+import { GameList } from '../components/game-list/game-list';
+import { GameData } from '../components/game-data/game-data';
+import { RoleStat } from '../components/role-stat/role-stat';
 
 // PROVIDERS
 import { DeceptaconService } from '../providers/deceptacon-service/deceptacon-service';
 import { AssetsService } from '../providers/assets-service/assets-service';
+
+// PIPES
+import { PipesModule } from '../pipes/pipes.module';
 
 // NATIVE
 import { StatusBar } from '@ionic-native/status-bar';
@@ -66,14 +72,18 @@ import { ScreenOrientation } from '@ionic-native/screen-orientation';
     VillagerDetail,
     PlaceholderDetail,
     AlignmentChart,
-    RoleList
+    RoleList,
+    GameList,
+    GameData,
+    RoleStat
   ],
   imports: [
     BrowserModule,
     IonicModule.forRoot(MyApp),
     IonicStorageModule.forRoot(),
     SocketIoModule.forRoot(config),
-    HttpModule
+    HttpModule,
+    PipesModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -97,7 +107,10 @@ import { ScreenOrientation } from '@ionic-native/screen-orientation';
     VillagerDetail,
     PlaceholderDetail,
     AlignmentChart,
-    RoleList
+    RoleList,
+    GameList,
+    GameData,
+    RoleStat
   ],
   providers: [
     StatusBar,
