@@ -48,13 +48,13 @@ export class ProfilePage {
       });
   }
   
-  goToTimestamp() {
+  goToRoles() {
     this.slides.lockSwipes(false);
     this.slides.slideTo(0);
     this.slides.lockSwipes(true);
   }
   
-  goToRoles() {
+  goToTimestamp() {
     this.slides.lockSwipes(false);
     this.slides.slideTo(1);
     this.slides.lockSwipes(true);

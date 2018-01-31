@@ -5,21 +5,39 @@ import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
   templateUrl: 'role-stat.html'
 })
 export class RoleStat {
-  @Input() role: any;
-  @Input() max: Number;
+  @Input() role: any = {amount: 1};
+  @Input() max: number = 1;
   percent: string = '0%';
+  winPercent: string = '0%';
+  lossPercent: string = '0%';
   
   constructor() {
-    this.calculatePercent();
+    this.calculateGamePercent();
+    this.calculateWinPercent();
   }
 
   ngOnChanges(changes: SimpleChanges) {
-    this.calculatePercent();
+    this.calculateGamePercent();
+    this.calculateWinPercent();
   }
   
-  calculatePercent() {
+  calculateGamePercent() {
     if (this.role && this.max) {
       this.percent = (this.role.amount / this.max)*100 + '%';
+    }
+  }
+  
+  calculateWinPercent() {
+    if (this.role.amount) {
+      if (this.role.wins > 0) {
+        let winPercent = (this.role.wins / this.role.amount)*100;
+        let lossPercent = 100 - winPercent;
+        this.winPercent = winPercent + '%';
+        this.lossPercent = lossPercent + '%';
+      } else {
+        this.winPercent = '0%';
+        this.lossPercent = '100%';
+      }
     }
   }
 }
