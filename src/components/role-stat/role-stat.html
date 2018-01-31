@@ -1,25 +1,42 @@
-<div class="role-stat">
-  <div class="role-container clearfix">
+<div class="role-stat" [ngClass]="{
+    'win-good': this.role.alignment.name === 'Good',
+    'win-evil': this.role.alignment.name === 'Evil',
+    'win-vampire': this.role.alignment.name === 'Vampire',
+    'win-cult': this.role.alignment.name === 'Cult',
+    'win-neutral': this.role.alignment.name === 'Neutral',
+    'win-other': this.role.alignment.name === 'Other'
+  }">
+  <div class="role-container">
     <div class="role-name">
       {{role.role.name}}
     </div>
-    <div class="role-number">
-      Games: {{role.amount}}
-    </div>
-  </div>
-  <div class="progress-bar">
-    <div class="bar-filled" [style.width]="percent"></div>
   </div>
   <div class="win-stats">
     <div class="key-container clearfix">
-      <div class="key key-win"></div>
+      <div class="key-cell">
+        <div class="key key-win"></div>
+      </div>
       <div class="key-label">Wins</div>
-      <div class="key key-loss"></div>
+      <div class="key-cell">
+        <div class="key key-loss bg-tan"></div>
+      </div>
       <div class="key-label">Loss</div>
+      <div class="role-number">
+        Games: {{role.amount}}
+      </div>
+    </div>
+    <div class="progress-bar clearfix">
+      <div class="bar-win-filled" [style.width]="winPercent + '%'"></div>
+      <div class="bar-loss-filled bg-tan" [style.width]="lossPercent + '%'"></div>
+    </div>
+    <div class="win-percent">
+      <div *ngIf="winPercent === parseIntWin">
+        {{parseIntWin}}%
+      </div>
+      <div *ngIf="winPercent !== parseIntWin">
+        {{winPercent | number : '1.2-2'}}%
+      </div>
     </div>
   </div>
-  <div class="progress-bar clearfix">
-    <div class="bar-win-filled" [style.width]="winPercent"></div>
-    <div class="bar-loss-filled" [style.width]="lossPercent"></div>
-  </div>
+  
 </div>

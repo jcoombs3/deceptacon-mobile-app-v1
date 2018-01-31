@@ -8,8 +8,10 @@ export class RoleStat {
   @Input() role: any = {amount: 1};
   @Input() max: number = 1;
   percent: string = '0%';
-  winPercent: string = '0%';
-  lossPercent: string = '0%';
+  winPercent: number = 0;
+  parseIntWin: number = 0;
+  lossPercent: number = 100;
+  parseIntLoss: number = 100;
   
   constructor() {
     this.calculateGamePercent();
@@ -30,14 +32,11 @@ export class RoleStat {
   calculateWinPercent() {
     if (this.role.amount) {
       if (this.role.wins > 0) {
-        let winPercent = (this.role.wins / this.role.amount)*100;
-        let lossPercent = 100 - winPercent;
-        this.winPercent = winPercent + '%';
-        this.lossPercent = lossPercent + '%';
-      } else {
-        this.winPercent = '0%';
-        this.lossPercent = '100%';
+        this.winPercent = (this.role.wins / this.role.amount)*100;
+        this.lossPercent = 100 - this.winPercent;
       }
     }
+    this.parseIntWin = parseInt(this.winPercent);
+    this.parseIntLoss = parseInt(this.lossPercent);
   }
 }

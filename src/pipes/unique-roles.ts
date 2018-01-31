@@ -16,7 +16,6 @@ export class UniqueRoles implements PipeTransform {
         userData.push(game.userDetails[villager._id]);
       }
     }
-    console.log(games);
     allGames = userData.length;
     if (userData.length > 0) {
       const unique = Array.from(new Set(userData.map(data => data.role._id)));
@@ -42,7 +41,6 @@ export class UniqueRoles implements PipeTransform {
       max: allGames,
       roles: roles
     };
-    console.log(finalObj);
     return finalObj;
   }
   

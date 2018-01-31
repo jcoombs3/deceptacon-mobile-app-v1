@@ -17,6 +17,27 @@
   @include linear-gradient-bottom-diagonal-three(lighten($bg-black, 30%), lighten($bg-black, 20%), $bg-black);
 }
 
+// ----------------------- //
+
+.bg-good {
+  @include linear-gradient-bottom-diagonal-three(lighten(color($werewolf, good), 20%), lighten(color($werewolf, good), 10%), color($werewolf, good));
+}
+.bg-evil {
+  @include linear-gradient-bottom-diagonal-three(lighten(color($werewolf, evil), 20%), lighten(color($werewolf, evil), 10%), color($werewolf, evil));
+}
+.bg-vampire {
+  @include linear-gradient-bottom-diagonal-three(lighten(color($werewolf, vampire), 20%), lighten(color($werewolf, vampire), 10%), color($werewolf, vampire));
+}
+.bg-cult {
+  @include linear-gradient-bottom-diagonal-three(lighten(color($werewolf, cult), 20%), lighten(color($werewolf, cult), 10%), color($werewolf, cult));
+}
+.bg-neutral {
+  @include linear-gradient-bottom-diagonal-three(lighten(color($werewolf, neutral), 20%), lighten(color($werewolf, neutral), 10%), color($werewolf, neutral));
+}
+.bg-other {
+  @include linear-gradient-bottom-diagonal-three(lighten(color($werewolf, other), 20%), lighten(color($werewolf, other), 10%), color($werewolf, other));
+}
+
 
 
 

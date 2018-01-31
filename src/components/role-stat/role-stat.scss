@@ -1,21 +1,14 @@
 role-stat {
   
-  $progressBarHeight: 10px;
+  $progressBarHeight: 12px;
   
   .role-stat {
-    padding: 16px;
+    padding: 8px 16px;
   }
   
   .role-name {
-    width: 50%;
-    float: left;
     text-align: left;
-  }
-  
-  .role-number {
-    width: 50%;
-    float: left;
-    text-align: right;
+    font-weight: bold;
   }
  
   .progress-bar {
@@ -32,13 +25,14 @@ role-stat {
     position: absolute;
     top: 0;
     left: 0;
-    background: blue;
   }
   
   .key-container {
     text-align: left;
     display: table;
     height: $progressBarHeight;
+    margin-top: 5px;
+    width: 100%;
   }
   
   .key-cell {
@@ -50,33 +44,108 @@ role-stat {
   .key-label {
     display: table-cell;
     padding-left: 5px;
-    padding-right: 20px;
+    width: 45px;
+    font-size: 12px;
+  }
+  
+  .role-number {
+    display: table-cell;
+    vertical-align: bottom;
+    text-align: right;
+    font-size: 12px;
   }
   
   .key {
     width: $progressBarHeight;
     height: $progressBarHeight;
-    
-    &.key-win {
-      background: magenta;
-    }
-    
-    &.key-loss {
-      background: red;
-    }
+    border: 1px solid gray;
   }
   
   .bar-win-filled {
     float: left;
     width: 0px;
     height: $progressBarHeight;
-    background: magenta;
   }
   
   .bar-loss-filled {
     float: left;
     width: 0px;
     height: $progressBarHeight;
-    background: red;
+  }
+  
+  .win-good {
+    .bar-filled, .key-win, .bar-win-filled {
+      @include linear-gradient-bottom-diagonal-three(lighten(color($werewolf, good), 20%), lighten(color($werewolf, good), 10%), color($werewolf, good));
+    }
+    .role-name, .win-percent {
+      color: color($werewolf, good);
+    }
+  }
+  .win-evil {
+    .bar-filled, .key-win, .bar-win-filled {
+      @include linear-gradient-bottom-diagonal-three(lighten(color($werewolf, evil), 20%), lighten(color($werewolf, evil), 10%), color($werewolf, evil));
+    }
+    .role-name, .win-percent {
+      color: color($werewolf, evil);
+    }
+  }
+  .win-vampire {
+    .bar-filled, .key-win, .bar-win-filled {
+      @include linear-gradient-bottom-diagonal-three(lighten(color($werewolf, vampire), 20%), lighten(color($werewolf, vampire), 10%), color($werewolf, vampire));
+    }
+    .role-name, .win-percent {
+      color: color($werewolf, vampire);
+    }
+  }
+  .win-cult {
+    .bar-filled, .key-win, .bar-win-filled {
+      @include linear-gradient-bottom-diagonal-three(lighten(color($werewolf, cult), 20%), lighten(color($werewolf, cult), 10%), color($werewolf, cult));
+    }
+    .role-name, .win-percent {
+      color: color($werewolf, cult);
+    }
+  }
+  
+  
+  
+//  .win-evil {
+//    @include linear-gradient-bottom-diagonal-three(lighten(color($werewolf, evil), 20%), lighten(color($werewolf, evil), 10%), color($werewolf, evil));
+//  }
+//  .win-vampire {
+//    @include linear-gradient-bottom-diagonal-three(lighten(color($werewolf, vampire), 20%), lighten(color($werewolf, vampire), 10%), color($werewolf, vampire));
+//  }
+//  .win-cult {
+//    @include linear-gradient-bottom-diagonal-three(lighten(color($werewolf, cult), 20%), lighten(color($werewolf, cult), 10%), color($werewolf, cult));
+//  }
+//  .win-neutral {
+//    @include linear-gradient-bottom-diagonal-three(lighten(color($werewolf, neutral), 20%), lighten(color($werewolf, neutral), 10%), color($werewolf, neutral));
+//  }
+//  .win-other {
+//    @include linear-gradient-bottom-diagonal-three(lighten(color($werewolf, other), 20%), lighten(color($werewolf, other), 10%), color($werewolf, other));
+//  }
+//  .loss-good {
+//    @include linear-gradient-bottom-diagonal-three(lighten(color($werewolf, good), 70%), lighten(color($werewolf, good), 60%), lighten(color($werewolf, good), 50%));
+//  }
+//  .loss-evil {
+//    @include linear-gradient-bottom-diagonal-three(lighten(color($werewolf, evil), 70%), lighten(color($werewolf, evil), 60%), lighten(color($werewolf, evil), 50%));
+//  }
+//  .loss-vampire {
+//    @include linear-gradient-bottom-diagonal-three(lighten(color($werewolf, vampire), 70%), lighten(color($werewolf, vampire), 60%), lighten(color($werewolf, vampire), 50%));
+//  }
+//  .loss-cult {
+//    @include linear-gradient-bottom-diagonal-three(lighten(color($werewolf, cult), 70%), lighten(color($werewolf, cult), 60%), lighten(color($werewolf, cult), 50%));
+//  }
+//  .loss-neutral {
+//    @include linear-gradient-bottom-diagonal-three(lighten(color($werewolf, neutral), 70%), lighten(color($werewolf, neutral), 60%), lighten(color($werewolf, neutral), 50%));
+//  }
+//  .loss-other {
+//    @include linear-gradient-bottom-diagonal-three(lighten(color($werewolf, other), 70%), lighten(color($werewolf, other), 60%), lighten(color($werewolf, other), 50%));
+//  }
+  
+  .win-percent {
+    margin-top: 5px;
+    text-align: left;
+    font-size: 14px;
+    color: color($colors, primary);
   }
 }

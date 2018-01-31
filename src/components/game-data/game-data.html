@@ -1,5 +1,4 @@
 <div>
-  <h2>Unique Roles</h2>
   <role-stat *ngFor="let role of uniqueRoles" [role]="role" [max]="max"></role-stat>
   <div *ngIf="uniqueRoles.length === 0">
     No Unique Roles
