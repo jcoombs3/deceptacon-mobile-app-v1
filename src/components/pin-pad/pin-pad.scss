@@ -58,6 +58,19 @@ pin-pad {
         color: color($colors, primary);
       }
     }
+  
+    .btn-back {
+      border: none;
+      font-size: 30px;
+      padding-left: 0;
+      padding-right: 0;
+      background: transparent;
+      
+      &:active {
+        background: transparent;
+        color: lighten(color($colors, primary), 50%);
+      }
+    }
   }
   
 }

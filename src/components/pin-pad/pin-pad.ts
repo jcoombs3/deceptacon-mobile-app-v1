@@ -25,4 +25,10 @@ export class PinPad {
       this.validatePIN();
     }
   }
+  
+  back() {
+    if (this.pin.length > 0) {
+      this.pin = this.pin.slice(0, this.pin.length-1);
+    }
+  }
 }
