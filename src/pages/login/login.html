@@ -57,7 +57,7 @@
           </ion-list>
           <button class="hidden-submit">Submit</button>
         </form>
-        <div class="login-pad-container" [ngClass]="{'active': revealPIN}">
+        <div class="login-pad-container" *ngIf="revealPIN">
           <p>Welcome <span *ngIf="isBack">back</span> {{villager.username}}!</p>
           <pin-pad (validated)="retrievePIN($event)"></pin-pad>
         </div>

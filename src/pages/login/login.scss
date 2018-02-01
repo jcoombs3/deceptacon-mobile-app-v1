@@ -120,10 +120,5 @@ page-login {
   .login-pad-container {
     @include vertical-align();
     top: 40%;
-    opacity: 0;
-    
-    &.active {
-      opacity: 1;
-    }
   }
 }

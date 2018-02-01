@@ -9,6 +9,7 @@ role-stat {
   .role-name {
     text-align: left;
     font-weight: bold;
+    font-size: 16px;
   }
  
   .progress-bar {
@@ -107,6 +108,26 @@ role-stat {
     .role-name, .win-percent {
       color: color($werewolf, cult);
     }
+  }
+  .win-neutral {
+    .bar-filled, .key-win, .bar-win-filled {
+      @include linear-gradient-bottom-diagonal-three(lighten(color($werewolf, neutral), 20%), lighten(color($werewolf, neutral), 10%), color($werewolf, neutral));
+    }
+    .role-name, .win-percent {
+      color: color($werewolf, neutral);
+    }
+  }
+  .win-other {
+    .bar-filled, .key-win, .bar-win-filled {
+      @include linear-gradient-bottom-diagonal-three(lighten(color($werewolf, other), 20%), lighten(color($werewolf, other), 10%), color($werewolf, other));
+    }
+    .role-name, .win-percent {
+      color: color($werewolf, other);
+    }
+  }
+  
+  .game-in-progress {
+    font-weight: bold;
   }
   
   

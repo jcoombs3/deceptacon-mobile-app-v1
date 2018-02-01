@@ -32,8 +32,8 @@ export class RoleStat {
   calculateWinPercent() {
     if (this.role.amount) {
       if (this.role.wins > 0) {
-        this.winPercent = (parseInt(this.role.wins) / parseInt(this.role.amount))*100;
-        this.lossPercent = 100 - this.winPercent;
+        this.winPercent = (parseInt(this.role.wins) / parseInt(this.role.amount)*100);
+        this.lossPercent = 100 - parseInt(this.winPercent);
       }
     }
     this.parseIntWin = parseInt(this.winPercent);

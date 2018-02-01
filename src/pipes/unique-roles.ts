@@ -20,12 +20,17 @@ export class UniqueRoles implements PipeTransform {
     if (userData.length > 0) {
       const unique = Array.from(new Set(userData.map(data => data.role._id)));
       unique.forEach(id => {
+        // check if game is not over yet 
         roleObj[id] = userData.filter(data => data.role._id === id)[0];
         roleObj[id].amount = userData.filter(data => data.role._id === id).length;
         roleObj[id].isVillager = roleObj[id].role.name === 'Villager';
         roleObj[id].wins = games.filter(game => 
-          game.userDetails[villager._id] &&
+          game.userDetails[villager._id] && game.userDetails.winner &&
           game.userDetails.winner._id === game.userDetails[villager._id].alignment._id &&  
+          roleObj[id].role._id === game.userDetails[villager._id].role._id
+        ).length;
+        roleObj[id].tbd = games.filter(game => 
+          game.userDetails[villager._id] && !game.userDetails.winner &&
           roleObj[id].role._id === game.userDetails[villager._id].role._id
         ).length;
       });
