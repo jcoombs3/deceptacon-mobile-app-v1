@@ -53,11 +53,15 @@
                  autocomplete="off" autocorrect="off" autocapitalize="on" spellcheck="false">
       </ion-input>
     </ion-item>
-    <ion-item>
+    <ion-item *ngIf="!noLastName">
       <ion-label stacked color="primary">Last Name</ion-label>
       <ion-input type="text" name="lastname" ngModel #lastname="ngModel" required 
                  autocomplete="off" autocorrect="off" autocapitalize="on" spellcheck="false">
       </ion-input>
+    </ion-item>
+    <ion-item class="no-last-name">
+      <ion-label>I wish to not register with a Last Name</ion-label>
+      <ion-checkbox (ionChange)="updateNoLastName()"></ion-checkbox>
     </ion-item>
     <button class="hidden-submit">Submit</button>
   </form>

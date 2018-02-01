@@ -26,7 +26,8 @@ export class CreateAccountModal {
     pin: null,
     picture: "BodyGuard.png",
     color: "tan"
-  }
+  };
+  noLastName: boolean = false;
   
   constructor(
     public viewCtrl: ViewController,
@@ -98,7 +99,7 @@ export class CreateAccountModal {
     if (f.valid && this.villager.pin) {
       this.villager.username = f.value.username;
       this.villager.firstname = f.value.firstname;
-      this.villager.lastname = f.value.lastname;
+      this.villager.lastname = f.value.lastname ? f.value.lastname : '';
       return true;
     } else if (!f.valid && !f.value.username) {
       errorText = "Please input a username";
@@ -106,7 +107,7 @@ export class CreateAccountModal {
     } else if (!f.valid && !f.value.firstname) {
       errorText = "Please add your first name";
       error = true;
-    } else if (!f.valid && !f.value.lastname) {
+    } else if (!f.valid && !f.value.lastname && !this.noLastName) {
       errorText = "Please add your last name";
       error = true;
     } else if (!this.villager.pin) {
@@ -132,6 +133,10 @@ export class CreateAccountModal {
       }
     });
     createPinModal.present();
+  }
+  
+  updateNoLastName() {
+    this.noLastName = !this.noLastName;
   }
   
   openCodeConduct() {

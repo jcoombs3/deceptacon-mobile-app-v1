@@ -8,10 +8,10 @@ export class RoleStat {
   @Input() role: any = {amount: 1};
   @Input() max: number = 1;
   percent: string = '0%';
-  winPercent: number = 0;
-  parseIntWin: number = 0;
-  lossPercent: number = 100;
-  parseIntLoss: number = 100;
+  winPercent: Number = 0;
+  parseIntWin: Number = 0;
+  lossPercent: Number = 100;
+  parseIntLoss: Number = 100;
   
   constructor() {
     this.calculateGamePercent();

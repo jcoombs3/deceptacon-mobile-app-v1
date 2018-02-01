@@ -52,7 +52,6 @@ export class GamePage {
   
   setEventListeners() {
     const iThis = this;
-    console.log('++ setEventListeners()');
     this.events.subscribe(`circle-updated-${this.circle._id}`, function(circle) {
       iThis.circle = circle;
       if (iThis.circle.game) {
@@ -81,7 +80,6 @@ export class GamePage {
   }
   
   getGame() {
-    console.log('++ getGame');
     if (this.circle.game) {
       this.deceptaconService.getGame(this.circle.game._id).subscribe(data => {
         this.circle.game = data;
@@ -105,18 +103,15 @@ export class GamePage {
   }
   
   checkIfInGame() {
-    let villagerArray = [];//this.otherVillagers;
+    let villagerArray = [];
     let villagers = this.circle.game.villagers;
-    //if (villagerArray.length !== villagers.length) {
-      //villagerArray = [];
-      for (let i = 0; i < villagers.length; i++) {
-        if (this.villager._id === villagers[i]._id) {
-          this.inGame = true;
-        } else {
-          villagerArray.push(villagers[i]);
-        }
+    for (let i = 0; i < villagers.length; i++) {
+      if (this.villager._id === villagers[i]._id) {
+        this.inGame = true;
+      } else {
+        villagerArray.push(villagers[i]);
       }
-    //}
+    }
     this.otherVillagers = villagerArray;
   }
   

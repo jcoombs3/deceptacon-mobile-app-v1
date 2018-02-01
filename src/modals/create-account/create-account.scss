@@ -15,6 +15,15 @@ modal-create-account {
     color: color($colors, white);
   }
   
+  .no-last-name {
+    font-size: 13px;
+    padding-top: 5px;
+    
+    .item-inner {
+      border: none !important;
+    }
+  }
+  
   // ------------- //
   
   .profile-pic {

@@ -48,7 +48,7 @@
           <villager-detail [villager]="villager" (click)="goToProfile(villager)"></villager-detail>
           <button class="leave" (click)="leaveGame(villager)">Leave</button>
         </li>
-        <li *ngFor="let aVillager of otherVillagers">
+        <li *ngFor="let aVillager of otherVillagers | sortVillagers">
           <villager-detail [villager]="aVillager" (click)="goToProfile(aVillager)"></villager-detail>
           <button class="kick" *ngIf="isMod && !circle.game.status.active && !circle.game.status.end && !circle.game.status.cancelled" (click)="kickVillager(aVillager)">Kick</button>
         </li>
