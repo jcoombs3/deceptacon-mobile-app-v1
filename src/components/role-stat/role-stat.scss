@@ -14,9 +14,11 @@ role-stat {
   .progress-bar {
     width: 100%;
     height: $progressBarHeight;
-    border: 1px solid gray;
+    border: 1px solid black;
     background: color($colors, white);
     position: relative;
+    overflow: hidden;
+    @include box-shadow();
   }
   
   .bar-filled {
@@ -31,7 +33,7 @@ role-stat {
     text-align: left;
     display: table;
     height: $progressBarHeight;
-    margin-top: 5px;
+    margin-bottom: 2px;
     width: 100%;
   }
   
@@ -58,7 +60,8 @@ role-stat {
   .key {
     width: $progressBarHeight;
     height: $progressBarHeight;
-    border: 1px solid gray;
+    border: 1px solid black;
+    overflow: hidden;
   }
   
   .bar-win-filled {

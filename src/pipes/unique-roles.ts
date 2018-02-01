@@ -22,6 +22,7 @@ export class UniqueRoles implements PipeTransform {
       unique.forEach(id => {
         roleObj[id] = userData.filter(data => data.role._id === id)[0];
         roleObj[id].amount = userData.filter(data => data.role._id === id).length;
+        roleObj[id].isVillager = roleObj[id].role.name === 'Villager';
         roleObj[id].wins = games.filter(game => 
           game.userDetails[villager._id] &&
           game.userDetails.winner._id === game.userDetails[villager._id].alignment._id &&  
@@ -29,14 +30,22 @@ export class UniqueRoles implements PipeTransform {
         ).length;
       });
     }
+    let villagerObj;
     for (let id in roleObj) {
-      roles.push(roleObj[id]);
+      if (!roleObj[id].isVillager) {
+        roles.push(roleObj[id]);
+      } else {
+        villagerObj = roleObj[id];
+      }
     }
     roles = roles.sort((a, b) => {
       if (a.amount < b.amount) return 1;
       else if (a.amount > b.amount) return -1;
       else return 0;
     });
+    if (villagerObj) {
+      roles.push(villagerObj);
+    }
     const finalObj = {
       max: allGames,
       roles: roles

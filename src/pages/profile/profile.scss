@@ -1,49 +1,73 @@
 page-profile {
   
-  $profileHeader: 200px;
-  $profileButtons: 50px;
-  
   .profile-header {
-    height: $profileHeader;
-    padding: 25px 0px;
-    @include linear-gradient-bottom-diagonal-three(lighten(color($login, primary), 10%), lighten(color($login, primary), 5%), color($login, primary));
+    padding: 16px;
+    @include linear-gradient-bottom-diagonal-three(lighten(color($colors, secondary), 30%), lighten(color($colors, secondary), 20%), lighten(color($colors, secondary), 10%));
     position: relative;
     z-index: 10;
+    border-bottom: 2px solid color($colors, primary);
     
     .profile-pic {
       margin: 0 auto;
-    }
-  }
-  
-  .profile-buttons {
-    position: relative;
-    z-index: 5;
-    
-    button {
-      width: 33.333%;
-      height: $profileButtons;
-      padding: 0;
-      margin: 0;
-      display: inline-block;
-      float: left;
-      background: darken(color($login, primary), 10%);
-      border: 2px solid color($colors, white);
-      border-right: none;
-      color: color($colors, white);
+      border-color: color($colors, primary);
       
-      &:first-child {
+      @include media($Mobile_sm...) { 
+        width: 125px;
+        height: 125px;
+      }
+    }
+    
+    .button-container {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      
+      button {
+        width: 100px;
+        margin: 0;
+        border-bottom-left-radius: 0px;
+        border-bottom-right-radius: 0px;
+        border: 2px solid color($colors, primary);
+        border-bottom: none;
+      
+        @include media($Mobile_sm...) { 
+          width: 75px;
+        }
+        
+        &.active {
+          background: lighten(color($colors, primary), 20%);
+        }
+      }
+      
+      .btn-disabled {
+        background: gray;
+      }
+      
+      button:first-child {
+        float: left;
         border-left: none;
+        border-top-left-radius: 0px;
+      }
+      
+      button:last-child {
+        float: right;
+        border-right: none;
+        border-top-right-radius: 0px;
       }
     }
   }
   
   .profile-content {
-//    position: absolute;
-//    top: 0;
-//    left: 0;
-//    width: 100%;
-//    height: 100%;
-//    background: magenta;
-//    padding-top: $profileHeader + $profileButtons;
+    padding-top: 10px;
+    
+    &.loading {
+      padding-top: 50px;
+      text-align: center;
+    }
+    
+    ion-spinner {
+      margin-top: 16px;
+    }
   }
 }

@@ -1,5 +1,6 @@
 import { ViewChild, Component } from '@angular/core';
-import { NavController, NavParams, ModalController, Slides } from 'ionic-angular';
+import { NavController, NavParams, 
+         ModalController, ToastController } from 'ionic-angular';
 import { Storage } from '@ionic/storage';
 
 // MODALS
@@ -16,11 +17,13 @@ export class ProfilePage {
   user: any = {};
   villager: any = {};
   gameHistory: any = [];
-  @ViewChild(Slides) slides: Slides;
+  showRoles: boolean = true;
+  loaded: boolean = false;
   
   constructor(
     public navCtrl: NavController,
     public modalCtrl: ModalController,
+    public toastCtrl: ToastController,
     private navParams: NavParams,
     private storage: Storage,
     private deceptaconService: DeceptaconService
@@ -34,36 +37,15 @@ export class ProfilePage {
     });
   }
   
-  ionViewDidLoad() {
-    this.slides.lockSwipes(true); 
-  }
-  
   getVillagerData() {
     this.deceptaconService.getVillager(this.villager._id)
       .subscribe(data => {
         this.villager = data;
         this.gameHistory = data.gameHistory ? data.gameHistory : [];
+        this.loaded = true;
       }, error => {
       
       });
-  }
-  
-  goToRoles() {
-    this.slides.lockSwipes(false);
-    this.slides.slideTo(0);
-    this.slides.lockSwipes(true);
-  }
-  
-  goToTimestamp() {
-    this.slides.lockSwipes(false);
-    this.slides.slideTo(1);
-    this.slides.lockSwipes(true);
-  }
-  
-  goToFriends() {
-    this.slides.lockSwipes(false);
-    this.slides.slideTo(2);
-    this.slides.lockSwipes(true);
   }
   
   editProfilePic() {
@@ -89,5 +71,20 @@ export class ProfilePage {
       }, error => {
       
       });
+  }
+  
+  goToRoles() {
+    this.showRoles = true;
+  }
+  
+  goToGames() {
+    let toast = this.toastCtrl.create({
+      message: 'Game List is disabled this beta',
+      duration: 2000,
+      position: 'top',
+      showCloseButton: true,
+      cssClass: 'error'
+    });
+    toast.present();
   }
 }

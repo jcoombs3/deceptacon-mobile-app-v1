@@ -10,38 +10,19 @@
   
   <div class="profile-header">
     <profile-pic [picture]="villager.picture" [color]="villager.color" (click)="editProfilePic()"></profile-pic>
+    <div class="button-container">
+      <button ion-button (click)="goToRoles()" [ngClass]="{'active': showRoles}">Roles</button>
+      <button ion-button class="btn-disabled" (click)="goToGames()" [ngClass]="{'active': !showRoles}">Games</button>
+    </div>
   </div>
   
-  <div class="profile-buttons clearfix">
-    <button (click)="goToRoles()">Roles</button>
-    <button (click)="goToTimestamp()">Date</button>
-    <button (click)="goToFriends()">Friends</button>
+  <div class="profile-content loading" *ngIf="!loaded">
+    <div>Loading Game Data...</div>
+    <ion-spinner></ion-spinner>
   </div>
   
-  <div class="profile-content">
-    <ion-slides>
-      <ion-slide>
-        <game-data [games]="gameHistory" [villager]="villager"></game-data>
-      </ion-slide>
-      <ion-slide>
-        <game-list [games]="gameHistory" [villager]="villager"></game-list>
-      </ion-slide>
-      <ion-slide>
-        slide 3
-      </ion-slide>
-    </ion-slides>
+  <div class="profile-content" *ngIf="loaded">
+    <game-data [games]="gameHistory" [villager]="villager" [ngClass]="{'hide': !showRoles}"></game-data>
+<!--    <game-list [games]="gameHistory" [villager]="villager" [ngClass]="{'hide': showRoles}"></game-list>-->
   </div>
- 
-  
-  
-  
-<!--
-  <div *ngFor="let game of villager.gameHistory" class="game">
-    {{game.timestamp}} <br/>
-    Status: <span *ngIf="game.status.active">Active</span>
-    <span *ngIf="game.status.ended">Ended</span>
-    <span *ngIf="game.status.cancelled">Cancelled</span>
-    <span *ngIf="!game.status.active && !game.status.ended && !game.status.cancelled">Waiting</span>
-  </div>
--->
 </ion-content>
