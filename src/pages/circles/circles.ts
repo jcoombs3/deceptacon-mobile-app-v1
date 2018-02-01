@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
-import { NavController, ToastController, LoadingController, Events } from 'ionic-angular';
+import { NavController, ToastController, LoadingController, 
+         Events, AlertController } from 'ionic-angular';
 import { Storage } from '@ionic/storage';
 import { Socket } from 'ng-socket-io';
 
@@ -21,6 +22,7 @@ export class CirclesPage {
   
   constructor(
     public navCtrl: NavController,
+    public alertCtrl: AlertController,
     public toastCtrl: ToastController,
     public loadingCtrl: LoadingController,
     private deceptaconService: DeceptaconService,
@@ -94,6 +96,27 @@ export class CirclesPage {
   }
   
   moderate(circle: any) {
+    let alert = this.alertCtrl.create({
+      title: `Reserving ${circle.name}`,
+      message: `Are you sure?`,
+      buttons: [
+        {
+          text: 'No',
+          role: 'cancel',
+          handler: () => {}
+        },
+        {
+          text: 'Yes',
+          handler: () => {
+            this.reserveCircle(circle);
+          }
+        }
+      ]
+    });
+    alert.present();
+  }
+  
+  reserveCircle(circle: any) {
     let arr = {
       villagerId: this.villager._id,
       circleId: circle._id
