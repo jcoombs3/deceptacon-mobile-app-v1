@@ -1,0 +1,21 @@
+page-villagers {
+  ul {
+    padding: 0;
+    margin: 0px -16px;
+    list-style-type: none;
+  }
+  
+  li {
+    padding: 0 16px;
+    margin: 0;
+    background: lighten(color($colors, secondary), 15%);
+    position: relative;
+    border-bottom: 2px solid black;
+  }
+  
+  villager-detail {
+    @include linear-gradient-bottom-diagonal-three(lighten(color($colors, secondary), 20%), lighten(color($colors, secondary), 15%), lighten(color($colors, secondary), 5%));
+    padding-right: 50px;
+    position: relative;
+  }
+}

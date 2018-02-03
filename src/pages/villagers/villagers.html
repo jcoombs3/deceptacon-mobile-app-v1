@@ -1,0 +1,15 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>
+      Villagers
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content class="has-footer">
+  <ul> 
+    <li *ngFor="let villager of villagers | sortVillagers">
+      <villager-detail [villager]="villager" (click)="goToProfile(villager)"></villager-detail>
+    </li>
+  </ul>
+</ion-content>

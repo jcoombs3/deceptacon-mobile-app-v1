@@ -63,8 +63,10 @@ export class ProfilePage {
   }
   
   saveProfile() {
+    console.log(this.villager);
     this.deceptaconService.saveVillager(this.villager)
       .subscribe(data => {
+        console.log('success');
         this.storage.set('user', data);
         this.user = data;
         this.villager = data;

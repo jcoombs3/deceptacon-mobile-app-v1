@@ -16,6 +16,7 @@ import { HomePage } from '../pages/home/home';
 import { CirclesPage } from '../pages/circles/circles';
 import { GamePage } from '../pages/game/game';
 import { ProfilePage } from '../pages/profile/profile';
+import { VillagersPage } from '../pages/villagers/villagers';
 
 // MODALS
 import { CreateAccountModal } from '../modals/create-account/create-account';
@@ -58,6 +59,7 @@ import { ScreenOrientation } from '@ionic-native/screen-orientation';
     CirclesPage,
     GamePage,
     ProfilePage,
+    VillagersPage,
     
     CreateAccountModal,
     ChangeProfilePicModal,
@@ -93,6 +95,7 @@ import { ScreenOrientation } from '@ionic-native/screen-orientation';
     CirclesPage,
     GamePage,
     ProfilePage,
+    VillagersPage,
     
     CreateAccountModal,
     ChangeProfilePicModal,
