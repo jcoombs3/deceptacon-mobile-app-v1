@@ -153,7 +153,9 @@ export class LoginPage {
   }
   
   authenticate(villager: any) {
-    villager.pin = this.villager.pin;
+    if (this.villager.pin) {
+      villager.pin = this.villager.pin;
+    }
     this.storage.set('user', villager);
     this.events.publish('user:authenticated', villager);
     this.socket.emit('com.deceptacon.event', {

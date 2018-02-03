@@ -1,0 +1,34 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>
+      Admin page
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content class="has-footer">
+  <ion-grid>
+    <ion-row class="admin-keys">
+      <ion-col class="key-admin" col-3>Admins</ion-col>
+      <ion-col class="key-name" col-6>Villagers</ion-col>
+      <ion-col class="key-mod" col-3>Mods</ion-col>
+    </ion-row>
+    <ion-row *ngFor="let villager of villagers | sortVillagers" class="row-villager">
+      <ion-col col-3>
+        <button class="btn-admin" ion-button [ngClass]="{'active': villager.isAdmin}"
+                (click)="toggleAdminRights(villager)">
+          <img [src]="assets.assetsUrl + 'checkmark.png'">
+        </button>
+      </ion-col>
+      <ion-col col-6>
+        <villager-detail [villager]="villager"></villager-detail>
+      </ion-col>
+      <ion-col col-3>
+        <button class="btn-mod" ion-button [ngClass]="{'active': villager.isMod}"
+                (click)="toggleModRights(villager)">
+          <img [src]="assets.assetsUrl + 'checkmark.png'">
+        </button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

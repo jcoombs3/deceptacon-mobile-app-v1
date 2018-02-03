@@ -6,6 +6,7 @@ import { Storage } from '@ionic/storage';
 import { CirclesPage } from '../circles/circles';
 import { LoginPage } from '../login/login';
 import { VillagersPage } from '../villagers/villagers';
+import { AdminPage } from '../admin/admin';
 
 @Component({
   selector: 'page-home',
@@ -32,6 +33,10 @@ export class HomePage {
   
   goToVillagers() {
     this.navCtrl.push(VillagersPage);
+  }
+  
+  goToAdmin() {
+    this.navCtrl.push(AdminPage);
   }
   
   logout() {
