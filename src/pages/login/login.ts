@@ -28,6 +28,8 @@ export class LoginPage {
     username: ''
   };
   @ViewChild(Slides) slides: Slides;
+  
+  // TODO: clean up isBack
 
   constructor(
     public navCtrl: NavController, 
@@ -47,8 +49,7 @@ export class LoginPage {
     this.storage.get('user').then(data => {
       if (data) {
         this.villager = data;
-        this.revealPIN = true;
-        this.isBack = true;
+        this.loginService();
       }
     });
   }
@@ -103,28 +104,32 @@ export class LoginPage {
   
   login() {
     if (this.validateLogin()) {
-      let loading = this.loadingCtrl.create({
-        content: 'Logging in...'
-      });
-      loading.present();
-      this.deceptaconService.login(this.villager)
-        .subscribe(data => {
-          loading.dismiss();
-          this.authenticate(data);
-        }, error => {
-          let toast = this.toastCtrl.create({
-            message: error,
-            duration: 3000,
-            position: 'top',
-            showCloseButton: true,
-            cssClass: 'error'
-          });
-          this.revealPIN = false;
-          this.isBack = false;
-          toast.present();
-          loading.dismiss();
-        });
+      this.loginService();
     }
+  }
+  
+  loginService() {
+    let loading = this.loadingCtrl.create({
+      content: 'Logging in...'
+    });
+    loading.present();
+    this.deceptaconService.login(this.villager)
+      .subscribe(data => {
+        loading.dismiss();
+        this.authenticate(data);
+      }, error => {
+        let toast = this.toastCtrl.create({
+          message: error,
+          duration: 3000,
+          position: 'top',
+          showCloseButton: true,
+          cssClass: 'error'
+        });
+        this.revealPIN = false;
+        this.isBack = false;
+        toast.present();
+        loading.dismiss();
+      });
   }
   
   validateLogin() {
@@ -148,6 +153,7 @@ export class LoginPage {
   }
   
   authenticate(villager: any) {
+    villager.pin = this.villager.pin;
     this.storage.set('user', villager);
     this.events.publish('user:authenticated', villager);
     this.socket.emit('com.deceptacon.event', {
