@@ -45,6 +45,12 @@ export class DeceptaconService {
       .catch(this.handleError);
   }
   
+  updateVillagerRights(arr: any) {
+    return this.http.post(this.deceptaconUrl + '/rights/villager', arr)
+      .map(res => res.json())
+      .catch(this.handleError);
+  }
+  
   // ---------------------- //
   
   // CIRCLES

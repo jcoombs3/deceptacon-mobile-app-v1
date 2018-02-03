@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, AlertController } from 'ionic-angular';
+import { NavController, AlertController, LoadingController } from 'ionic-angular';
 
 // PROVIDERS
 import { DeceptaconService } from '../../providers/deceptacon-service/deceptacon-service';
@@ -15,6 +15,7 @@ export class AdminPage {
   constructor(
     public navCtrl: NavController,
     public alertCtrl: AlertController,
+    public loadingCtrl: LoadingController,
     private deceptaconService: DeceptaconService,
     private assets: AssetsService
   ) {}
@@ -38,7 +39,22 @@ export class AdminPage {
       txt = `Revoke ${villager.fullname}'s admin rights?`;
     }
     this.showAlert(txt, () => {
-      console.log('++ confirm');
+      let loading = this.loadingCtrl.create({
+        content: 'Updating...'
+      });
+      loading.present();
+      let arr = {
+        _id: villager._id,
+        isAdmin: !villager.isAdmin,
+        isMod: villager.isMod
+      };
+      this.deceptaconService.updateVillagerRights(arr)
+        .subscribe(data => {
+          this.updateVillagerList(data);
+          loading.dismiss();
+        }, error => {
+          loading.dismiss();
+        });
     });
   } 
   
@@ -48,9 +64,33 @@ export class AdminPage {
       txt = `Revoke ${villager.fullname}'s mod rights?`;
     }
     this.showAlert(txt, () => {
-      console.log('++ confirm');
+      let loading = this.loadingCtrl.create({
+        content: 'Updating...'
+      });
+      loading.present();
+      let arr = {
+        _id: villager._id,
+        isAdmin: villager.isAdmin,
+        isMod: !villager.isMod
+      };
+      this.deceptaconService.updateVillagerRights(arr)
+        .subscribe(data => {
+          this.updateVillagerList(data);
+          loading.dismiss();
+        }, error => {
+          loading.dismiss();
+        });
     });
   } 
+  
+  updateVillagerList(villager: any) {
+    for (let i = 0; i < this.villagers.length; i++) {
+      if (this.villagers[i]._id === villager._id) {
+        this.villagers[i] = villager;
+        break;
+      }
+    }
+  }
   
   showAlert(txt: string, callback: Function) {
     let alert = this.alertCtrl.create({
