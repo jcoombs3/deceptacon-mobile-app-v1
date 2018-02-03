@@ -168,6 +168,36 @@ export class GamePage {
     });
   }
   
+  changeSeats(game) {
+    let alert = this.alertCtrl.create({
+      title: 'Add/Remove Seats',
+      inputs: [{
+        name: 'seats',
+        placeholder: this.seats,
+        type: 'number'
+      }],
+      buttons: [{
+        text: 'Cancel',
+        role: 'cancel',
+        handler: data => {
+          console.log('Cancel clicked');
+        }
+      }, {
+        text: 'Update',
+        handler: data => {
+          const game = this.circle.game;
+          if (parseInt(data.seats) < parseInt(game.villagers.length) + parseInt(game.placeholders.length) ||
+              parseInt(data.seats) === 0) {
+            console.log('no can do');
+          } else {
+            console.log('can do');
+          }
+        }
+      }]
+    });
+    alert.present();
+  }
+  
   leaveGame(villager: any) {
     this.showKickAlert(`Leaving ${this.circle.name}`, villager);
   }

@@ -40,6 +40,10 @@
               (click)="addPlaceholder()">
         + Placeholder
       </button>
+      <button ion-button *ngIf="isMod && !circle.game.status.active"
+              (click)="changeSeats()">
+        +/- Seats
+      </button>
     </div>
     <div class="game-villagers">
       <h2>Villagers</h2>
