@@ -7,6 +7,7 @@ import { Storage } from '@ionic/storage';
 import { HomePage } from '../../pages/home/home';
 import { ProfilePage } from '../../pages/profile/profile';
 import { GamePage } from '../../pages/game/game';
+import { AdminPage } from '../../pages/admin/admin';
 
 // PAGES
 import { GameSurveyModal } from '../../modals/game-survey/game-survey';
@@ -74,6 +75,8 @@ export class DeceptaconFooter {
   unsubscribeEvents(user: any) {
     this.events.unsubscribe(`villager-removed-${user._id}`);
     this.socket.removeListener(`villager-removed-${user._id}`);
+    this.events.unsubscribe(`villager-rights-${user._id}`);
+    this.socket.removeListener(`villager-rights-${user._id}`);
     if (this.user.currentGame) {
       this.socket.removeListener(`game-begin-${this.user.currentGame._id}`);
       this.socket.removeListener(`game-ended-${this.user.currentGame._id}`);
@@ -87,6 +90,27 @@ export class DeceptaconFooter {
     this.socket.on(`villager-removed-${this.user._id}`, (data) => {
       console.log('event: villager:removed', 'DeceptaconFooter');
       this.removeVillagerLogic(data);
+    });
+    this.events.subscribe(`villager-rights-${this.user._id}`, (data) => {
+      this.user.isAdmin = data.isAdmin;
+      this.user.isMod = data.isMod;
+      this.storage.set('user', this.user);
+      this.showToast(`Your rights have updated`, '');
+      let active = this.nav.last().instance instanceof AdminPage;
+      if (active) {
+        this.goToHome();
+      } 
+    });
+    this.socket.on(`villager-rights-${this.user._id}`, (data) => {
+      console.log('event: villager:rights', 'DeceptaconFooter');
+      this.user.isAdmin = data.isAdmin;
+      this.user.isMod = data.isMod;
+      this.storage.set('user', this.user);
+      this.showToast(`Your rights have updated`, '');
+      let active = this.nav.last().instance instanceof AdminPage;
+      if (active) {
+        this.goToHome();
+      } 
     });
     if (this.user.currentGame) {
       let game = this.user.currentGame.game;

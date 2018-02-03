@@ -10,7 +10,7 @@
   <h1 *ngIf="villager">Welcome {{villager.fullname}}</h1>
   <button ion-button (click)="goToCircles()">Circles</button>
   <button ion-button (click)="goToVillagers()">Villagers</button>
-  <button ion-button (click)="goToAdmin()" *ngIf="villager.isAdmin">Admin</button>
+  <button ion-button (click)="goToAdmin()" *ngIf="villager.isAdmin || villager.isMod">Admin</button>
   
   <br/>
   <br/>

@@ -19,12 +19,15 @@ export class HomePage {
     public navCtrl: NavController,
     private storage: Storage,
     private events: Events
-  ) {
+  ) {}
+  
+  ionViewWillEnter() {
     this.storage.get('user').then(data => {
       if (data) {
+        console.log(data);
         this.villager = data;
       }
-    });  
+    }); 
   }
   
   goToCircles() {
@@ -41,6 +44,7 @@ export class HomePage {
   
   logout() {
     this.storage.set('user', null);
+    this.storage.set('security', null);
     this.events.publish('user:loggedout', null);
     this.navCtrl.setRoot(LoginPage);
   }

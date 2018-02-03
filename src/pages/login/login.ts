@@ -49,7 +49,12 @@ export class LoginPage {
     this.storage.get('user').then(data => {
       if (data) {
         this.villager = data;
-        this.loginService();
+        this.storage.get('security').then(securityData => {
+          if (securityData) {
+            this.villager.pin = securityData;
+            this.loginService();
+          }
+        });
       }
     });
   }
@@ -154,7 +159,7 @@ export class LoginPage {
   
   authenticate(villager: any) {
     if (this.villager.pin) {
-      villager.pin = this.villager.pin;
+      this.storage.set('security', this.villager.pin);
     }
     this.storage.set('user', villager);
     this.events.publish('user:authenticated', villager);

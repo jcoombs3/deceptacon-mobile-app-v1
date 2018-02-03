@@ -15,7 +15,7 @@
     </ion-row>
     <ion-row *ngFor="let villager of villagers | sortVillagers" class="row-villager">
       <ion-col col-3>
-        <button class="btn-admin" ion-button [ngClass]="{'active': villager.isAdmin}"
+        <button class="btn-admin" ion-button [ngClass]="{'active': villager.isAdmin, 'inactive': !user.isAdmin}"
                 (click)="toggleAdminRights(villager)">
           <img [src]="assets.assetsUrl + 'checkmark.png'">
         </button>
