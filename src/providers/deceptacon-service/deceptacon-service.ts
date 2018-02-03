@@ -107,6 +107,12 @@ export class DeceptaconService {
       .catch(this.handleError);
   }
   
+  updateGameDetails(arr: any) {
+    return this.http.post(this.deceptaconUrl + '/game/update', arr)
+      .map(res => res.json())
+      .catch(this.handleError);
+  }
+  
   beginGame(arr: any) {
     return this.http.post(this.deceptaconUrl + '/game/begin', arr)
       .map(res => res.json())

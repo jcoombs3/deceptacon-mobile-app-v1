@@ -24,10 +24,14 @@ export class HomePage {
   ionViewWillEnter() {
     this.storage.get('user').then(data => {
       if (data) {
-        console.log(data);
         this.villager = data;
       }
     }); 
+  }
+  
+  doRefresh(refresher) {
+    this.ionViewWillEnter();
+    refresher.complete();
   }
   
   goToCircles() {

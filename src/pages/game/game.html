@@ -8,6 +8,14 @@
 
 <ion-content padding class="has-footer">
   
+  <ion-refresher (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content
+      pullingIcon="arrow-dropdown"
+      pullingText="Pull to refresh"
+      refreshingSpinner="circles">
+    </ion-refresher-content>
+  </ion-refresher>
+  
   <div *ngIf="circle.game">
     <div class="game-header clearfix">
       <div class="game-status">

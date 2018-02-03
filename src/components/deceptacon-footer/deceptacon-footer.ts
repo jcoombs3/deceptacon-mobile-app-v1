@@ -68,6 +68,7 @@ export class DeceptaconFooter {
     this.events.subscribe('user:loggedout', (user) => {
       console.log('event: user:loggedout', 'DeceptaconFooter');
       this.socket.removeAllListeners();
+      this.unsubscribeEvents(this.user);
       this.user = user;
     });
   }
@@ -77,9 +78,9 @@ export class DeceptaconFooter {
     this.socket.removeListener(`villager-removed-${user._id}`);
     this.events.unsubscribe(`villager-rights-${user._id}`);
     this.socket.removeListener(`villager-rights-${user._id}`);
-    if (this.user.currentGame) {
-      this.socket.removeListener(`game-begin-${this.user.currentGame._id}`);
-      this.socket.removeListener(`game-ended-${this.user.currentGame._id}`);
+    if (user.currentGame) {
+      this.socket.removeListener(`game-begin-${user.currentGame._id}`);
+      this.socket.removeListener(`game-ended-${user.currentGame._id}`);
     }
   }
   
@@ -114,6 +115,8 @@ export class DeceptaconFooter {
     });
     if (this.user.currentGame) {
       let game = this.user.currentGame.game;
+      this.socket.removeListener(`game-begin-${game._id}`);
+      this.socket.removeListener(`game-ended-${game._id}`);
       this.socket.on(`game-begin-${game._id}`, (data) => {
         console.log('event: game:begin', 'DeceptaconFooter');
         this.showToast(`${this.user.currentGame.name}'s game has started`, '');

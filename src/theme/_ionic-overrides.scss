@@ -42,6 +42,21 @@ button {
 ion-content {
   @include linear-gradient-bottom-diagonal-three(color($gradient_shine, start), color($gradient_shine, middle), color($gradient_shine, end));
   color: inherit !important;
+  
+  .fixed-content {
+    @include linear-gradient-bottom-diagonal-three(lighten(color($login, primary), 10%), lighten(color($login, primary), 5%), color($login, primary));
+    
+  }
+  
+  .scroll-content {
+    background: inherit;
+    border: none !important;
+  }
+  
+  ion-refresher, ion-refresher-content, 
+  .refresher-pulling-icon, .refresher-pulling-text {
+    color: color($colors, white);
+  }
 }
 
 // ion-toast

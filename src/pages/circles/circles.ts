@@ -44,6 +44,20 @@ export class CirclesPage {
     this.unsubscribeToEvents();
   }
   
+  doRefresh(refresher) {
+    this.unsubscribeToEvents();
+    this.deceptaconService.getCircles().subscribe(data => {
+      this.circles = data;
+      this.setEventListeners();
+      this.checkIfMod();
+      this.checkIfInGame();
+      refresher.complete();
+    }, error => {
+      console.log('++ error');
+      refresher.complete();
+    });
+  }
+  
   getCircles() {
     this.unsubscribeToEvents();
     this.deceptaconService.getCircles().subscribe(data => {
@@ -190,6 +204,7 @@ export class CirclesPage {
   }
   
   updateCircle(iCircle: any) {
+    console.log('++ updateCircle');
     for (let i = 0; i < this.circles.length; i++) {
       if (this.circles[i]._id === iCircle._id) {
         this.circles[i] = iCircle;

@@ -50,6 +50,20 @@ export class GamePage {
     this.unsubscribeToEvents();
   }
   
+  doRefresh(refresher) {
+    if (this.circle.game) {
+      this.deceptaconService.getGame(this.circle.game._id).subscribe(data => {
+        this.circle.game = data;
+        this.checkIfInGame();
+        refresher.complete();
+      }, error => {
+        console.log('++ error');
+      });
+    } else {
+      refresher.complete();
+    }
+  }
+  
   setEventListeners() {
     const iThis = this;
     this.events.subscribe(`circle-updated-${this.circle._id}`, function(circle) {
@@ -168,9 +182,9 @@ export class GamePage {
     });
   }
   
-  changeSeats(game) {
+  changeSeats() {
     let alert = this.alertCtrl.create({
-      title: 'Add/Remove Seats',
+      title: 'New Seat #',
       inputs: [{
         name: 'seats',
         placeholder: this.seats,
@@ -190,12 +204,30 @@ export class GamePage {
               parseInt(data.seats) === 0) {
             console.log('no can do');
           } else {
-            console.log('can do');
+            this.updateGameDetails(game, data.seats);
           }
         }
       }]
     });
     alert.present();
+  }
+  
+  updateGameDetails(game: any, seats: Number) {
+    let arr = {
+      gameId: game._id,
+      seats: seats
+    };
+    this.deceptaconService.updateGameDetails(arr)
+      .subscribe(data => {
+        this.circle.game = data;
+        this.checkIfInGame();
+        this.socket.emit('com.deceptacon.event', {
+          event: `circle-updated-${this.circle._id}`,
+          data: this.circle
+        });
+      }, error => {
+        console.log('++ error');
+      });
   }
   
   leaveGame(villager: any) {

@@ -36,7 +36,6 @@ export class VillagersPage {
     this.deceptaconService.getVillagers()
       .subscribe(data => {
         this.villagers = data;
-      console.log(this.villagers);
       }, error => {
       
       });

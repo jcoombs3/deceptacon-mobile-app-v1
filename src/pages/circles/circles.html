@@ -7,6 +7,15 @@
 </ion-header>
 
 <ion-content class="has-footer">
+  
+  <ion-refresher (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content
+      pullingIcon="arrow-dropdown"
+      pullingText="Pull to refresh"
+      refreshingSpinner="circles">
+    </ion-refresher-content>
+  </ion-refresher>
+  
   <div class="circle" *ngFor="let circle of circles">
     <div>{{circle.name}}</div>
     <div *ngIf="circle.moderator">

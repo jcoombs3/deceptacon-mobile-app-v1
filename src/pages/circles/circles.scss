@@ -2,6 +2,6 @@ page-circles {
   
   .circle {
     padding: 10px;
-    border-bottom: 2px solid red;
+    border-bottom: 2px solid color($colors, primary);
   }
 }

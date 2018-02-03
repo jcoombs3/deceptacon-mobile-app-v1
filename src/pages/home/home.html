@@ -6,7 +6,16 @@
   </ion-navbar>
 </ion-header>
 
-<ion-content>
+<ion-content class="has-footer">
+  
+  <ion-refresher (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content
+      pullingIcon="arrow-dropdown"
+      pullingText="Pull to refresh"
+      refreshingSpinner="circles">
+    </ion-refresher-content>
+  </ion-refresher>
+  
   <h1 *ngIf="villager">Welcome {{villager.fullname}}</h1>
   <button ion-button (click)="goToCircles()">Circles</button>
   <button ion-button (click)="goToVillagers()">Villagers</button>
