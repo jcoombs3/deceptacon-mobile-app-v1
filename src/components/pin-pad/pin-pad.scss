@@ -45,12 +45,12 @@ pin-pad {
       border: 2px solid darken(color($colors, white), 15%);
       background: color($colors, primary);
       color: color($colors, white);
-      width: 50px;
-      height: 50px;
+      width: 55px;
+      height: 55px;
     
       @include media($Mobile_sm...) {
-        width: 45px;
-        height: 45px;
+        width: 50px;
+        height: 50px;
       }
       
       &:active {

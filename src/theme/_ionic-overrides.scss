@@ -19,6 +19,7 @@
 }
 
 .bar-buttons button {
+  font-weight: bold;
   color: color($colors, white);
   
   &[icon-only] {
@@ -40,12 +41,11 @@ button {
 // ion-content 
 
 ion-content {
-  @include linear-gradient-bottom-diagonal-three(color($gradient_shine, start), color($gradient_shine, middle), color($gradient_shine, end));
+  @include linear-gradient-bottom-diagonal-three(lighten(color($colors, special), 15%), lighten(color($colors, special), 10%), lighten(color($colors, special), 5%));
   color: inherit !important;
   
   .fixed-content {
     @include linear-gradient-bottom-diagonal-three(lighten(color($login, primary), 10%), lighten(color($login, primary), 5%), color($login, primary));
-    
   }
   
   .scroll-content {

@@ -4,6 +4,7 @@
   ion-footer .toolbar-background {
     background: darken(color($login, primary), 15%);
     color: color($colors, white);
+    @include box-shadow(0 1px 3px darken(color($login, primary), 40%));
   }
   
   ion-content {
@@ -19,7 +20,7 @@
   
   ion-header .toolbar-background, 
   ion-footer .toolbar-background {
-    background: color($colors, white);
+    background: color($colors, special);
     color: color($colors, primary);
   }
   
@@ -28,7 +29,7 @@
   }
   
   ion-content {
-    @include linear-gradient-bottom-diagonal-three($bg-white, darken($bg-white, 5%), darken($bg-white, 10%));
+    @include linear-gradient-bottom-diagonal-three(lighten(color($colors, special), 15%), lighten(color($colors, special), 10%), lighten(color($colors, special), 5%));
   }
   
   .label, ion-input, a {

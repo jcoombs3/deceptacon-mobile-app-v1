@@ -8,14 +8,7 @@ page-villagers {
   li {
     padding: 0 16px;
     margin: 0;
-    background: lighten(color($colors, secondary), 15%);
     position: relative;
-    border-bottom: 2px solid black;
-  }
-  
-  villager-detail {
-    @include linear-gradient-bottom-diagonal-three(lighten(color($colors, secondary), 20%), lighten(color($colors, secondary), 15%), lighten(color($colors, secondary), 5%));
-    padding-right: 50px;
-    position: relative;
+    border-bottom: 2px solid color($colors, primary);
   }
 }

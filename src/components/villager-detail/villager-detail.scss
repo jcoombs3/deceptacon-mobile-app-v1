@@ -2,6 +2,14 @@ villager-detail {
   display: table;
   width: 100%;
   padding: 15px;
+  @include linear-gradient-bottom-diagonal-three(lighten(color($colors, special), 15%), lighten(color($colors, special), 10%), lighten(color($colors, special), 5%));
+  color: color($colors, primary);
+  font-size: 16px;
+  font-weight: bold;
+    
+  @include media($Mobile_sm...) {
+    font-size: 13px;
+  }
   
   .profile-pic {
     width: 60px;

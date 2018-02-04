@@ -6,7 +6,7 @@ profile-pic {
     position: relative;
     border-radius: 10px;
     overflow: hidden;
-    border: 2px solid darken(color($colors, white), 15%);
+    border: 2px solid color($colors, primary);
   }
   
   img {
