@@ -23,7 +23,6 @@ export class RoleStat {
   calculateWinPercent() {
     if (this.role.amount && this.role.wins > 0) {
       this.winPercent = (this.role.wins / this.role.amount)*100;
-      console.log(this.winPercent);
       this.lossPercent = 100 - ((this.role.wins / this.role.amount)*100);
     }
     this.parseIntWin = parseInt(this.winPercent);

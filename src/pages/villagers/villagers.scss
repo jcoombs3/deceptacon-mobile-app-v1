@@ -11,4 +11,20 @@ page-villagers {
     position: relative;
     border-bottom: 2px solid color($colors, primary);
   }
+  
+  .input-container {
+    background: color($colors, primary);
+    padding: 16px 16px 30px;
+    border-bottom: 2px solid color($colors, primary);
+    position: sticky;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 5;
+    @include box-shadow-primary();
+    
+    .label, .input {
+      color: color($colors, white);
+    }
+  }
 }

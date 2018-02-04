@@ -7,6 +7,14 @@
 </ion-header>
 
 <ion-content class="has-footer">
+  <div class="input-container">
+    <ion-item>
+      <ion-label stacked color="primary">Search by Name</ion-label>
+      <ion-input type="text" name="fullname" ngModel #fullname="ngModel" required 
+                 autocomplete="off" autocorrect="off" autocapitalize="on" spellcheck="false">
+      </ion-input>
+    </ion-item>
+  </div>
   <ul> 
     <li *ngFor="let villager of villagers | sortVillagers">
       <villager-detail [villager]="villager" (click)="goToProfile(villager)"></villager-detail>
