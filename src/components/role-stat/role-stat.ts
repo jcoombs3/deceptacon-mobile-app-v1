@@ -7,34 +7,24 @@ import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
 export class RoleStat {
   @Input() role: any = {amount: 1};
   @Input() max: number = 1;
-  percent: string = '0%';
-  winPercent: Number = 0;
-  parseIntWin: Number = 0;
-  lossPercent: Number = 100;
-  parseIntLoss: Number = 100;
+  winPercent: any = 0;
+  parseIntWin: any = 0;
+  lossPercent: any = 100;
+  parseIntLoss: any = 100;
   
   constructor() {
-    this.calculateGamePercent();
     this.calculateWinPercent();
   }
 
   ngOnChanges(changes: SimpleChanges) {
-    this.calculateGamePercent();
     this.calculateWinPercent();
   }
   
-  calculateGamePercent() {
-    if (this.role && this.max) {
-      this.percent = (this.role.amount / this.max)*100 + '%';
-    }
-  }
-  
   calculateWinPercent() {
-    if (this.role.amount) {
-      if (this.role.wins > 0) {
-        this.winPercent = parseInt((parseInt(this.role.wins) / parseInt(this.role.amount)*100));
-        this.lossPercent = parseInt(100 - parseInt(this.winPercent));
-      }
+    if (this.role.amount && this.role.wins > 0) {
+      this.winPercent = (this.role.wins / this.role.amount)*100;
+      console.log(this.winPercent);
+      this.lossPercent = 100 - ((this.role.wins / this.role.amount)*100);
     }
     this.parseIntWin = parseInt(this.winPercent);
     this.parseIntLoss = parseInt(this.lossPercent);

@@ -7,8 +7,14 @@
 .bg-cyan {
   @include linear-gradient-bottom-diagonal-three(lighten($bg-cyan, 20%), lighten($bg-cyan, 10%), $bg-cyan);
 }
+.bg-orange {
+  @include linear-gradient-bottom-diagonal-three(lighten($bg-orange, 20%), lighten($bg-orange, 10%), $bg-orange);
+}
 .bg-green {
   @include linear-gradient-bottom-diagonal-three(lighten($bg-green, 30%), lighten($bg-green, 20%), $bg-green);
+}
+.bg-purple {
+  @include linear-gradient-bottom-diagonal-three(lighten($bg-purple, 20%), lighten($bg-purple, 10%), $bg-purple);
 }
 .bg-white {
   @include linear-gradient-bottom-diagonal-three($bg-white, darken($bg-white, 2%), darken($bg-white, 4%));
@@ -50,9 +56,6 @@
 }
 .bg-tan {
   @include linear-gradient-bottom-diagonal-three(lighten($bg-tan, 20%), lighten($bg-tan, 10%), $bg-tan);
-}
-.bg-orange {
-  @include linear-gradient-bottom-diagonal-three(lighten($bg-orange, 20%), lighten($bg-orange, 10%), $bg-orange);
 }
 .bg-blue {
   @include linear-gradient-bottom-diagonal-three(lighten($bg-blue, 20%), lighten($bg-blue, 10%), $bg-blue);

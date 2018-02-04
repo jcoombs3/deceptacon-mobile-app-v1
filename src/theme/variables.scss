@@ -47,12 +47,13 @@ $login: (
 );
 
 $profile: (
-  yellow: #F0F757,
-  magenta: #F23785,
-  cyan: #C0FDFB,
-  green: #6BF98F,
+  yellow: #EFEA5A, //#F0F757,
+  magenta: #F44E3F,
+  cyan: #498CCC,
+  green: #16DB93,
   white: #FFFFFF,
-  
+  orange: #FF6C3F,
+  purple: #5654D3,
   
   
   
@@ -61,9 +62,8 @@ $profile: (
   
   darkblue: color($colors, primary),
   tan: color($colors, secondary),
-  orange: #FE5D26,
   blue: #507DBC,
-  black: #262322,
+  black: #211A1D,
   gray: #91818A,
 );
 
@@ -80,13 +80,14 @@ $bg-yellow: color($profile, yellow);
 $bg-magenta: color($profile, magenta);
 $bg-cyan: color($profile, cyan);
 $bg-green: color($profile, green);
+$bg-orange: color($profile, orange);
+$bg-purple: color($profile, purple);
 $bg-white: color($profile, white);
+$bg-black: color($profile, black);
 
 $bg-darkblue: color($profile, darkblue);
 $bg-tan: color($profile, tan);
-$bg-orange: color($profile, orange);
 $bg-blue: color($profile, blue);
-$bg-black: color($profile, black);
 $bg-gray: color($profile, gray);
 
 $gradient_shine: (
