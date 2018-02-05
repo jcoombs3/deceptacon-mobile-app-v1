@@ -8,14 +8,15 @@
 
 <ion-content class="has-footer">
   <div class="input-container">
-    <ion-item>
+    <ion-spinner *ngIf="!villagers" name="crescent"></ion-spinner>
+    <ion-item *ngIf="villagers">
       <ion-label stacked color="primary">Search by Name</ion-label>
-      <ion-input type="text" name="fullname" ngModel #fullname="ngModel" required 
+      <ion-input type="text" [value]="search" (input)="searchVillagers($event.target.value)"
                  autocomplete="off" autocorrect="off" autocapitalize="on" spellcheck="false">
       </ion-input>
     </ion-item>
   </div>
-  <ul> 
+  <ul *ngIf="villagers"> 
     <li *ngFor="let villager of villagers | sortVillagers">
       <villager-detail [villager]="villager" (click)="goToProfile(villager)"></villager-detail>
     </li>

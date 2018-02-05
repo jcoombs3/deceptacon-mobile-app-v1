@@ -14,7 +14,8 @@ import { DeceptaconService } from '../../providers/deceptacon-service/deceptacon
 })
 export class VillagersPage {
   user: any = {};
-  villagers: any = [];
+  villagers: any = null;
+  search: string = '';
   
   constructor(
     public navCtrl: NavController,
@@ -39,6 +40,10 @@ export class VillagersPage {
       }, error => {
       
       });
+  }
+  
+  searchVillagers(value) {
+    this.search = value;
   }
   
   goToProfile(villager: any) {

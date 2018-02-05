@@ -21,10 +21,19 @@ page-villagers {
     left: 0;
     width: 100%;
     z-index: 5;
+    min-height: 118px;
     @include box-shadow-primary();
     
     .label, .input {
       color: color($colors, white);
     }
+  }
+  
+  ion-spinner {
+    @include absolute-center(40px, 40px);
+  }
+  
+  .spinner-ios-crescent circle {
+    stroke: color($colors, white);
   }
 }
