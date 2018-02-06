@@ -79,5 +79,9 @@ deceptacon-footer {
 }
 
 ion-content.has-footer .scroll-content {
-  padding-bottom: 55px !important;
+  padding-bottom: 90px !important; //55px !important;
+}
+
+ion-content.bg-secondary .scroll-content {
+  background: color($colors, secondary);
 }

@@ -42,7 +42,6 @@ export class ProfilePage {
       .subscribe(data => {
         this.villager = data;
         this.gameHistory = data.gameHistory ? data.gameHistory : [];
-        console.log(this.gameHistory);
         this.loaded = true;
       }, error => {
       
@@ -64,10 +63,8 @@ export class ProfilePage {
   }
   
   saveProfile() {
-    console.log(this.villager);
     this.deceptaconService.saveVillager(this.villager)
       .subscribe(data => {
-        console.log('success');
         this.storage.set('user', data);
         this.user = data;
         this.villager = data;

@@ -3,7 +3,11 @@ role-stat {
   $progressBarHeight: 12px;
   
   .role-stat {
-    padding: 8px 16px;
+    padding: 16px 16px 0px;
+  }
+    
+  &:last-child .role-stat {
+    padding-bottom: 16px;
   }
   
   .role-name {

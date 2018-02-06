@@ -1,13 +1,34 @@
-<ion-list class="game-list">
-  <ion-item *ngFor="let game of games">
-    <div>Timestamp: {{game.timestamp | date:'EEE, h:mmaa'}}</div>
-    <div>Moderator: {{game.moderator.fullname}}</div>
-    <div *ngIf="game.userDetails.winner">
-      Winner: {{game.userDetails.winner.name}}
-    </div>
-    <div *ngIf="game.userDetails[villager._id]">
-      <div>Role: {{game.userDetails[villager._id].role.name}}</div>
-      <div>Alignment: {{game.userDetails[villager._id].alignment.name}}</div>
-    </div>
-  </ion-item>
-</ion-list>
+<div *ngFor="let game of games | sortGames" class="game-item">
+  <ion-grid>
+    <ion-row>
+      <ion-col col-6 class="circle">
+        {{game.circle}}
+      </ion-col>
+      <ion-col col-6 class="timestamp">
+        {{game.timestamp | date:'EEE, h:mmaa'}}
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col col-12 class="moderator">
+        Moderator: {{game.moderator.fullname}}
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col col-12 class="winner" *ngIf="game.userDetails.winner">
+        Winner: {{game.userDetails.winner.name}}
+      </ion-col>
+    </ion-row>
+    <ion-row class="role" [ngClass]="{
+      'role-good': game.userDetails[villager._id].alignment.name === 'Good',
+      'role-evil': game.userDetails[villager._id].alignment.name === 'Evil',
+      'role-vampire': game.userDetails[villager._id].alignment.name === 'Vampire',
+      'role-cult': game.userDetails[villager._id].alignment.name === 'Cult',
+      'role-neutral': game.userDetails[villager._id].alignment.name === 'Neutral',
+      'role-other': game.userDetails[villager._id].alignment.name === 'Other'
+    }" *ngIf="game.userDetails[villager._id]">
+      <ion-col col-12>
+        {{game.userDetails[villager._id].role.name}} ({{game.userDetails[villager._id].alignment.name}})
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</div>

@@ -9,6 +9,10 @@ page-admin {
   
   .row {
     border-bottom: 2px solid color($colors, white);
+    
+    &:last-child {
+      border-bottom: 5px solid color($colors, white);
+    }
   }
   
   .col:first-child {

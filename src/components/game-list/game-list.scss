@@ -1,3 +1,60 @@
 game-list {
- 
+  
+  .game-item {
+    padding: 16px;
+    border-bottom: 2px solid color($colors, primary);
+    @include linear-gradient-bottom-diagonal-three(lighten(color($colors, special), 15%), lighten(color($colors, special), 10%), lighten(color($colors, special), 5%));
+    
+    ion-grid, ion-row, ion-col
+    .grid, .row, .col {
+      padding: 0px;
+      margin: 0;
+    }
+    
+    .role {
+      padding-top: 16px;
+    }
+  }
+  
+  .circle {
+    text-align: left;   
+    font-weight: bold;
+    font-size: 16px;
+    color: color($colors, primary);
+  }
+  
+  .timestamp {
+    text-align: right;
+    color: color($colors, primary);
+    font-weight: bold;
+  }
+  
+  .role {
+    font-weight: bold;
+    font-size: 16px;
+  }
+  
+  .role-good {
+    color: color($werewolf, good);
+  }
+  
+  .role-evil {
+    color: color($werewolf, evil);
+  }
+  
+  .role-vampire {
+    color: color($werewolf, vampire);
+  }
+  
+  .role-cult {
+    color: color($werewolf, cult);
+  }
+  
+  .role-neutral {
+    color: color($werewolf, neutral);
+  }
+  
+  .role-other {
+    color: color($werewolf, other);
+  }
 }
