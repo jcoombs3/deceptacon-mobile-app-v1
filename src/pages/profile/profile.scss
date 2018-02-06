@@ -30,18 +30,15 @@ page-profile {
         border-bottom-right-radius: 0px;
         border: 2px solid color($colors, primary);
         border-bottom: none;
+        background: color($colors, secondary);
       
         @include media($Mobile_sm...) { 
           width: 75px;
         }
         
         &.active {
-          background: lighten(color($colors, primary), 20%);
+          background: color($colors, primary);
         }
-      }
-      
-      .btn-disabled {
-        background: gray;
       }
       
       button:first-child {

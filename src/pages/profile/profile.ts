@@ -42,6 +42,7 @@ export class ProfilePage {
       .subscribe(data => {
         this.villager = data;
         this.gameHistory = data.gameHistory ? data.gameHistory : [];
+        console.log(this.gameHistory);
         this.loaded = true;
       }, error => {
       
@@ -80,13 +81,6 @@ export class ProfilePage {
   }
   
   goToGames() {
-    let toast = this.toastCtrl.create({
-      message: 'Game List is disabled this beta',
-      duration: 2000,
-      position: 'top',
-      showCloseButton: true,
-      cssClass: 'error'
-    });
-    toast.present();
+    this.showRoles = false;
   }
 }

@@ -12,7 +12,7 @@
     <profile-pic [picture]="villager.picture" [color]="villager.color" (click)="editProfilePic()"></profile-pic>
     <div class="button-container">
       <button ion-button (click)="goToRoles()" [ngClass]="{'active': showRoles}">Roles</button>
-      <button ion-button class="btn-disabled" (click)="goToGames()" [ngClass]="{'active': !showRoles}">Games</button>
+      <button ion-button (click)="goToGames()" [ngClass]="{'active': !showRoles}">Games</button>
     </div>
   </div>
   
@@ -23,6 +23,6 @@
   
   <div class="profile-content" *ngIf="loaded">
     <game-data [games]="gameHistory" [villager]="villager" [ngClass]="{'hide': !showRoles}"></game-data>
-<!--    <game-list [games]="gameHistory" [villager]="villager" [ngClass]="{'hide': showRoles}"></game-list>-->
+    <game-list [games]="gameHistory" [villager]="villager" [ngClass]="{'hide': showRoles}"></game-list>
   </div>
 </ion-content>
