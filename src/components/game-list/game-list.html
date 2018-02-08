@@ -10,7 +10,7 @@
     </ion-row>
     <ion-row>
       <ion-col col-12 class="moderator">
-        Moderator: {{game.moderator.fullname}}
+        Moderator: {{game.moderator.fullname}} <span *ngIf="game.moderator._id === villager._id">(Me)</span>
       </ion-col>
     </ion-row>
     <ion-row>

@@ -17,7 +17,7 @@
     </ion-item>
   </div>
   <ul *ngIf="villagers"> 
-    <li *ngFor="let villager of villagers | sortVillagers">
+    <li *ngFor="let villager of villagers">
       <villager-detail [villager]="villager" (click)="goToProfile(villager)"></villager-detail>
     </li>
   </ul>

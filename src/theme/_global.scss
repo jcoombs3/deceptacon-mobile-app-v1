@@ -18,6 +18,15 @@ a {
   font-size: 12px;
 }
 
+button[ion-button].ion-button-secondary {
+  background: color($colors, secondary);
+  color: color($colors, white);
+  
+  &:active {
+    background: lighten(color($colors, secondary), 5%);
+  }
+}
+
 button[ion-button].ion-button-special {
   @include linear-gradient-bottom-diagonal-three(color($colors, white), darken(color($colors, white), 3%), darken(color($colors, white), 6%));
   color: $bg-darkblue;

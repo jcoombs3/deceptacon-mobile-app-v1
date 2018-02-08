@@ -38,6 +38,17 @@ button {
   font-family: 'Avenir';
 }
 
+.text-input::-moz-placeholder {
+  color: color($colors, white);
+}
+.text-input:-ms-input-placeholder {
+  color: color($colors, white);
+}
+.text-input::-webkit-input-placeholder {
+  text-indent: 0;
+  color: color($colors, white);
+}
+
 // ion-content 
 
 ion-content {

@@ -87,7 +87,6 @@ export class GamePage {
   }
   
   unsubscribeToEvents() {
-    console.log('++ unsubscribeToEvents()');
     this.events.unsubscribe(`circle-updated-${this.circle._id}`);
     this.socket.removeListener(`circle-updated-${this.circle._id}`);
     this.socket.removeListener(`villager-joined-${this.circle._id}`);

@@ -7,28 +7,36 @@
 </ion-header>
 
 <ion-content class="has-footer bg-secondary">
-  <ion-grid>
-    <ion-row class="admin-keys">
-      <ion-col class="key-admin" col-2>Admins</ion-col>
-      <ion-col class="key-name" col-8>Villagers</ion-col>
-      <ion-col class="key-mod" col-2>Mods</ion-col>
-    </ion-row>
-    <ion-row *ngFor="let villager of villagers | sortVillagers" class="row-villager">
-      <ion-col col-2>
-        <button class="btn-admin" ion-button [ngClass]="{'active': villager.isAdmin, 'inactive': !user.isAdmin}"
-                (click)="toggleAdminRights(villager)">
-          <img [src]="assets.assetsUrl + 'checkmark.png'">
-        </button>
-      </ion-col>
-      <ion-col col-8>
-        <villager-detail [villager]="villager"></villager-detail>
-      </ion-col>
-      <ion-col col-2>
-        <button class="btn-mod" ion-button [ngClass]="{'active': villager.isMod}"
-                (click)="toggleModRights(villager)">
-          <img [src]="assets.assetsUrl + 'checkmark.png'">
-        </button>
-      </ion-col>
-    </ion-row>
-  </ion-grid>
+  <div class="admin-key-container">
+    <ion-grid>
+      <ion-row class="admin-keys">
+        <ion-col class="key-admin" col-2>Admins</ion-col>
+        <ion-col class="key-name" col-8>Villagers</ion-col>
+        <ion-col class="key-mod" col-2>Mods</ion-col>
+      </ion-row>
+    </ion-grid>
+  </div>
+  <div class="villagers-container">
+    <ion-grid>
+      <ion-row *ngFor="let villager of villagers | sortVillagers" class="row-villager">
+        <ion-col col-2>
+          <button class="btn-admin" ion-button [ngClass]="{'active': villager.isAdmin, 'inactive': !user.isAdmin}"
+                  (click)="toggleAdminRights(villager)">
+            <img [src]="assets.assetsUrl + 'checkmark.png'">
+          </button>
+        </ion-col>
+        <ion-col col-8>
+          <villager-detail [villager]="villager"></villager-detail>
+        </ion-col>
+        <ion-col col-2>
+          <button class="btn-mod" ion-button [ngClass]="{'active': villager.isMod}"
+                  (click)="toggleModRights(villager)">
+            <img [src]="assets.assetsUrl + 'checkmark.png'">
+          </button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </div>
+    
+    
 </ion-content>

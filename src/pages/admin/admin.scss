@@ -7,6 +7,14 @@ page-admin {
     padding: 0;
   }
   
+  .admin-key-container {
+    position: sticky;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 5;
+  }
+  
   .row {
     border-bottom: 2px solid color($colors, white);
     
@@ -26,9 +34,6 @@ page-admin {
   .admin-keys {
     color: color($colors, white);
     text-align: center;
-    position: sticky;
-    top: 0;
-    left: 0;
     
     .key-admin, .key-mod {
       padding: 16px 0px;

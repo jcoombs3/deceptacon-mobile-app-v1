@@ -7,6 +7,44 @@ page-game {
     border-bottom: 2px solid black;
   }
   
+  .input-seats-introductory {
+    margin-top: 0;
+    margin-bottom: 16px;
+    text-align: center;
+  }
+  
+  .input-seats {
+    background: color($colors, primary);
+    color: color($colors, white);
+    width: 250px;
+    height: 250px;
+    margin: 0 auto;
+    border-radius: 50%;
+    @include box-shadow-primary();
+    padding: 20px;
+    text-align: center;
+    
+    .item {
+      max-width: 130px;
+      margin: 0 auto;
+      font-size: 30px;
+      color: color($colors, white);
+    }
+    
+    input {
+      text-align: center;
+      margin: 0 0 0 5px !important;
+    }
+    
+    button {
+      margin-top: 32px;
+    }
+    
+    .label {
+      opacity: 0;
+    }
+  }
+  
   .game-moderator {
     margin: 15px 0px 35px;
   }
