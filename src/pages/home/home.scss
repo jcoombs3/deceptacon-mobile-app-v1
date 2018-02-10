@@ -30,6 +30,7 @@ page-home {
     width: 100%;
     margin: 0 auto;
     border-bottom: 2px solid color($colors, primary);
+    border-top: 5px solid color($colors, primary);
     @include box-shadow();
     position: relative;
     
@@ -52,6 +53,10 @@ page-home {
       background: transparent;
       color: color($colors, black);
       padding: 0px 10px;
+      
+      &:active {
+        background: transparent;
+      }
     }
   }
   

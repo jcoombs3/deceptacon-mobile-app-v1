@@ -24,13 +24,12 @@ export class LoginPage {
   showLogin: boolean = false;
   revealPIN: boolean = false;
   isBack: boolean = false;
+  autoLogin: boolean = false;
   villager: any = {
     pin: [],
     username: ''
   };
   @ViewChild(Slides) slides: Slides;
-  
-  // TODO: clean up isBack
 
   constructor(
     public navCtrl: NavController, 
@@ -54,6 +53,7 @@ export class LoginPage {
         this.storage.get('security').then(securityData => {
           if (securityData) {
             this.villager.pin = securityData;
+            this.autoLogin = true;
             this.loginService();
           }
         });
@@ -126,17 +126,24 @@ export class LoginPage {
         loading.dismiss();
         this.authenticate(data);
       }, error => {
-        let toast = this.toastCtrl.create({
-          message: error,
-          duration: 3000,
-          position: 'top',
-          showCloseButton: true,
-          cssClass: 'error'
-        });
-        this.revealPIN = false;
-        this.isBack = false;
-        toast.present();
         loading.dismiss();
+        if (!this.autoLogin) {
+          let toast = this.toastCtrl.create({
+            message: error,
+            duration: 3000,
+            position: 'top',
+            showCloseButton: true,
+            cssClass: 'error'
+          });
+          this.revealPIN = false;
+          this.isBack = false;
+          toast.present();
+        } else {
+          this.storage.remove('user');
+          this.storage.remove('security');
+          this.storage.remove('token');
+        }
+        this.autoLogin = false;
       });
   }
   

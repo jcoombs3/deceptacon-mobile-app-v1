@@ -54,7 +54,7 @@
       </button>
     </div>
     <div class="game-villagers">
-      <h2>Villagers</h2>
+      <h2>Participants</h2>
       <ul *ngIf="circle.game.villagers.length + circle.game.placeholders.length > 0">
         <li *ngIf="inGame && !isMod">
           <villager-detail [villager]="villager" (click)="goToProfile(villager)"></villager-detail>
