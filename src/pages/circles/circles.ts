@@ -35,6 +35,7 @@ export class CirclesPage {
     this.storage.get('user').then(data => {
       if (data) {
         this.villager = data;
+        console.log(this.villager);
         this.getCircles(); 
       }
     });

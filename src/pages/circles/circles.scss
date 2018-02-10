@@ -1,8 +1,20 @@
 page-circles {
   
   .circle {
+    min-height: 100px;
     padding: 10px;
     border-bottom: 2px solid color($colors, primary);
     @include linear-gradient-bottom-diagonal-three(lighten(color($colors, special), 15%), lighten(color($colors, special), 10%), lighten(color($colors, special), 5%));
+  }
+  
+  p {
+    color: color($colors, white);
+    text-align: center;
+    margin: 0;
+  }
+  
+  .introductory {
+    padding: 16px;
+    background: color($colors, primary);
   }
 }

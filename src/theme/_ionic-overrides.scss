@@ -74,8 +74,8 @@ ion-content {
 
 ion-toast, .toast-ios, .toast-android {
   .toast-wrapper {
-    @include linear-gradient-bottom-diagonal-three(lighten(color($colors, special), 8%), lighten(color($colors, special), 3%), color($colors, special));
-    border: 2px solid color($colors, black);
+    @include linear-gradient-bottom-diagonal-three(lighten(color($colors, secondary), 8%), lighten(color($colors, secondary), 3%), color($colors, secondary));
+    border: 2px solid color($colors, primary);
   }
   
   &.error .toast-wrapper {

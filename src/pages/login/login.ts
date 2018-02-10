@@ -5,6 +5,7 @@ import { NavController, ModalController,
 import { Storage } from '@ionic/storage';
 import { Socket } from 'ng-socket-io';
 import { NgForm } from '@angular/forms';
+import { Keyboard } from '@ionic-native/keyboard';
 
 // MODALS
 import { CreateAccountModal } from '../../modals/create-account/create-account';
@@ -41,7 +42,8 @@ export class LoginPage {
     private assets: AssetsService,
     private storage: Storage,
     private socket: Socket,
-    private events: Events
+    private events: Events,
+    private keyboard: Keyboard
   ) { }
   
   ionViewDidLoad() {
@@ -98,6 +100,7 @@ export class LoginPage {
   }
   
   onSubmit(f: NgForm) {
+    this.keyboard.close();
     this.isBack = false;
     this.villager.username = f.value.username;
     if (f.valid) {
@@ -161,6 +164,8 @@ export class LoginPage {
     if (this.villager.pin) {
       this.storage.set('security', this.villager.pin);
     }
+    this.storage.set('token', villager.token);
+    villager.token = '';
     this.storage.set('user', villager);
     this.events.publish('user:authenticated', villager);
     this.socket.emit('com.deceptacon.event', {

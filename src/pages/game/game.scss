@@ -11,6 +11,7 @@ page-game {
     margin-top: 0;
     margin-bottom: 16px;
     text-align: center;
+    color: color($colors, primary);
   }
   
   .input-seats {
@@ -75,7 +76,7 @@ page-game {
     }
     
     .game-begin {
-      background: color($colors, special);
+      background: color($colors, primary);
       border-radius: 50%;
       border-top-left-radius: 0px;
       border-top-right-radius: 0px;
@@ -83,12 +84,12 @@ page-game {
       box-sizing: content-box;
       
       &:active {
-        background: lighten(color($colors, special), 5%);
+        background: lighten(color($colors, primary), 15%);
       }
     }
     
     .game-end {
-      background: darkred;
+      background: color($colors, primary);
       border-radius: 50%;
       border-top-left-radius: 0px;
       border-top-right-radius: 0px;
@@ -96,7 +97,7 @@ page-game {
       box-sizing: content-box;
       
       &:active {
-        background: lighten(darkred, 5%);
+        background: lighten(color($colors, primary), 15%);
       }
     }
   }
@@ -142,7 +143,9 @@ page-game {
     right: 0;
     width: 70px;
     height: 100%;
-    background: orange;
+    background: $bg-orange;
+    color: color($colors, white);
+    border-left: 2px solid color($colors, white);
   }
   
   button.leave {
@@ -151,6 +154,8 @@ page-game {
     right: 0;
     width: 70px;
     height: 100%;
-    background: yellow;
+    background: $bg-yellow;
+    color: color($colors, primary);
+    border-left: 2px solid color($colors, white);
   }
 }

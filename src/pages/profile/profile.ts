@@ -63,14 +63,18 @@ export class ProfilePage {
   }
   
   saveProfile() {
-    this.deceptaconService.saveVillager(this.villager)
-      .subscribe(data => {
-        this.storage.set('user', data);
-        this.user = data;
-        this.villager = data;
-      }, error => {
-      
-      });
+    this.storage.get('token').then(token => {
+      if (token) {
+        this.deceptaconService.saveVillager(this.villager, token)
+          .subscribe(data => {
+            this.storage.set('user', data);
+            this.user = data;
+            this.villager = data;
+          }, error => {
+
+          });
+      }
+    });
   }
   
   goToRoles() {

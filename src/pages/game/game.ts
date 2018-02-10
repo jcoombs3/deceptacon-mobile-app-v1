@@ -136,7 +136,10 @@ export class GamePage {
   }
   
   createGame() {
-    if (this.seats) {
+    if (!this.seats) {
+      this.seats = 20;
+    }
+    this.showAlert(`Create game with ${this.seats}?`, () => {
       let arr = {
         villagerId: this.villager._id,
         circleId: this.circle._id,
@@ -157,9 +160,7 @@ export class GamePage {
       }, error => {
         console.log('++ error');
       });
-    } else {
-      console.log('++ no seats');
-    }
+    }); 
   }
   
   addPlaceholder() {

@@ -1,3 +1,228 @@
 page-home {
+  background: color($colors, secondary);
   
+  ion-content.has-refresher > .scroll-content {
+    background: color($colors, secondary);
+  }
+  
+  $mainHome: 25%;
+  $secondaryHome: 20%;
+  $tertiaryHome: (100% - $mainHome - ($secondaryHome*2)) / 3;
+  
+  button, h2 {
+    font-weight: bold;
+    text-transform: uppercase;
+    text-align: center;
+    font-size: 28px;
+    color: color($colors, white);
+    background: inherit;
+  }
+  
+  .header-container {
+    height: $secondaryHome;
+    width: 100%;
+    text-align: center;
+    border-radius: 50%;
+    background: color($colors, white);
+    border-top-left-radius: 0px;
+    border-top-right-radius: 0px;
+    padding: 10px 15px 15px;
+    width: 100%;
+    margin: 0 auto;
+    border-bottom: 2px solid color($colors, primary);
+    @include box-shadow();
+    position: relative;
+    
+    img {
+      max-width: 90%;
+      max-height: 90%;
+      @include vertical-align();
+      margin-left: -15px;
+    
+      @include media($iPhone_X...) {
+        max-width: 75%;
+      }
+    }
+    
+    .button-logout {
+      position: absolute;
+      top: 0;
+      right: 0;
+      margin: 0;
+      background: transparent;
+      color: color($colors, black);
+      padding: 0px 10px;
+    }
+  }
+  
+  .highlight-container {
+    height: $secondaryHome;
+    width: 100%;
+    background: color($colors, secondary);
+    border-bottom: 2px solid color($colors, white);
+
+    div {
+      @include vertical-align();
+      color: color($colors, white);
+      text-align: center;
+    }
+  }
+  
+  .circle-container {
+    height: $tertiaryHome;
+    width: 100%;
+    background: color($colors, primary);
+    border-bottom: 2px solid color($colors, white);
+  
+    button {
+      width: 100%;
+      height: 100%;
+    }
+    
+    ion-icon {
+      font-size: 30px;
+      position: relative;
+      top: 1px;
+      margin-left: 16px;
+    }
+    
+    @include media($iPhone_X...) {
+      &.not-admin {
+        height: $tertiaryHome + $tertiaryHome;
+      }
+    }
+  }
+  
+  .villager-container {
+    height: $mainHome;
+    width: 100%;
+    border-bottom: 2px solid color($colors, white);
+    background: color($colors, secondary);
+    position: relative;
+  
+    button {
+      width: 100%;
+      height: 45%;
+    }
+    
+    .img-container {
+      position: absolute;
+      bottom: 0;
+      right: 0;
+      height: 55%;
+      width: 65%;
+      overflow: hidden;
+    }
+    
+    img.first {
+      max-height: 100%;
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      z-index: 0;
+    }
+    
+    img.second {
+      max-height: 100%;
+      position: absolute;
+      bottom: -10px;
+      left: 18%;
+      z-index: 3;
+    }
+    
+    img.third {
+      max-height: 100%;
+      position: absolute;
+      bottom: 0;
+      left: 36%;
+      z-index: 1;
+    }
+    
+    img.fourth {
+      max-height: 100%;
+      position: absolute;
+      bottom: -5px;
+      left: 54%;
+      z-index: 2;
+    }
+  }
+  
+  .admin-container {
+    height: $tertiaryHome;
+    width: 100%;
+    background: color($colors, primary);
+    border-bottom: 2px solid color($colors, white);
+  
+    button {
+      width: 100%;
+      height: 100%;
+    }
+    
+    ion-icon {
+      font-size: 30px;
+      position: relative;
+      top: 1px;
+      margin-left: 16px;
+    }
+  }
+  
+  .align-container {
+    height: $tertiaryHome;
+    width: 100%;
+    background: color($werewolf, evil);
+    position: relative;
+      
+    &.not-admin {
+      height: $tertiaryHome + $tertiaryHome;
+      
+      @include media($iPhone_X...) {
+        height: $tertiaryHome;
+      }
+    }
+    
+    .villager-m {
+      position: absolute;
+      height: 95%;
+      bottom: 0;
+      left: 16px;
+      z-index: 5;
+    }
+    
+    .werewolf {
+      position: absolute;
+      height: 95%;
+      bottom: 0;
+      right: 16px;
+      z-index: 5;
+    }
+    
+    .good-line {
+      position: absolute;
+      z-index: 3;
+      width: 50%;
+      height: 100%;
+      top: 0;
+      left: 0;
+      background: color($werewolf, good);
+    }
+    
+    .divider {
+      height: 100%;
+      @include horizontal-align();
+      z-index: 4;
+      margin-left: -4px;
+    }
+  }
+  
+  .current-game-container {
+    height: $secondaryHome + $tertiaryHome;
+    width: 100%;
+    background: color($colors, white);
+   
+    button {
+      width: 100%;
+      height: 100%;
+      color: color($colors, primary);
+    }
+  }
 }

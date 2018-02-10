@@ -1,15 +1,24 @@
 import { Injectable } from '@angular/core';
 import { Http, Headers } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
+import { Storage } from '@ionic/storage';
 import 'rxjs/Rx';
 
 @Injectable()
 export class DeceptaconService {
   deceptaconUrl: String = 'https://deceptacon-server.herokuapp.com'
   
-  constructor(public http: Http) {}
+  constructor(public http: Http, private storage: Storage) {}
   
   // ---------------------- //
+  
+  getUser(callback: Function) {
+    this.storage.get('user').then(data => {
+      if (data) {
+        callback(data.token);
+      }
+    });
+  }
   
   // LOGIN
   login(arr: any) {
@@ -33,8 +42,11 @@ export class DeceptaconService {
       .catch(this.handleError);
   }
   
-  saveVillager(villager: any) {
-    return this.http.post(this.deceptaconUrl + '/save/villager', villager)
+  saveVillager(villager: any, token: String) {
+    let arr = villager;
+    arr.token = token;
+    console.log(arr);
+    return this.http.post(this.deceptaconUrl + '/save/villager', arr)
       .map(res => res.json())
       .catch(this.handleError);
   }
