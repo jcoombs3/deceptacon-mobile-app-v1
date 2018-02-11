@@ -12,7 +12,7 @@
     <ion-refresher-content
       pullingIcon="arrow-dropdown"
       pullingText="Pull to refresh"
-      refreshingSpinner="circles">
+      refreshingSpinner="crescent">
     </ion-refresher-content>
   </ion-refresher>
   
@@ -20,18 +20,25 @@
     <p>Here you can find all active Werewolf games <br/> at Decepta Con. If you wish to moderate, <br/> please see another mod or admin for access</p>
   </div>
   
-  <div class="circle" *ngFor="let circle of circles">
-    <div>{{circle.name}}</div>
-    <div *ngIf="circle.moderator">
-      Moderator: {{circle.moderator.fullname}}
-    </div>
-    <div *ngIf="circle.game && !circle.game.status.active">
-      {{circle.game.villagers.length + circle.game.placeholders.length}}/{{circle.game.seats}}
-    </div>
-    <button ion-button (click)="goToCircle(circle)" *ngIf="circle.moderator">View</button>
-    <div *ngIf="!isMod && !inGame">
-      <button ion-button (click)="moderate(circle)" *ngIf="!circle.moderator && villager.isMod">Moderate</button>
-      <button ion-button (click)="joinGame(circle)" *ngIf="circle.game && circle.game.villagers.length + circle.game.placeholders.length < circle.game.seats && !villager.currentGame && !circle.game.status.active">Join</button>
+  <div class="loading-container" *ngIf="circles.length === 0">
+    <ion-spinner name="crescent"></ion-spinner>
+  </div>
+  
+  <div *ngIf="circles.length > 0">
+    <div class="circle" *ngFor="let circle of circles">
+      <div>{{circle.name}}</div>
+      <div *ngIf="circle.moderator">
+        Moderator: {{circle.moderator.fullname}}
+      </div>
+      <div *ngIf="circle.game && !circle.game.status.active">
+        {{circle.game.villagers.length + circle.game.placeholders.length}}/{{circle.game.seats}}
+      </div>
+      <button ion-button (click)="goToCircle(circle)" *ngIf="circle.moderator">View</button>
+      <div *ngIf="!isMod && !inGame">
+        <button ion-button (click)="moderate(circle)" *ngIf="!circle.moderator && villager.isMod">Moderate</button>
+        <button ion-button (click)="joinGame(circle)" *ngIf="circle.game && circle.game.villagers.length + circle.game.placeholders.length < circle.game.seats && !villager.currentGame && !circle.game.status.active">Join</button>
+      </div>
     </div>
   </div>
+  
 </ion-content>

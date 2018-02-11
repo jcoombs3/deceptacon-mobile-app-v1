@@ -1,15 +1,20 @@
 page-profile {
   
+  ion-content {
+    @include linear-gradient-bottom-diagonal-three(color($colors, white), darken(color($colors, white), 2.5%), darken(color($colors, white), 5%));
+  }
+  
   .profile-header {
     padding: 16px;
-    @include linear-gradient-bottom-diagonal-three(lighten(color($colors, secondary), 30%), lighten(color($colors, secondary), 20%), lighten(color($colors, secondary), 10%));
+//    background: color($colors, primary);
+    @include linear-gradient-bottom-diagonal-three(lighten(color($colors, primary), 10%), lighten(color($colors, primary), 5%), lighten(color($colors, primary), 0%));
     position: relative;
     z-index: 10;
-    border-bottom: 2px solid color($colors, primary);
+    border-bottom: 2px solid color($colors, white);
     
     .profile-pic {
       margin: 0 auto;
-      border-color: color($colors, primary);
+      border-color: color($colors, white);
       
       @include media($Mobile_sm...) { 
         width: 125px;
@@ -28,7 +33,7 @@ page-profile {
         margin: 0;
         border-bottom-left-radius: 0px;
         border-bottom-right-radius: 0px;
-        border: 2px solid color($colors, primary);
+        border: 2px solid color($colors, white);
         border-bottom: none;
         background: color($colors, secondary);
       
@@ -37,7 +42,8 @@ page-profile {
         }
         
         &.active {
-          background: color($colors, primary);
+          background: color($colors, white);
+          color: color($colors, primary);
         }
       }
       

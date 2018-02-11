@@ -17,4 +17,14 @@ page-circles {
     padding: 16px;
     background: color($colors, primary);
   }
+  
+  .loading-container {
+    padding-top: 25px;
+    position: relative;
+    text-align: center;
+    
+    .spinner-ios-crescent circle {
+      stroke: color($colors, white);
+    }
+  }
 }
