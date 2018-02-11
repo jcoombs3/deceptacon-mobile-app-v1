@@ -35,7 +35,6 @@ export class CirclesPage {
     this.storage.get('user').then(data => {
       if (data) {
         this.villager = data;
-        console.log(this.villager);
         this.getCircles(); 
       }
     });
@@ -205,7 +204,6 @@ export class CirclesPage {
   }
   
   updateCircle(iCircle: any) {
-    console.log('++ updateCircle');
     for (let i = 0; i < this.circles.length; i++) {
       if (this.circles[i]._id === iCircle._id) {
         this.circles[i] = iCircle;

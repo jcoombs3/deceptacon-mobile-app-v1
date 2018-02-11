@@ -20,7 +20,7 @@
   
   ion-header .toolbar-background, 
   ion-footer .toolbar-background {
-    background: color($colors, special);
+    background: color($colors, white);
     color: color($colors, primary);
   }
   
@@ -29,7 +29,7 @@
   }
   
   ion-content {
-    @include linear-gradient-bottom-diagonal-three(lighten(color($colors, special), 15%), lighten(color($colors, special), 10%), lighten(color($colors, special), 5%));
+    @include linear-gradient-bottom-diagonal-three(color($colors, white), darken(color($colors, white), 2.5%), darken(color($colors, white), 5%));
   }
   
   .label, ion-input, a {

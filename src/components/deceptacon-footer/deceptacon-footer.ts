@@ -1,7 +1,9 @@
 import { Component, Input } from '@angular/core';
-import { Events, ModalController, ToastController } from 'ionic-angular';
+import { Events, ModalController, ToastController, 
+         LoadingController, Platform } from 'ionic-angular';
 import { Socket } from 'ng-socket-io';
 import { Storage } from '@ionic/storage';
+import { Subscription } from 'rxjs';
 
 // PAGES
 import { HomePage } from '../../pages/home/home';
@@ -25,10 +27,13 @@ import { AssetsService } from '../../providers/assets-service/assets-service';
 export class DeceptaconFooter {
   @Input() nav: any;
   user: any = null;
+  private onResumeSubscription: Subscription;
   
   constructor(
     public modalCtrl: ModalController,
     public toastCtrl: ToastController,
+    public loadingCtrl: LoadingController,
+    public platform: Platform,
     private assets: AssetsService, 
     private deceptaconService: DeceptaconService, 
     private events: Events,
@@ -36,6 +41,29 @@ export class DeceptaconFooter {
     private storage: Storage
   ) {
     this.addEventListeners();
+    this.onResumeSubscription = platform.resume.subscribe(() => {
+      this.onResume();
+    }); 
+  }
+  
+  onResume() {
+    if (this.user) {
+      let loading = this.loadingCtrl.create({
+        content: `Welcome back, ${this.user.firstname}`
+      });
+      loading.present();
+      this.deceptaconService.getVillager(this.user._id)
+        .subscribe(data => {
+          this.storage.set('user', data);
+          this.user = data;
+          this.unsubscribeEvents(this.user);
+          this.addDynamicListeners();
+          this.checkForSurvey(false);
+          loading.dismiss();
+        }, error => {
+          console.log('++ error');
+        });
+    }
   }
   
   addEventListeners() {

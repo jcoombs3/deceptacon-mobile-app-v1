@@ -73,8 +73,6 @@ export class GamePage {
       }
     });
     this.socket.on(`circle-updated-${this.circle._id}`, function(circle) {
-      console.log('++ socket: circle updated');
-      console.log(circle);
       iThis.circle = circle;
       if (iThis.circle.game) {
         iThis.checkIfInGame();

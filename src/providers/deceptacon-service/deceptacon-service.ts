@@ -45,7 +45,6 @@ export class DeceptaconService {
   saveVillager(villager: any, token: String) {
     let arr = villager;
     arr.token = token;
-    console.log(arr);
     return this.http.post(this.deceptaconUrl + '/save/villager', arr)
       .map(res => res.json())
       .catch(this.handleError);

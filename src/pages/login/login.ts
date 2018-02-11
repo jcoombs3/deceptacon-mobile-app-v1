@@ -57,8 +57,19 @@ export class LoginPage {
             this.loginService();
           }
         });
+      } else {
+        this.wipeData();
       }
     });
+  }
+  
+  wipeData() {
+    this.storage.remove('user');
+    this.storage.remove('security');
+  }
+  
+  ionViewWillEnter() {
+    this.storage.remove('token');
   }
   
   ionViewDidEnter() {
