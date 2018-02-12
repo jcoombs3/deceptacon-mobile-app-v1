@@ -94,13 +94,17 @@ export class DeceptaconService {
       .catch(this.handleError);
   }
   
-  joinGame(arr: any) {
+  joinGame(obj: any, token: String) {
+    let arr = obj;
+    arr.token = token;
     return this.http.post(this.deceptaconUrl + '/game/join', arr)
       .map(res => res.json())
       .catch(this.handleError);
   }
   
-  removeVillager(arr: any) {
+  removeVillager(obj: any, token: String) {
+    let arr = obj;
+    arr.token = token;
     return this.http.post(this.deceptaconUrl + '/game/remove/villager', arr)
       .map(res => res.json())
       .catch(this.handleError);

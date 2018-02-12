@@ -283,24 +283,29 @@ export class GamePage {
   removeVillager(villager: any) {
     let arr = {
       villagerId: villager._id,
-      gameId: this.circle.game._id
+      gameId: this.circle.game._id,
+      userId: this.villager._id
     };
-    this.deceptaconService.removeVillager(arr)
-      .subscribe(data => {
-        this.circle = data;
-        this.checkIfInGame();
-        this.socket.emit('com.deceptacon.event', {
-          event: `circle-updated-${data._id}`,
-          data: data
-        });
-        this.socket.emit('com.deceptacon.event', {
-          event: `villager-removed-${villager._id}`,
-          data: data
-        });
-        this.events.publish(`villager-removed-${villager._id}`, data);
-      }, error => {
-        console.log('++ error');
-      });
+    this.storage.get('token').then(token => {
+      if (token) {
+        this.deceptaconService.removeVillager(arr)
+          .subscribe(data => {
+            this.circle = data;
+            this.checkIfInGame();
+            this.socket.emit('com.deceptacon.event', {
+              event: `circle-updated-${data._id}`,
+              data: data
+            });
+            this.socket.emit('com.deceptacon.event', {
+              event: `villager-removed-${villager._id}`,
+              data: data
+            });
+            this.events.publish(`villager-removed-${villager._id}`, data);
+          }, error => {
+            console.log('++ error');
+          });
+      }
+    });  
   }
   
   removePlaceholder() {
