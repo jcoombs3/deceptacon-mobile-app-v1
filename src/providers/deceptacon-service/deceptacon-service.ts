@@ -56,7 +56,9 @@ export class DeceptaconService {
       .catch(this.handleError);
   }
   
-  updateVillagerRights(arr: any) {
+  updateVillagerRights(obj: any, token: String) {
+    let arr = obj;
+    arr.token = token;
     return this.http.post(this.deceptaconUrl + '/rights/villager', arr)
       .map(res => res.json())
       .catch(this.handleError);
@@ -72,7 +74,9 @@ export class DeceptaconService {
       .catch(this.handleError);
   }
   
-  reserveCircle(arr: any) {
+  reserveCircle(obj: any, token: String) {
+    let arr = obj;
+    arr.token = token;
     return this.http.post(this.deceptaconUrl + '/circle/reserve', arr)
       .map(res => res.json())
       .catch(this.handleError);
@@ -82,7 +86,9 @@ export class DeceptaconService {
   
   // GAMES
   
-  createGame(arr: any) {
+  createGame(obj: any, token: String) {
+    let arr = obj;
+    arr.token = token;
     return this.http.post(this.deceptaconUrl + '/register/game', arr)
       .map(res => res.json())
       .catch(this.handleError);

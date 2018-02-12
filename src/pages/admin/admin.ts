@@ -58,18 +58,23 @@ export class AdminPage {
         });
         loading.present();
         let arr = {
+          adminId: this.user._id,
           _id: villager._id,
           isAdmin: !villager.isAdmin,
           isMod: villager.isMod
         };
-        this.deceptaconService.updateVillagerRights(arr)
-          .subscribe(data => {
-            this.sendSocketEvent(data);
-            this.updateVillagerList(data);
-            loading.dismiss();
-          }, error => {
-            loading.dismiss();
-          });
+        this.storage.get('token').then(token => {
+          if (token) {
+            this.deceptaconService.updateVillagerRights(arr, token)
+              .subscribe(data => {
+                this.sendSocketEvent(data);
+                this.updateVillagerList(data);
+                loading.dismiss();
+              }, error => {
+                loading.dismiss();
+              });
+          }
+        });
       });
     } else {
       let toast = this.toastCtrl.create({
@@ -94,18 +99,23 @@ export class AdminPage {
       });
       loading.present();
       let arr = {
+        adminId: this.user._id,
         _id: villager._id,
         isAdmin: villager.isAdmin,
         isMod: !villager.isMod
       };
-      this.deceptaconService.updateVillagerRights(arr)
-        .subscribe(data => {
-          this.sendSocketEvent(data);
-          this.updateVillagerList(data);
-          loading.dismiss();
-        }, error => {
-          loading.dismiss();
-        });
+      this.storage.get('token').then(token => {
+        if (token) {
+          this.deceptaconService.updateVillagerRights(arr, token)
+            .subscribe(data => {
+              this.sendSocketEvent(data);
+              this.updateVillagerList(data);
+              loading.dismiss();
+            }, error => {
+              loading.dismiss();
+            });
+        }
+      });
     });
   } 
   

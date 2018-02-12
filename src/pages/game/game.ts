@@ -129,7 +129,6 @@ export class GamePage {
   onSubmit(f: NgForm) {
     if (f.valid) {
       this.seats = f.value.seats;
-      this.createGame();
     }
   }
   
@@ -145,18 +144,22 @@ export class GamePage {
           seats: this.seats
         }
       };
-      this.deceptaconService.createGame(arr)
-        .subscribe(data => {
-        this.circle = data;
-        this.circle.moderator = this.villager;
-        this.circle.game.moderator = this.villager;
-        this.events.publish('user:creategame');
-        this.socket.emit('com.deceptacon.event', {
-          event: `circle-updated-${data._id}`,
-          data: data
-        });
-      }, error => {
-        console.log('++ error');
+      this.storage.get('token').then(token => {
+        if (token) {
+          this.deceptaconService.createGame(arr, token)
+            .subscribe(data => {
+            this.circle = data;
+            this.circle.moderator = this.villager;
+            this.circle.game.moderator = this.villager;
+            this.events.publish('user:creategame');
+            this.socket.emit('com.deceptacon.event', {
+              event: `circle-updated-${data._id}`,
+              data: data
+            });
+          }, error => {
+            console.log('++ error');
+          });
+        }
       });
     }); 
   }

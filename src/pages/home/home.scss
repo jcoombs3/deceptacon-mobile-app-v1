@@ -32,7 +32,9 @@ page-home {
     border-bottom: 2px solid color($colors, primary);
     border-top: 5px solid color($colors, primary);
     @include box-shadow();
-    position: relative;
+    position: sticky;
+    top: 0;
+    left: 0;
     
     img {
       max-width: 90%;

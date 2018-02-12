@@ -139,31 +139,45 @@ export class CirclesPage {
       content: 'Reserving circle...'
     });
     loading.present();
-    this.deceptaconService.reserveCircle(arr)
-      .subscribe(data => {
-        loading.dismiss();
+    this.storage.get('token').then(token => {
+      if (token) {
+        this.deceptaconService.reserveCircle(arr, token)
+          .subscribe(data => {
+            loading.dismiss();
+            let toast = this.toastCtrl.create({
+              message: `${data.name} reserved`,
+              duration: 2000,
+              position: 'top'
+            });
+            toast.present();
+            data.moderator = this.villager;
+            this.socket.emit('com.deceptacon.event', {
+              event: `circle-updated-${data._id}`,
+              data: data
+            });
+            this.goToCircle(data);
+        }, error => {
+          let toast = this.toastCtrl.create({
+            message: error,
+            duration: 3000,
+            position: 'top',
+            showCloseButton: true,
+            cssClass: 'error'
+          });
+          toast.present();
+          loading.dismiss();
+        });
+      } else {
         let toast = this.toastCtrl.create({
-          message: `${data.name} reserved`,
-          duration: 2000,
-          position: 'top'
+          message: "There was an error reserving the circle. Please try again.",
+          duration: 3000,
+          position: 'top',
+          showCloseButton: true,
+          cssClass: 'error'
         });
         toast.present();
-        data.moderator = this.villager;
-        this.socket.emit('com.deceptacon.event', {
-          event: `circle-updated-${data._id}`,
-          data: data
-        });
-        this.goToCircle(data);
-    }, error => {
-      let toast = this.toastCtrl.create({
-        message: error,
-        duration: 3000,
-        position: 'top',
-        showCloseButton: true,
-        cssClass: 'error'
-      });
-      toast.present();
-      loading.dismiss();
+        loading.dismiss();
+      }
     });
   }
   
@@ -175,32 +189,47 @@ export class CirclesPage {
     let loading = this.loadingCtrl.create({
       content: 'Joining circle...'
     });
-    this.deceptaconService.joinGame(arr)
-      .subscribe(data => {
-        loading.dismiss();
+    this.storage.get('token').then(token => {
+      if (token) {
+        this.deceptaconService.joinGame(arr, token)
+          .subscribe(data => {
+            loading.dismiss();
+            let toast = this.toastCtrl.create({
+              message: `${data.name} joined`,
+              duration: 2000,
+              position: 'top'
+            });
+            toast.present();
+            this.events.publish('user:joinedgame', arr.gameId);
+            this.socket.emit('com.deceptacon.event', {
+              event: `villager-joined-${data._id}`,
+              data: this.villager
+            });
+            this.goToCircle(data);
+        }, error => {
+          let toast = this.toastCtrl.create({
+            message: error,
+            duration: 3000,
+            position: 'top',
+            showCloseButton: true,
+            cssClass: 'error'
+          });
+          toast.present();
+          loading.dismiss();
+        });  
+      } else {
         let toast = this.toastCtrl.create({
-          message: `${data.name} joined`,
-          duration: 2000,
-          position: 'top'
+          message: "There was an issue joining the game. Please try again",
+          duration: 3000,
+          position: 'top',
+          showCloseButton: true,
+          cssClass: 'error'
         });
         toast.present();
-        this.events.publish('user:joinedgame', arr.gameId);
-        this.socket.emit('com.deceptacon.event', {
-          event: `villager-joined-${data._id}`,
-          data: this.villager
-        });
-        this.goToCircle(data);
-    }, error => {
-      let toast = this.toastCtrl.create({
-        message: error,
-        duration: 3000,
-        position: 'top',
-        showCloseButton: true,
-        cssClass: 'error'
-      });
-      toast.present();
-      loading.dismiss();
+        loading.dismiss();
+      }
     });
+      
   }
   
   updateCircle(iCircle: any) {
