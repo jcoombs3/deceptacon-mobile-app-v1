@@ -169,17 +169,21 @@ export class GamePage {
       modId: this.villager._id,
       gameId: this.circle.game._id
     };
-    this.deceptaconService.addPlaceholder(arr)
-      .subscribe(data => {
-      this.circle = data;
-      this.circle.moderator = this.villager;
-      this.circle.game.moderator = this.villager;
-      this.socket.emit('com.deceptacon.event', {
-        event: `circle-updated-${data._id}`,
-        data: data
-      });
-    }, error => {
-      console.log('++ error');
+    this.storage.get('token').then(token => {
+      if (token) {
+        this.deceptaconService.addPlaceholder(arr, token)
+          .subscribe(data => {
+          this.circle = data;
+          this.circle.moderator = this.villager;
+          this.circle.game.moderator = this.villager;
+          this.socket.emit('com.deceptacon.event', {
+            event: `circle-updated-${data._id}`,
+            data: data
+          });
+        }, error => {
+          console.log('++ error');
+        });
+      }
     });
   }
   
@@ -215,20 +219,25 @@ export class GamePage {
   
   updateGameDetails(game: any, seats: Number) {
     let arr = {
+      modId: this.villager._id,
       gameId: game._id,
       seats: seats
     };
-    this.deceptaconService.updateGameDetails(arr)
-      .subscribe(data => {
-        this.circle.game = data;
-        this.checkIfInGame();
-        this.socket.emit('com.deceptacon.event', {
-          event: `circle-updated-${this.circle._id}`,
-          data: this.circle
-        });
-      }, error => {
-        console.log('++ error');
-      });
+    this.storage.get('token').then(token => {
+      if (token) {
+        this.deceptaconService.updateGameDetails(arr, token)
+          .subscribe(data => {
+            this.circle.game = data;
+            this.checkIfInGame();
+            this.socket.emit('com.deceptacon.event', {
+              event: `circle-updated-${this.circle._id}`,
+              data: this.circle
+            });
+          }, error => {
+            console.log('++ error');
+          });
+      }
+    }); 
   }
   
   leaveGame(villager: any) {
@@ -288,7 +297,7 @@ export class GamePage {
     };
     this.storage.get('token').then(token => {
       if (token) {
-        this.deceptaconService.removeVillager(arr)
+        this.deceptaconService.removeVillager(arr, token)
           .subscribe(data => {
             this.circle = data;
             this.checkIfInGame();
@@ -313,38 +322,47 @@ export class GamePage {
       modId: this.villager._id,
       gameId: this.circle.game._id
     };
-    this.deceptaconService.removePlaceholder(arr)
-      .subscribe(data => {
-        this.circle = data;
-        this.circle.moderator = this.villager;
-        this.circle.game.moderator = this.villager;
-        this.socket.emit('com.deceptacon.event', {
-          event: `circle-updated-${data._id}`,
-          data: data
-        });
-      }, error => {
-        console.log('++ error');
-      });
+    this.storage.get('token').then(token => {
+      if (token) {
+        this.deceptaconService.removePlaceholder(arr, token)
+          .subscribe(data => {
+            this.circle = data;
+            this.circle.moderator = this.villager;
+            this.circle.game.moderator = this.villager;
+            this.socket.emit('com.deceptacon.event', {
+              event: `circle-updated-${data._id}`,
+              data: data
+            });
+          }, error => {
+            console.log('++ error');
+          });
+      }
+    });  
   }
   
   beginGame() {
     this.showAlert('Start game?', () => {
       let arr = {
-        gameId: this.circle.game._id
+        gameId: this.circle.game._id,
+        modId: this.villager._id
       };
-      this.deceptaconService.beginGame(arr)
-        .subscribe(data => {
-        this.circle.game = data;
-        this.socket.emit('com.deceptacon.event', {
-          event: `game-begin-${data._id}`,
-          data: this.circle
-        });
-        this.socket.emit('com.deceptacon.event', {
-          event: `circle-updated-${data._id}`,
-          data: this.circle
-        });
-      }, error => {
-        console.log('++ error');
+      this.storage.get('token').then(token => {
+        if (token) {
+          this.deceptaconService.beginGame(arr, token)
+            .subscribe(data => {
+            this.circle.game = data;
+            this.socket.emit('com.deceptacon.event', {
+              event: `game-begin-${data._id}`,
+              data: this.circle
+            });
+            this.socket.emit('com.deceptacon.event', {
+              event: `circle-updated-${data._id}`,
+              data: this.circle
+            });
+          }, error => {
+            console.log('++ error');
+          });
+        }
       });
     }); 
   }
@@ -352,18 +370,23 @@ export class GamePage {
   endGame() {
     this.showAlert('End game?', () => {
       let arr = {
-        gameId: this.circle.game._id
+        gameId: this.circle.game._id,
+        modId: this.villager._id
       };
-      this.deceptaconService.endGame(arr)
-        .subscribe(data => {
-        this.events.publish('user:endedgame', data._id)
-        this.socket.emit('com.deceptacon.event', {
-          event: `game-ended-${data._id}`,
-          data: this.circle
-        });
-      }, error => {
-        console.log('++ error');
-      });
+      this.storage.get('token').then(token => {
+        if (token) {
+          this.deceptaconService.endGame(arr, token)
+            .subscribe(data => {
+            this.events.publish('user:endedgame', data._id)
+            this.socket.emit('com.deceptacon.event', {
+              event: `game-ended-${data._id}`,
+              data: this.circle
+            });
+          }, error => {
+            console.log('++ error');
+          });
+        }
+      }); 
     });  
   }
   

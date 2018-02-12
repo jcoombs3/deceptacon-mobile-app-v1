@@ -116,31 +116,41 @@ export class DeceptaconService {
       .catch(this.handleError);
   }
   
-  addPlaceholder(arr: any) {
+  addPlaceholder(obj: any, token: String) {
+    let arr = obj;
+    arr.token = token;
     return this.http.post(this.deceptaconUrl + '/game/placeholder/', arr)
       .map(res => res.json())
       .catch(this.handleError);
   }
   
-  removePlaceholder(arr: any) {
+  removePlaceholder(obj: any, token: String) {
+    let arr = obj;
+    arr.token = token;
     return this.http.post(this.deceptaconUrl + '/game/remove/placeholder', arr)
       .map(res => res.json())
       .catch(this.handleError);
   }
   
-  updateGameDetails(arr: any) {
+  updateGameDetails(obj: any, token: String) {
+    let arr = obj;
+    arr.token = token;
     return this.http.post(this.deceptaconUrl + '/game/update', arr)
       .map(res => res.json())
       .catch(this.handleError);
   }
   
-  beginGame(arr: any) {
+  beginGame(obj: any, token: String) {
+    let arr = obj;
+    arr.token = token;
     return this.http.post(this.deceptaconUrl + '/game/begin', arr)
       .map(res => res.json())
       .catch(this.handleError);
   }
   
-  endGame(arr: any) {
+  endGame(obj: any, token: String) {
+    let arr = obj;
+    arr.token = token;
     return this.http.post(this.deceptaconUrl + '/game/end', arr)
       .map(res => res.json())
       .catch(this.handleError);
