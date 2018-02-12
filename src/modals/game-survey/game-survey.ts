@@ -1,6 +1,7 @@
 import { Component, ViewChild } from '@angular/core';
 import { Platform, ViewController, NavParams, LoadingController, 
          Events, AlertController, Slides } from 'ionic-angular';
+import { Storage } from '@ionic/storage';
 
 import { StatusBar } from '@ionic-native/status-bar';
 
@@ -28,7 +29,8 @@ export class GameSurveyModal {
     public alertCtrl: AlertController,
     private navParams: NavParams,
     private events: Events,
-    private deceptaconService: DeceptaconService
+    private deceptaconService: DeceptaconService,
+    private storage: Storage
   ) { 
     this.villager = this.navParams.data; 
     this.deceptaconService.getAlignments()
@@ -93,14 +95,18 @@ export class GameSurveyModal {
       alignment: this.alignment._id,
       role: this.role._id
     };
-    this.deceptaconService.publishGameDetails(arr)
-      .subscribe(data => {
-        loading.dismiss();
-        this.events.publish('user:published');
-        this.closeModal();
-    }, error => {
-      loading.dismiss();
-    });
+    this.storage.get('token').then(token => {
+      if (token) {
+        this.deceptaconService.publishGameDetails(arr, token)
+          .subscribe(data => {
+            loading.dismiss();
+            this.events.publish('user:published');
+            this.closeModal();
+        }, error => {
+          loading.dismiss();
+        });
+      }
+    }); 
   }
   
   closeModal() {

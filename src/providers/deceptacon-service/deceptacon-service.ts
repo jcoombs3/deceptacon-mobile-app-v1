@@ -162,13 +162,17 @@ export class DeceptaconService {
       .catch(this.handleError);
   }
   
-  publishGameDetails(arr: any) {
+  publishGameDetails(obj: any, token: String) {
+    let arr = obj;
+    arr.token = token;
     return this.http.post(this.deceptaconUrl + '/game/publish', arr)
       .map(res => res.json())
       .catch(this.handleError);
   }
   
-  publishWinnerDetails(arr: any) {
+  publishWinnerDetails(obj: any, token: String) {
+    let arr = obj;
+    arr.token = token;
     return this.http.post(this.deceptaconUrl + '/game/winner', arr)
       .map(res => res.json())
       .catch(this.handleError);

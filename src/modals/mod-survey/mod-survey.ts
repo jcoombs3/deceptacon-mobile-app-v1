@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { Platform, ViewController, NavParams, 
          LoadingController, Events } from 'ionic-angular';
+import { Storage } from '@ionic/storage';
 
 import { StatusBar } from '@ionic-native/status-bar';
 
@@ -23,7 +24,8 @@ export class ModSurveyModal {
     public loadingCtrl: LoadingController,
     private navParams: NavParams,
     private events: Events,
-    private deceptaconService: DeceptaconService
+    private deceptaconService: DeceptaconService,
+    private storage: Storage
   ) { 
     this.villager = this.navParams.data;  
   }
@@ -50,14 +52,18 @@ export class ModSurveyModal {
       content: 'Saving...'
     });
     loading.present();
-    this.deceptaconService.publishWinnerDetails(arr)
-      .subscribe(data => {
-        loading.dismiss();
-        this.events.publish('user:published');
-        this.closeModal();
-    }, error => {
-      loading.dismiss();
-    });
+    this.storage.get('token').then(token => {
+      if (token) {
+        this.deceptaconService.publishWinnerDetails(arr, token)
+          .subscribe(data => {
+            loading.dismiss();
+            this.events.publish('user:published');
+            this.closeModal();
+        }, error => {
+          loading.dismiss();
+        });
+      }
+    }); 
   }
   
   closeModal() {
