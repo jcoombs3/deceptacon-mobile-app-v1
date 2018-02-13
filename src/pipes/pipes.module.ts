@@ -4,6 +4,7 @@ import { UniqueRoles } from './unique-roles';
 import { ModeratedGames } from './moderated-games';
 import { SortVillagers } from './sort-villagers';
 import { SortGames } from './sort-games';
+import { SortCircles } from './sort-circles';
 
 @NgModule({
   declarations: [
@@ -11,7 +12,8 @@ import { SortGames } from './sort-games';
     UniqueRoles,
     ModeratedGames,
     SortVillagers,
-    SortGames
+    SortGames,
+    SortCircles
   ],
   imports: [
 
@@ -21,7 +23,8 @@ import { SortGames } from './sort-games';
     UniqueRoles,
     ModeratedGames,
     SortVillagers,
-    SortGames
+    SortGames,
+    SortCircles
   ]
 })
 export class PipesModule { }

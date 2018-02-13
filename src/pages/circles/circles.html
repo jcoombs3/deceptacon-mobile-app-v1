@@ -19,24 +19,72 @@
   <div class="introductory">
     <p>Here you can find all active Werewolf games <br/> at Decepta Con. If you wish to moderate, <br/> please see another mod or admin for access</p>
   </div>
-  
   <div class="loading-container" *ngIf="circles.length === 0">
     <ion-spinner name="crescent"></ion-spinner>
   </div>
   
-  <div *ngIf="circles.length > 0">
-    <div class="circle" *ngFor="let circle of circles">
-      <div>{{circle.name}}</div>
-      <div *ngIf="circle.moderator">
-        Moderator: {{circle.moderator.fullname}}
+  <div *ngIf="circles.length > 0" class="main-circle-container clearfix">
+    <div class="circle" *ngFor="let circle of circles" (click)="selectCircle(circle)">
+      <div class="circle-detail" *ngIf="selectedCircle._id !== circle._id" [ngClass]="{'in-game': circle.game && circle.game.status.active}">
+        <h2>{{circle.name}}</h2>
+        <div class="status" *ngIf="!circle.moderator">Open</div>
+        <div class="status" *ngIf="circle.moderator && !circle.game">
+          <ion-spinner name="crescent"></ion-spinner>
+        </div>
+        <div class="status status-seats" *ngIf="circle.game && !circle.game.status.active">
+          {{circle.game.villagers.length + circle.game.placeholders.length}}/{{circle.game.seats}}
+        </div>
+        <div class="status" *ngIf="circle.game && circle.game.status.active">
+          Playing
+        </div>
       </div>
-      <div *ngIf="circle.game && !circle.game.status.active">
-        {{circle.game.villagers.length + circle.game.placeholders.length}}/{{circle.game.seats}}
+      <div class="circle-detail moderate" (click)="moderate(circle)" *ngIf="selectedCircle._id === circle._id && !circle.moderator && !isMod && !inGame">
+        <h2>{{circle.name}}</h2>
+        <div class="status">Moderate</div>
       </div>
-      <button ion-button (click)="goToCircle(circle)" *ngIf="circle.moderator">View</button>
-      <div *ngIf="!isMod && !inGame">
-        <button ion-button (click)="moderate(circle)" *ngIf="!circle.moderator && villager.isMod">Moderate</button>
-        <button ion-button (click)="joinGame(circle)" *ngIf="circle.game && circle.game.villagers.length + circle.game.placeholders.length < circle.game.seats && !villager.currentGame && !circle.game.status.active">Join</button>
+      <div class="circle-detail game" *ngIf="selectedCircle._id === circle._id && circle.game">
+        <h2>{{circle.name}}</h2>
+        <div class="section section-view" (click)="goToCircle(circle)" [ngClass]="{'full': circle.game.villagers.length + circle.game.placeholders.length >= circle.game.seats || circle.game.status.active || villager.currentGame}">
+          <div class="status">View</div>
+        </div>
+        <div class="section section-join" (click)="joinGame(circle)" *ngIf="circle.game.villagers.length + circle.game.placeholders.length < circle.game.seats && !villager.currentGame && !circle.game.status.active">
+          <div class="status">Join</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <div *ngIf="customs.length > 0" class="customs">
+    <div class="introductory">
+      <p>If you wish to expand Werewolf outside of the designated areas and still keep track of your records, use these circles!</p>
+    </div>
+    <div class="main-circle-container clearfix">
+      <div class="circle" *ngFor="let circle of customs" (click)="selectCircle(circle)">
+        <div class="circle-detail" *ngIf="selectedCircle._id !== circle._id">
+          <h2>{{circle.name}}</h2>
+          <div class="status" *ngIf="!circle.moderator">Open</div>
+          <div class="status" *ngIf="circle.moderator && !circle.game">
+            <ion-spinner name="crescent"></ion-spinner>
+          </div>
+          <div class="status status-seats" *ngIf="circle.game && !circle.game.status.active"> {{circle.game.villagers.length + circle.game.placeholders.length}}/{{circle.game.seats}}
+          </div>
+          <div class="status" *ngIf="circle.game && circle.game.status.active">
+            Playing
+          </div>
+        </div>
+        <div class="circle-detail moderate" (click)="moderate(circle)" *ngIf="selectedCircle._id === circle._id && !circle.moderator && !isMod && !inGame">
+          <h2>{{circle.name}}</h2>
+          <div class="status">Moderate</div>
+        </div>
+        <div class="circle-detail game" *ngIf="selectedCircle._id === circle._id && circle.game">
+          <h2>{{circle.name}}</h2>
+          <div class="section section-view" (click)="goToCircle(circle)" [ngClass]="{'full': circle.game.villagers.length + circle.game.placeholders.length >= circle.game.seats || circle.game.status.active || villager.currentGame}">
+            <div class="status">View</div>
+          </div>
+          <div class="section section-join" (click)="joinGame(circle)" *ngIf="circle.game.villagers.length + circle.game.placeholders.length < circle.game.seats && !villager.currentGame && !circle.game.status.active">
+            <div class="status">Join</div>
+          </div>
+        </div>
       </div>
     </div>
   </div>

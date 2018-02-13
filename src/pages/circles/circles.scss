@@ -2,9 +2,115 @@ page-circles {
   
   .circle {
     min-height: 100px;
-    padding: 10px;
+    width: 50%;
+    float: left;
     border-bottom: 2px solid color($colors, primary);
+    position: relative;
     @include linear-gradient-bottom-diagonal-three(lighten(color($colors, special), 15%), lighten(color($colors, special), 10%), lighten(color($colors, special), 5%));
+    color: color($colors, primary);
+    
+    &:nth-child(2n-1) {
+      border-right: 2px solid color($colors, primary);
+    }
+    
+    &:active {
+      background: color($colors, special);
+    }
+    
+    .circle-detail {
+      width: 100%;
+      height: 100%;
+      padding: 16px;
+      position: absolute;
+      
+      &.moderate {
+        background: color($profile, orange);
+        color: color($colors, white);
+        
+        &:active {
+          background: darken(color($profile, orange), 5%);
+        }
+      }
+      
+      &.game {
+        background: color($profile, orange);
+        color: color($colors, white);
+      }
+      
+      &.in-game {
+        background: lighten(color($colors, secondary), 13%);
+        color: color($colors, white);
+      }
+      
+      .section {
+        position: relative;
+        width: 50%;
+        height: 100%;
+        float: left;
+      }
+      
+      .section-view {
+        position: absolute;
+        top: 0; 
+        left: 0;
+        border-right: 2px solid color($colors, white);
+        background: color($profile, orange);
+        color: color($colors, white);
+        
+        &:active {
+          background: darken(color($profile, orange), 5%);
+        }
+        
+        &.full {
+          width: 100%;
+          border-right: none;
+          color: color($colors, white);
+        }
+      }
+      
+      .section .status {
+        text-align: center;
+      }
+      
+      .section-join {
+        position: absolute;
+        top: 0; 
+        right: 0;
+        background: lighten(color($profile, orange), 10%);
+      }
+    }
+    
+    ion-spinner {
+      position: relative;
+      top: 10px;
+    }
+    
+    .spinner-ios-crescent circle {
+      stroke: color($colors, primary);
+    }
+  }
+  
+  .status-seats {
+    font-size: 30px;
+    line-height: 19px;
+    font-weight: bold;
+  }
+  
+  h2 {
+    font-size: 16px;
+    font-weight: bold;
+    text-transform: uppercase;
+    position: relative;
+    z-index: 5;
+  }
+  
+  .status {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    padding: 0 16px 16px;
+    width: 100%;
+    text-align: right;
   }
   
   p {
@@ -26,5 +132,9 @@ page-circles {
     .spinner-ios-crescent circle {
       stroke: color($colors, white);
     }
+  }
+  
+  .customs {
+    margin-top: 26px;
   }
 }

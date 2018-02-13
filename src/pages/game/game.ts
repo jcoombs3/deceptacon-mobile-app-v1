@@ -176,6 +176,7 @@ export class GamePage {
           this.circle = data;
           this.circle.moderator = this.villager;
           this.circle.game.moderator = this.villager;
+          console.log(`circle-updated-${data._id}`);
           this.socket.emit('com.deceptacon.event', {
             event: `circle-updated-${data._id}`,
             data: data
@@ -356,7 +357,7 @@ export class GamePage {
               data: this.circle
             });
             this.socket.emit('com.deceptacon.event', {
-              event: `circle-updated-${data._id}`,
+              event: `circle-updated-${this.circle._id}`,
               data: this.circle
             });
           }, error => {
@@ -380,6 +381,12 @@ export class GamePage {
             this.events.publish('user:endedgame', data._id)
             this.socket.emit('com.deceptacon.event', {
               event: `game-ended-${data._id}`,
+              data: this.circle
+            });
+            this.circle.moderator = null;
+            this.circle.game = null;
+            this.socket.emit('com.deceptacon.event', {
+              event: `circle-updated-${this.circle._id}`,
               data: this.circle
             });
           }, error => {

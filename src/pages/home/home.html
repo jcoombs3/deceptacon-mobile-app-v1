@@ -25,22 +25,6 @@
     <button ion-button class="ion-button-secondary button-logout" (click)="logout()">Log Out</button>
   </div>
   
-  <div class="highlight-container" *ngIf="!villager.currentGame || forceKick">
-    <div>Placeholder Game* to Join <br/> In Development...</div>
-  </div>
-  
-  <div class="circle-container" *ngIf="!villager.currentGame || forceKick" [ngClass]="{'not-admin': !villager.isAdmin && !villager.isMod}">
-    <button (click)="goToCircles()">
-      Find a Game <ion-icon name="md-arrow-forward"></ion-icon>
-    </button>
-  </div>
-  
-  <div class="current-game-container" *ngIf="villager.currentGame && !forceKick">
-    <button (click)="goToCurrentGame()">
-      Game In-Progress <ion-icon name="md-arrow-forward"></ion-icon>
-    </button>
-  </div>
-  
   <div class="villager-container">
     <button (click)="goToVillagers()">
       Search Villagers
@@ -53,13 +37,19 @@
     </div>
   </div>
   
+  <div class="circle-container" [ngClass]="{'not-admin': !villager.isAdmin && !villager.isMod}">
+    <button (click)="goToCircles()">
+      Find a Game <ion-icon name="md-arrow-forward"></ion-icon>
+    </button>
+  </div>
+  
   <div class="admin-container" *ngIf="villager.isAdmin || villager.isMod">
     <button (click)="goToAdmin()">
       Administration
     </button>
   </div>
   
-  <div class="align-container" [ngClass]="{'not-admin': !villager.isAdmin && !villager.isMod}">
+  <div class="align-container">
     <img class="villager-m" [src]="assets.getProfileUrl() + 'VillagerM.png'" />
     <div class="good-line"></div>
     <img class="werewolf" [src]="assets.getProfileUrl() + 'Werewolf.png'" />
