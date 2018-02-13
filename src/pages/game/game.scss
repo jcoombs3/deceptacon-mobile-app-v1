@@ -153,6 +153,7 @@ page-game {
     color: color($colors, white);
     padding-right: 50px;
     position: relative;
+    font-weight: bold;
     
     .profile-pic {
       border-color: color($colors, white);
@@ -167,7 +168,7 @@ page-game {
     height: 100%;
     background: $bg-orange;
     color: color($colors, white);
-    border-left: 2px solid color($colors, white);
+    border-left: 2px solid color($colors, black);
   }
   
   button.leave {
@@ -176,8 +177,8 @@ page-game {
     right: 0;
     width: 70px;
     height: 100%;
-    background: $bg-yellow;
-    color: color($colors, primary);
-    border-left: 2px solid color($colors, white);
+    background: color($profile, orange);
+    color: color($colors, white);
+    border-left: 2px solid color($colors, black);
   }
 }

@@ -38,6 +38,12 @@
           Playing
         </div>
       </div>
+      <div class="circle-detail" *ngIf="selectedCircle._id === circle._id && circle.moderator && !circle.game">
+        <h2>{{circle.name}}</h2>
+        <div class="status" *ngIf="circle.moderator && !circle.game">
+          <ion-spinner name="crescent"></ion-spinner>
+        </div>
+      </div>
       <div class="circle-detail moderate" (click)="moderate(circle)" *ngIf="selectedCircle._id === circle._id && !circle.moderator && !isMod && !inGame">
         <h2>{{circle.name}}</h2>
         <div class="status">Moderate</div>
