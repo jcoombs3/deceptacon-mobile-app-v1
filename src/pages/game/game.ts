@@ -129,6 +129,7 @@ export class GamePage {
   onSubmit(f: NgForm) {
     if (f.valid) {
       this.seats = f.value.seats;
+      this.createGame();
     }
   }
   
