@@ -1,10 +1,11 @@
 page-game {
+  color: color($colors, primary);
   
   .game-header {
     margin: -16px -16px 0px;
     padding: 16px;
-    background: lighten(color($colors, secondary), 15%);
-    border-bottom: 2px solid black;
+    background: color($colors, primary);
+    color: color($colors, white);
   }
   
   .input-seats-introductory {
@@ -48,19 +49,35 @@ page-game {
   
   .game-moderator {
     margin: 15px 0px 35px;
+    
+    .btn-container {
+      width: 100%;
+      
+      .btn-mod {
+        margin: 0;
+        border-radius: none;
+        box-shadow: none;
+        border: none;
+        width: 45%;
+        float: left;
+        padding: 13px 16px 22px;
+        background: color($colors, primary);
+        color: color($colors, white);
+        text-align: center;
+        border-radius: 50%;
+        border-top-left-radius: 0px;
+        border-top-right-radius: 0px;
+        
+        &:last-child {
+          float: right;
+        }
+      }
+    }
   }
   
-  .status-open {
-    color: blue;
-  }
-  .status-active {
-    color: green;
-  }
-  .status-cancelled {
-    color: red;
-  }
-  .status-end {
-    color: gray;
+  .status-open, .status-active, 
+  .status-cancelled, .status-end {
+    font-weight: bold;
   }
   
   .game-status, .game-seats {
@@ -121,9 +138,14 @@ page-game {
   }
   
   villager-detail {
-    @include linear-gradient-bottom-diagonal-three(lighten(color($colors, secondary), 20%), lighten(color($colors, secondary), 15%), lighten(color($colors, secondary), 5%));
+    background: color($colors, secondary);
     padding-right: 50px;
     position: relative;
+    color: color($colors, white);
+
+    .profile-pic {
+      border-color: color($colors, white);
+    }
   }
   
   placeholder-detail {

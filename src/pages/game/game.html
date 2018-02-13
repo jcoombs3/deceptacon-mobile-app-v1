@@ -44,14 +44,14 @@
           <villager-detail [villager]="circle.game.moderator" (click)="goToProfile(circle.game.moderator)"></villager-detail>
         </li>
       </ul>
-      <button ion-button *ngIf="isMod && circle.game.villagers.length < circle.game.seats && !circle.game.status.active"
-              (click)="addPlaceholder()">
-        + Placeholder
-      </button>
-      <button ion-button *ngIf="isMod && !circle.game.status.active"
-              (click)="changeSeats()">
-        +/- Seats
-      </button>
+      <div class="btn-container clearfix">
+        <div *ngIf="isMod && circle.game.villagers.length < circle.game.seats && !circle.game.status.active" class="btn-mod" (click)="addPlaceholder()">
+          + Placeholder
+        </div>
+        <div *ngIf="isMod && !circle.game.status.active" class="btn-mod" (click)="changeSeats()">
+          +/- Seats
+        </div>
+      </div>
     </div>
     <div class="game-villagers">
       <h2>Participants</h2>
