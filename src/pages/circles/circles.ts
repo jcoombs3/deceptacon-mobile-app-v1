@@ -60,6 +60,7 @@ export class CirclesPage {
   }
   
   doRefresh(refresher) {
+    this.selectedCircle = this.placeholderCircle;
     this.unsubscribeToEvents();
     this.deceptaconService.getCircles().subscribe(data => {
       let circleGroups = this.sortCirclesPipe.transform(data);
@@ -102,12 +103,18 @@ export class CirclesPage {
     const iThis = this;
     for (let i = 0; i < this.circles.length; i++) {
       this.socket.on(`circle-updated-${this.circles[i]._id}`, function(circle){
+        iThis.updateCircle(circle);
+      });
+      this.socket.on(`circle-seats-updated-${this.circles[i]._id}`, function(circle){
         console.log(circle);
         iThis.updateCircle(circle);
       });
     } 
     for (let j = 0; j < this.customs.length; j++) {
       this.socket.on(`circle-updated-${this.customs[j]._id}`, function(circle){
+        iThis.updateCircle(circle);
+      });
+      this.socket.on(`circle-seats-updated-${this.customs[j]._id}`, function(circle){
         iThis.updateCircle(circle);
       });
     } 
@@ -255,6 +262,8 @@ export class CirclesPage {
       if (token) {
         this.deceptaconService.joinGame(arr, token)
           .subscribe(data => {
+            circle.game.villagers.push(this.villager);
+            circle.game.seats = data.game.seats;
             loading.dismiss();
             let toast = this.toastCtrl.create({
               message: `${data.name} joined`,
@@ -267,7 +276,11 @@ export class CirclesPage {
               event: `villager-joined-${data._id}`,
               data: this.villager
             });
-            this.goToCircle(data);
+            this.socket.emit('com.deceptacon.event', {
+              event: `circle-seats-updated-${data._id}`,
+              data: circle
+            });
+            this.goToCircle(circle);
         }, error => {
           let toast = this.toastCtrl.create({
             message: error,

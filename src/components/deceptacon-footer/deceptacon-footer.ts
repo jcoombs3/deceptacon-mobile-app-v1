@@ -154,7 +154,6 @@ export class DeceptaconFooter {
         } 
       });
       this.socket.on(`game-ended-${game._id}`, (data) => {
-        console.log('event: game:ended', 'DeceptaconFooter');
         this.showToast(`${this.user.currentGame.name}'s game has ended`, 'error');
         let active = this.nav.last().instance instanceof GamePage;
         if (active) {
@@ -221,17 +220,23 @@ export class DeceptaconFooter {
   
   checkForSurvey(isActive: boolean) {
     if (isActive && this.user.currentGame) {
+      let game = this.user.currentGame.game;
       if (this.user._id !== this.user.currentGame.moderator) {
+        this.socket.removeListener(`game-ended-${game._id}`);
         this.goToSurvey();
       } else {
+        this.socket.removeListener(`game-ended-${game._id}`);
         this.goToModSurvey();
       }
     } else if (!isActive && this.user.currentGame) {
       let status = this.user.currentGame.game.status;
+      let game = this.user.currentGame.game;
       if (status.ended || status.cancelled) {
         if (this.user._id !== this.user.currentGame.moderator) {
+          this.socket.removeListener(`game-ended-${game._id}`);
           this.goToSurvey();
         } else {
+          this.socket.removeListener(`game-ended-${game._id}`);
           this.goToModSurvey();
         }
       } else if (status.active) {
