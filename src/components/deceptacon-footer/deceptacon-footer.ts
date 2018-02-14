@@ -84,6 +84,11 @@ export class DeceptaconFooter {
       this.goToHome();
       this.goToModSurvey();
     });
+    this.events.subscribe('user:cancelledgame', (gameId) => {
+      console.log('event: user:cancelledgame', 'DeceptaconFooter');
+      this.goToHome();
+      this.getUser();
+    });
     this.events.subscribe('user:joinedgame', (gameId) => {
       console.log('event: user:joinedgame', 'DeceptaconFooter');
       this.getUser();
@@ -109,6 +114,7 @@ export class DeceptaconFooter {
     if (user.currentGame) {
       this.socket.removeListener(`game-begin-${user.currentGame._id}`);
       this.socket.removeListener(`game-ended-${user.currentGame._id}`);
+      this.socket.removeListener(`game-cancelled-${user.currentGame._id}`);
     }
   }
   
@@ -145,28 +151,39 @@ export class DeceptaconFooter {
       let game = this.user.currentGame.game;
       this.socket.removeListener(`game-begin-${game._id}`);
       this.socket.removeListener(`game-ended-${game._id}`);
+      this.socket.removeListener(`game-cancelled-${game._id}`);
       this.socket.on(`game-begin-${game._id}`, (data) => {
         console.log('event: game:begin', 'DeceptaconFooter');
-        this.showToast(`${this.user.currentGame.name}'s game has started`, '');
+        this.showToast('The game has started', '');
         let active = this.nav.last().instance instanceof GamePage;
         if (!active) {
           this.goToCurrentGame();
         } 
       });
       this.socket.on(`game-ended-${game._id}`, (data) => {
-        this.showToast(`${this.user.currentGame.name}'s game has ended`, 'error');
+        this.showToast('The game has ended', 'error');
         let active = this.nav.last().instance instanceof GamePage;
         if (active) {
           this.goToHome();
         } 
         this.checkForSurvey(true);
       });
+      this.socket.on(`game-cancelled-${game._id}`, (data) => {
+        this.showToast('The game has been cancelled', 'error');
+        let active = this.nav.last().instance instanceof GamePage;
+        if (active) {
+          this.goToHome();
+        } 
+        this.user.currentGame = null;
+        this.storage.set('user', this.user);
+        this.getUser();
+      });
     }
   }
   
   removeVillagerLogic(data: any) {
     if (!data.game.status.active) {
-      this.showToast(`You have been removed from ${this.user.currentGame.name}`, 'error');
+      this.showToast('You have been removed from the game', 'error');
     } else {
       this.checkForSurvey(true);
     }
@@ -223,20 +240,24 @@ export class DeceptaconFooter {
       let game = this.user.currentGame.game;
       if (this.user._id !== this.user.currentGame.moderator) {
         this.socket.removeListener(`game-ended-${game._id}`);
+        this.socket.removeListener(`game-cancelled-${game._id}`);
         this.goToSurvey();
       } else {
         this.socket.removeListener(`game-ended-${game._id}`);
+        this.socket.removeListener(`game-cancelled-${game._id}`);
         this.goToModSurvey();
       }
     } else if (!isActive && this.user.currentGame) {
       let status = this.user.currentGame.game.status;
       let game = this.user.currentGame.game;
-      if (status.ended || status.cancelled) {
+      if (status.ended) {
         if (this.user._id !== this.user.currentGame.moderator) {
           this.socket.removeListener(`game-ended-${game._id}`);
+          this.socket.removeListener(`game-cancelled-${game._id}`);
           this.goToSurvey();
         } else {
           this.socket.removeListener(`game-ended-${game._id}`);
+          this.socket.removeListener(`game-cancelled-${game._id}`);
           this.goToModSurvey();
         }
       } else if (status.active) {
@@ -247,21 +268,11 @@ export class DeceptaconFooter {
   
   goToModSurvey() {
     const modSurveyModal = this.modalCtrl.create(ModSurveyModal, this.user);
-    modSurveyModal.onWillDismiss(data => {
-      if (data) {
-        console.log('++ modSurveyModal.onWillDismiss');
-      }
-    });
     modSurveyModal.present();
   }
   
   goToSurvey() {
     const gameSurveyModal = this.modalCtrl.create(GameSurveyModal, this.user);
-    gameSurveyModal.onWillDismiss(data => {
-      if (data) {
-        console.log('++ gameSurveyModal.onWillDismiss');
-      }
-    });
     gameSurveyModal.present();
   }
 }

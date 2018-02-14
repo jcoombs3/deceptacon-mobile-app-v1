@@ -1,26 +1,26 @@
-.bg-yellow {
-  @include linear-gradient-bottom-diagonal-three(lighten($bg-yellow, 30%), lighten($bg-yellow, 10%), $bg-yellow);
+.bg-orange {
+  @include linear-gradient-bottom-diagonal-three(lighten(color($profile, orange), 20%), lighten(color($profile, orange), 10%), color($profile, orange));
 }
-.bg-magenta {
-  @include linear-gradient-bottom-diagonal-three(lighten($bg-magenta, 20%), lighten($bg-magenta, 10%), $bg-magenta);
+.bg-primary {
+  @include linear-gradient-bottom-diagonal-three(lighten(color($colors, primary), 20%), lighten(color($colors, primary), 10%), color($colors, primary));
+}
+.bg-secondary {
+  @include linear-gradient-bottom-diagonal-three(lighten(color($colors, secondary), 20%), lighten(color($colors, secondary), 10%), color($colors, secondary));
+}
+.bg-special {
+  @include linear-gradient-bottom-diagonal-three(lighten(color($colors, special), 20%), lighten(color($colors, special), 10%), color($colors, special));
+}
+.bg-yellow {
+  @include linear-gradient-bottom-diagonal-three(lighten(color($profile, yellow), 20%), lighten(color($profile, yellow), 10%), color($profile, yellow));
 }
 .bg-cyan {
-  @include linear-gradient-bottom-diagonal-three(lighten($bg-cyan, 20%), lighten($bg-cyan, 10%), $bg-cyan);
+  @include linear-gradient-bottom-diagonal-three(lighten(color($profile, cyan), 40%), lighten(color($profile, cyan), 30%), color($profile, cyan));
 }
-.bg-orange {
-  @include linear-gradient-bottom-diagonal-three(lighten($bg-orange, 20%), lighten($bg-orange, 10%), $bg-orange);
+.bg-magenta {
+  @include linear-gradient-bottom-diagonal-three(lighten(color($profile, magenta), 20%), lighten(color($profile, magenta), 10%), color($profile, magenta));
 }
 .bg-green {
-  @include linear-gradient-bottom-diagonal-three(lighten($bg-green, 30%), lighten($bg-green, 20%), $bg-green);
-}
-.bg-purple {
-  @include linear-gradient-bottom-diagonal-three(lighten($bg-purple, 20%), lighten($bg-purple, 10%), $bg-purple);
-}
-.bg-white {
-  @include linear-gradient-bottom-diagonal-three($bg-white, darken($bg-white, 2%), darken($bg-white, 4%));
-}
-.bg-black {
-  @include linear-gradient-bottom-diagonal-three(lighten($bg-black, 30%), lighten($bg-black, 20%), $bg-black);
+  @include linear-gradient-bottom-diagonal-three(lighten(color($profile, green), 20%), lighten(color($profile, green), 10%), color($profile, green));
 }
 
 // ----------------------- //

@@ -7,25 +7,22 @@
 </ion-header>
 
 <ion-content class="has-footer bg-secondary">
-  
+
   <ion-refresher (ionRefresh)="doRefresh($event)">
-    <ion-refresher-content
-      pullingIcon="arrow-dropdown"
-      pullingText="Pull to refresh"
-      refreshingSpinner="crescent">
+    <ion-refresher-content pullingIcon="arrow-dropdown" pullingText="Pull to refresh" refreshingSpinner="crescent">
     </ion-refresher-content>
   </ion-refresher>
-  
+
   <div class="introductory">
     <p>Here you can find all active Werewolf games <br/> at Decepta Con. If you wish to moderate, <br/> please see another mod or admin for access</p>
   </div>
   <div class="loading-container" *ngIf="circles.length === 0">
     <ion-spinner name="crescent"></ion-spinner>
   </div>
-  
+
   <div *ngIf="circles.length > 0" class="main-circle-container clearfix">
     <div class="circle" *ngFor="let circle of circles" (click)="selectCircle(circle)">
-      <div class="circle-detail" *ngIf="selectedCircle._id !== circle._id" [ngClass]="{'in-game': circle.game && circle.game.status.active}">
+      <div class="circle-detail" *ngIf="selectedCircle._id !== circle._id || (selectedCircle._id === circle._id && !circle.game)" [ngClass]="{'in-game': circle.game && circle.game.status.active}">
         <h2>{{circle.name}}</h2>
         <div class="status" *ngIf="!circle.moderator">Open</div>
         <div class="status" *ngIf="circle.moderator && !circle.game">
@@ -59,23 +56,30 @@
       </div>
     </div>
   </div>
-  
+
   <div *ngIf="customs.length > 0" class="customs">
     <div class="introductory">
       <p>If you wish to expand Werewolf outside of the designated areas and still keep track of your records, use these circles!</p>
     </div>
     <div class="main-circle-container clearfix">
-      <div class="circle" *ngFor="let circle of customs" (click)="selectCircle(circle)">
-        <div class="circle-detail" *ngIf="selectedCircle._id !== circle._id">
+      <div class="circle" *ngFor="let circle of circles" (click)="selectCircle(circle)">
+        <div class="circle-detail" *ngIf="selectedCircle._id !== circle._id" [ngClass]="{'in-game': circle.game && circle.game.status.active}">
           <h2>{{circle.name}}</h2>
           <div class="status" *ngIf="!circle.moderator">Open</div>
           <div class="status" *ngIf="circle.moderator && !circle.game">
             <ion-spinner name="crescent"></ion-spinner>
           </div>
-          <div class="status status-seats" *ngIf="circle.game && !circle.game.status.active"> {{circle.game.villagers.length + circle.game.placeholders.length}}/{{circle.game.seats}}
+          <div class="status status-seats" *ngIf="circle.game && !circle.game.status.active">
+            {{circle.game.villagers.length + circle.game.placeholders.length}}/{{circle.game.seats}}
           </div>
           <div class="status" *ngIf="circle.game && circle.game.status.active">
             Playing
+          </div>
+        </div>
+        <div class="circle-detail" *ngIf="selectedCircle._id === circle._id && circle.moderator && !circle.game">
+          <h2>{{circle.name}}</h2>
+          <div class="status" *ngIf="circle.moderator && !circle.game">
+            <ion-spinner name="crescent"></ion-spinner>
           </div>
         </div>
         <div class="circle-detail moderate" (click)="moderate(circle)" *ngIf="selectedCircle._id === circle._id && !circle.moderator && !isMod && !inGame">
@@ -94,5 +98,5 @@
       </div>
     </div>
   </div>
-  
+
 </ion-content>

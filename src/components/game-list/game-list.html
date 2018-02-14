@@ -18,6 +18,12 @@
         Winner: {{game.userDetails.winner.name}}
       </ion-col>
     </ion-row>
+    <ion-row>
+      <ion-col col-12 class="status" *ngIf="game.status.active || (!game.status.active && !game.status.ended && !game.status.cancelled)">
+        Status: <span class="status-span" *ngIf="game.status.active">Playing</span>
+        <span class="status-span" *ngIf="!game.status.active && !game.status.ended && !game.status.cancelled">Waiting</span>
+      </ion-col>
+    </ion-row>
     <ion-row class="role" [ngClass]="{
       'role-good': game.userDetails[villager._id].alignment.name === 'Good',
       'role-evil': game.userDetails[villager._id].alignment.name === 'Evil',

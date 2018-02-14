@@ -93,12 +93,28 @@ page-game {
     }
     
     .game-begin {
+      background: color($profile, orange);
+      border-radius: 50%;
+      border-top-left-radius: 0px;
+      border-top-right-radius: 0px;
+      border: 2px solid color($colors, primary);
+      border-top: none;
+      padding: 0px 30px 10px;
+      box-sizing: content-box;
+      
+      &:active {
+        background: lighten(color($colors, primary), 15%);
+      }
+    }
+    
+    .game-cancel {
       background: color($colors, primary);
       border-radius: 50%;
       border-top-left-radius: 0px;
       border-top-right-radius: 0px;
       padding: 0px 30px 10px;
       box-sizing: content-box;
+      float: left;
       
       &:active {
         background: lighten(color($colors, primary), 15%);

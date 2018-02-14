@@ -16,6 +16,11 @@ game-list {
     }
   }
   
+  .status span {
+    font-weight: bold;
+    color: color($colors, primary);
+  }
+  
   .circle {
     text-align: left;   
     font-weight: bold;

@@ -18,6 +18,10 @@ a {
   font-size: 12px;
 }
 
+button {
+  box-shadow: none;
+}
+
 button[ion-button].ion-button-secondary {
   background: color($colors, secondary);
   color: color($colors, white);

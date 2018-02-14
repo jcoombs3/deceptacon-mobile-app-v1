@@ -177,7 +177,6 @@ export class GamePage {
           this.circle = data;
           this.circle.moderator = this.villager;
           this.circle.game.moderator = this.villager;
-          console.log(`circle-updated-${data._id}`);
           this.socket.emit('com.deceptacon.event', {
             event: `circle-updated-${data._id}`,
             data: data
@@ -200,16 +199,12 @@ export class GamePage {
       buttons: [{
         text: 'Cancel',
         role: 'cancel',
-        handler: data => {
-          console.log('Cancel clicked');
-        }
+        handler: data => {}
       }, {
         text: 'Update',
         handler: data => {
           const game = this.circle.game;
-          if (parseInt(data.seats) < parseInt(game.villagers.length) + parseInt(game.placeholders.length) ||
-              parseInt(data.seats) === 0) {
-            console.log('no can do');
+          if (parseInt(data.seats) < parseInt(game.villagers.length) + parseInt(game.placeholders.length) || parseInt(data.seats) === 0) {
           } else {
             this.updateGameDetails(game, data.seats);
           }
@@ -399,16 +394,32 @@ export class GamePage {
   }
   
   cancelGame() {
-    let arr = {
-      gameId: this.circle.game._id
-    };
-    console.log('++ cancelGame');
-    this.deceptaconService.cancelGame(arr)
-      .subscribe(data => {
-      console.log('++ game has been cancelled');
-    }, error => {
-      console.log('++ error');
-    });
+    this.showAlert('Cancel game?', () => {
+      let arr = {
+        gameId: this.circle.game._id,
+        modId: this.villager._id
+      };
+      this.storage.get('token').then(token => {
+        if (token) {
+          this.deceptaconService.cancelGame(arr, token)
+            .subscribe(data => {
+            this.events.publish('user:cancelledgame', data._id)
+            this.socket.emit('com.deceptacon.event', {
+              event: `game-cancelled-${data._id}`,
+              data: this.circle
+            });
+            this.circle.moderator = null;
+            this.circle.game = null;
+            this.socket.emit('com.deceptacon.event', {
+              event: `circle-updated-${this.circle._id}`,
+              data: this.circle
+            });
+          }, error => {
+            console.log('++ error');
+          });
+        }
+      }); 
+    }); 
   }
   
   goToProfile(villager: any) {

@@ -94,7 +94,7 @@ export class CirclesPage {
     this.selectedCircle = this.placeholderCircle;
     if (circle.moderator && circle.moderator._id === this.villager._id) {
       this.goToCircle(circle);
-    } else if (circle.game || (this.villager.isMod && !this.isMod)) {
+    } else {
       this.selectedCircle = circle;
     }
   }

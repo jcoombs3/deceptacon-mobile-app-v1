@@ -30,7 +30,9 @@
         Seats: {{circle.game.villagers.length + circle.game.placeholders.length}}/{{circle.game.seats}}
       </div>
     </div>
-    <div class="game-buttons">
+    <div class="game-buttons clearfix">
+      <!-- status-cancel -->
+      <button ion-button class="game-cancel" (click)="cancelGame()" *ngIf="isMod && !circle.game.status.active && !circle.game.status.end && !circle.game.status.cancelled">Cancel Game</button>
       <!-- status-open -->
       <button ion-button class="game-begin" (click)="beginGame()" *ngIf="isMod && circle.game.villagers.length + circle.game.placeholders.length > 0 && !circle.game.status.active && !circle.game.status.end && !circle.game.status.cancelled">Start Game</button>
       <!-- status-active -->
@@ -81,8 +83,7 @@
         <ion-item>
           <ion-label stacked color="primary">Seats</ion-label>
           <ion-input type="number" name="seats" ngModel #seats="ngModel" required 
-                     autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"
-                     placeholder=20>
+                     autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false">
           </ion-input>
         </ion-item>
         <button ion-button class="ion-button-secondary">Create Game</button>

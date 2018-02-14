@@ -156,7 +156,9 @@ export class DeceptaconService {
       .catch(this.handleError);
   }
   
-  cancelGame(arr: any) {
+  cancelGame(obj: any, token: String) {
+    let arr = obj;
+    arr.token = token;
     return this.http.post(this.deceptaconUrl + '/game/cancel', arr)
       .map(res => res.json())
       .catch(this.handleError);
@@ -197,7 +199,6 @@ export class DeceptaconService {
   // ---------------------- //
 
   handleError(error) {
-    //console.error(error);
     return Observable.throw(JSON.parse(error._body)["Error"] || 'Server error');
   }
 }
