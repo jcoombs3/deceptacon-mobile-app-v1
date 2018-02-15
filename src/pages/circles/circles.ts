@@ -141,6 +141,12 @@ export class CirclesPage {
         this.isMod = true;
       }
     }
+    for (let j = 0; j < this.customs.length; j++) {
+      if (this.villager._id === this.customs[j].moderator ||
+        (this.customs[j].moderator && this.villager._id === this.customs[j].moderator._id)) {
+        this.isMod = true;
+      }
+    }
   }
   
   checkIfInGame() {
@@ -150,6 +156,16 @@ export class CirclesPage {
         let villagers = this.circles[i].game.villagers;
         for (let j = 0; j < villagers.length; j++) {
           if (this.villager._id === villagers[j]) {
+            this.inGame = true;
+          }
+        }
+      }
+    }
+    for (let k = 0; k < this.customs.length; k++) {
+      if (this.customs[k].game) {
+        let villagers = this.customs[k].game.villagers;
+        for (let l = 0; l < villagers.length; l++) {
+          if (this.villager._id === villagers[l]) {
             this.inGame = true;
           }
         }
